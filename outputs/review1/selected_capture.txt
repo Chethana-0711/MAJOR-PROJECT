@@ -1,0 +1,4 @@
+Capture number: 179
+Capture directory: MUDCAD-X\dataset\01_Spring\2022-05-10\rk1\b\1\v2\2
+RGB: MUDCAD-X\dataset\01_Spring\2022-05-10\rk1\b\1\v2\2\vis.png
+Thermal: MUDCAD-X\dataset\01_Spring\2022-05-10\rk1\b\1\v2\2\lwir.png

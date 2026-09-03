@@ -1,0 +1,18 @@
+path: C:/Users/Chethana.Rakshith.000/Desktop/major project/data/yolo
+
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: fleece
+  1: hedge
+  2: net2dgreen
+  3: net3dgray
+  4: net3dgreen
+  5: net3dyellow
+  6: persongreen
+  7: personyellow
+  8: tarpgray
+  9: tarpgreen
+  10: turf
