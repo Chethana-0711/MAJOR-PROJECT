@@ -1,6 +1,7 @@
 from pathlib import Path
 import argparse
 import shutil
+import json
 
 import cv2
 import numpy as np
@@ -19,31 +20,103 @@ from agents.uncertainty_agent import UncertaintyAgent
 PROJECT_DIR = Path(".")
 DATASET_DIR = PROJECT_DIR / "MUDCAD-X" / "dataset"
 OUTPUT_DIR = PROJECT_DIR / "outputs" / "review1"
+
+# Master capture-level split
+SPLIT_FILE = PROJECT_DIR / "data" / "capture_splits.json"
+
 MODEL_PATH = (
     PROJECT_DIR / "runs" / "detect" / "train" / "weights" / "best.pt"
 )
 
 
 # ============================================================
-# FIND COMPLETE RGB + THERMAL CAPTURES
+# LOAD MASTER TEST SPLIT
+# ============================================================
+
+def load_test_split():
+
+    if not SPLIT_FILE.exists():
+
+        raise FileNotFoundError(
+            f"Master split file not found:\n"
+            f"{SPLIT_FILE}\n\n"
+            f"Please create data/capture_splits.json first."
+        )
+
+    with open(
+        SPLIT_FILE,
+        "r",
+        encoding="utf-8"
+    ) as file:
+
+        split_data = json.load(file)
+
+    if "test" not in split_data:
+
+        raise KeyError(
+            "The master split file does not contain a 'test' split."
+        )
+
+    test_captures = split_data["test"]
+
+    if not test_captures:
+
+        raise ValueError(
+            "The master test split is empty."
+        )
+
+    return test_captures
+
+
+# ============================================================
+# FIND TEST CAPTURES
 # ============================================================
 
 def find_captures():
 
+    test_split = load_test_split()
+
     captures = []
 
-    for rgb_path in DATASET_DIR.rglob("vis.png"):
+    for capture_entry in test_split:
 
-        capture_dir = rgb_path.parent
+        # The split file stores the capture directory.
+        capture_dir = Path(
+            capture_entry
+        )
+
+        # If the path in the JSON is relative,
+        # interpret it relative to the project root.
+        if not capture_dir.is_absolute():
+
+            capture_dir = PROJECT_DIR / capture_dir
+
+        rgb_path = capture_dir / "vis.png"
         lwir_path = capture_dir / "lwir.png"
 
-        if lwir_path.exists():
+        if not rgb_path.exists():
 
-            captures.append({
-                "rgb": rgb_path,
-                "lwir": lwir_path,
-                "directory": capture_dir
-            })
+            print(
+                f"WARNING: RGB image missing:\n"
+                f"  {rgb_path}"
+            )
+
+            continue
+
+        if not lwir_path.exists():
+
+            print(
+                f"WARNING: Thermal image missing:\n"
+                f"  {lwir_path}"
+            )
+
+            continue
+
+        captures.append({
+            "rgb": rgb_path,
+            "lwir": lwir_path,
+            "directory": capture_dir
+        })
 
     captures.sort(
         key=lambda item: str(item["directory"]).lower()
@@ -71,8 +144,25 @@ def save_capture_index(captures):
         encoding="utf-8"
     ) as file:
 
-        file.write("REVIEW 1 CAPTURE INDEX\n")
-        file.write("=" * 80 + "\n\n")
+        file.write(
+            "REVIEW 1 - HELD-OUT TEST CAPTURE INDEX\n"
+        )
+
+        file.write(
+            "=" * 80 + "\n\n"
+        )
+
+        file.write(
+            f"Number of test captures: {len(captures)}\n"
+        )
+
+        file.write(
+            "Source: data/capture_splits.json\n"
+        )
+
+        file.write(
+            "Split: TEST\n\n"
+        )
 
         for index, capture in enumerate(
             captures,
@@ -91,14 +181,17 @@ def save_capture_index(captures):
 # SELECT CAPTURE
 # ============================================================
 
-def select_capture(captures, requested_index=None):
+def select_capture(
+    captures,
+    requested_index=None
+):
 
     if requested_index is not None:
 
         if not 1 <= requested_index <= len(captures):
 
             raise ValueError(
-                f"Capture number must be between "
+                f"Test capture number must be between "
                 f"1 and {len(captures)}."
             )
 
@@ -109,11 +202,11 @@ def select_capture(captures, requested_index=None):
 
     print("\n")
     print("=" * 70)
-    print("REVIEW 1 - CAPTURE SELECTION")
+    print(" TEST CAPTURE SELECTION")
     print("=" * 70)
 
     print(
-        f"\nComplete RGB + Thermal captures found: "
+        f"\nHeld-out TEST captures available: "
         f"{len(captures)}"
     )
 
@@ -126,17 +219,17 @@ def select_capture(captures, requested_index=None):
     )
 
     print(
-        "\nEnter a capture number."
+        "\nEnter a TEST capture number."
     )
 
     print(
-        "Press ENTER to use capture #1."
+        "Press ENTER to use test capture #1."
     )
 
     while True:
 
         user_input = input(
-            "\nEnter capture number: "
+            "\nEnter test capture number: "
         ).strip()
 
         if user_input == "":
@@ -152,6 +245,7 @@ def select_capture(captures, requested_index=None):
                 print(
                     "Please enter a valid number."
                 )
+
                 continue
 
         if 1 <= index <= len(captures):
@@ -171,7 +265,10 @@ def select_capture(captures, requested_index=None):
 # SAVE SELECTED INPUTS
 # ============================================================
 
-def save_inputs(rgb_path, lwir_path):
+def save_inputs(
+    rgb_path,
+    lwir_path
+):
 
     OUTPUT_DIR.mkdir(
         parents=True,
@@ -295,17 +392,20 @@ def create_summary(
             reliability_counts[reliability] += 1
 
     width = 1200
-    height = 520
+    height = 800
 
     summary = np.zeros(
         (height, width, 3),
         dtype=np.uint8
     )
 
-    # Header
+    # ========================================================
+    # HEADER
+    # ========================================================
+
     cv2.putText(
         summary,
-        "REVIEW 1 - MULTI-AGENT CAMOUFLAGE ANALYSIS",
+        "MULTI-AGENT CAMOUFLAGE ANALYSIS",
         (35, 45),
         cv2.FONT_HERSHEY_SIMPLEX,
         0.82,
@@ -316,7 +416,7 @@ def create_summary(
 
     cv2.putText(
         summary,
-        f"Capture #{selected_index}  |  {capture_dir}",
+        f"TEST Capture #{selected_index}  |  {capture_dir}",
         (35, 75),
         cv2.FONT_HERSHEY_SIMPLEX,
         0.38,
@@ -325,13 +425,36 @@ def create_summary(
         cv2.LINE_AA
     )
 
-    # Agent boxes
+    # ========================================================
+    # AGENT BOXES
+    # ========================================================
+
     agents = [
-        ("SPATIAL", str(spatial_count), "RGB detections"),
-        ("SPECTRAL", str(spectral_count), "Thermal regions"),
-        ("FEATURE", str(feature_count), "Feature regions"),
-        ("CONFLICT", str(candidate_count), "Candidates"),
-        ("UNCERTAINTY", f"{average_confidence:.2f}", "Avg confidence")
+        (
+            "SPATIAL",
+            str(spatial_count),
+            "RGB detections"
+        ),
+        (
+            "SPECTRAL",
+            str(spectral_count),
+            "Thermal regions"
+        ),
+        (
+            "FEATURE",
+            str(feature_count),
+            "Feature regions"
+        ),
+        (
+            "CONFLICT",
+            str(candidate_count),
+            "Candidates"
+        ),
+        (
+            "UNCERTAINTY",
+            f"{average_confidence:.2f}",
+            "Avg confidence"
+        )
     ]
 
     box_x = 35
@@ -392,7 +515,10 @@ def create_summary(
             cv2.LINE_AA
         )
 
-    # Conflict
+    # ========================================================
+    # CONFLICT ANALYSIS
+    # ========================================================
+
     cv2.putText(
         summary,
         "CONFLICT ANALYSIS",
@@ -408,29 +534,30 @@ def create_summary(
         f"Candidates: {candidate_count}",
         f"Low conflict: {conflict_states['LOW']}",
         f"Moderate conflict: {conflict_states['MODERATE']}",
-        f"High conflict: {conflict_states['HIGH']}",
-        
+        f"High conflict: {conflict_states['HIGH']}"
     ]
 
     y = 320
 
     for line in conflict_lines:
 
-        if line:
-            cv2.putText(
-                summary,
-                line,
-                (35, y),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.44,
-                (220, 220, 220),
-                1,
-                cv2.LINE_AA
-            )
+        cv2.putText(
+            summary,
+            line,
+            (35, y),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.44,
+            (220, 220, 220),
+            1,
+            cv2.LINE_AA
+        )
 
         y += 30
 
-    # Uncertainty
+    # ========================================================
+    # UNCERTAINTY ANALYSIS
+    # ========================================================
+
     cv2.putText(
         summary,
         "UNCERTAINTY ANALYSIS",
@@ -448,9 +575,7 @@ def create_summary(
         "",
         f"High reliability: {reliability_counts['HIGH']}",
         f"Medium reliability: {reliability_counts['MEDIUM']}",
-        f"Low reliability: {reliability_counts['LOW']}",
-        
-        
+        f"Low reliability: {reliability_counts['LOW']}"
     ]
 
     y = 320
@@ -458,6 +583,7 @@ def create_summary(
     for line in uncertainty_lines:
 
         if line:
+
             cv2.putText(
                 summary,
                 line,
@@ -471,8 +597,14 @@ def create_summary(
 
         y += 30
 
-   
-    output_path = OUTPUT_DIR / "review1_summary.png"
+    # ========================================================
+    # SAVE SUMMARY
+    # ========================================================
+
+    output_path = (
+        OUTPUT_DIR /
+        "review1_summary.png"
+    )
 
     cv2.imwrite(
         str(output_path),
@@ -489,8 +621,8 @@ def create_summary(
 def main():
 
     print("\n")
-    print("=" * 70)
-    print("REVIEW 1 - MULTI-AGENT CAMOUFLAGE PIPELINE")
+    
+    print("MULTI-AGENT CAMOUFLAGE PIPELINE")
     print("=" * 70)
 
     OUTPUT_DIR.mkdir(
@@ -498,15 +630,46 @@ def main():
         exist_ok=True
     )
 
+    # ========================================================
+    # LOAD ONLY HELD-OUT TEST CAPTURES
+    # ========================================================
+
+    print("\nLoading master capture split...")
+
     captures = find_captures()
 
     if not captures:
 
         raise FileNotFoundError(
-            "No complete RGB + Thermal captures found."
+            "No complete RGB + Thermal TEST captures found."
         )
 
-    index_path = save_capture_index(captures)
+    print(
+        f"TEST captures available: {len(captures)}"
+    )
+
+    if len(captures) != 129:
+
+        print(
+            "\nWARNING:"
+        )
+
+        print(
+            "Expected 129 test captures from the "
+            "master split."
+        )
+
+        print(
+            f"Found {len(captures)} usable test captures."
+        )
+
+    index_path = save_capture_index(
+        captures
+    )
+
+    # ========================================================
+    # ARGUMENTS
+    # ========================================================
 
     parser = argparse.ArgumentParser()
 
@@ -514,7 +677,10 @@ def main():
         "--index",
         type=int,
         default=None,
-        help="Capture number from capture_index.txt"
+        help=(
+            "Test capture number from "
+            "capture_index.txt"
+        )
     )
 
     args = parser.parse_args()
@@ -528,11 +694,27 @@ def main():
     lwir_path = selected["lwir"]
     capture_dir = selected["directory"]
 
-    print("\nSelected capture:")
-    print(f"  Number: {selected_index}")
-    print(f"  Directory: {capture_dir}")
-    print(f"  RGB: {rgb_path}")
-    print(f"  Thermal: {lwir_path}")
+    # ========================================================
+    # SELECTED CAPTURE
+    # ========================================================
+
+    print("\nSelected TEST capture:")
+
+    print(
+        f"  Test number: {selected_index}"
+    )
+
+    print(
+        f"  Directory: {capture_dir}"
+    )
+
+    print(
+        f"  RGB: {rgb_path}"
+    )
+
+    print(
+        f"  Thermal: {lwir_path}"
+    )
 
     save_inputs(
         rgb_path,
@@ -546,14 +728,29 @@ def main():
     ) as file:
 
         file.write(
-            f"Capture number: {selected_index}\n"
+            "REVIEW 1 SELECTED CAPTURE\n"
         )
+
+        file.write(
+            "=" * 60 + "\n"
+        )
+
+        file.write(
+            "Split: TEST\n"
+        )
+
+        file.write(
+            f"Test capture number: {selected_index}\n"
+        )
+
         file.write(
             f"Capture directory: {capture_dir}\n"
         )
+
         file.write(
             f"RGB: {rgb_path}\n"
         )
+
         file.write(
             f"Thermal: {lwir_path}\n"
         )
@@ -564,28 +761,43 @@ def main():
 
     print("\nLoading agents...")
 
-    print("  Loading Spatial Agent...")
+    print(
+        "  Loading Spatial Agent..."
+    )
+
     spatial_agent = SpatialAgent(
         model_path=str(MODEL_PATH)
     )
 
-    print("  Loading Spectral Agent...")
+    print(
+        "  Loading Spectral Agent..."
+    )
+
     spectral_agent = SpectralAgent()
 
-    print("  Loading Feature Agent...")
+    print(
+        "  Loading Feature Agent..."
+    )
+
     feature_agent = FeatureAgent()
 
-    print("  Loading Conflict Agent...")
+    print(
+        "  Loading Conflict Agent..."
+    )
+
     conflict_agent = ConflictAgent()
 
-    print("  Loading Uncertainty Agent...")
+    print(
+        "  Loading Uncertainty Agent..."
+    )
+
     uncertainty_agent = UncertaintyAgent()
 
     # ========================================================
     # 1. SPATIAL
     # ========================================================
 
-    print("\n" + "-" * 70)
+    
     print("1/5  SPATIAL AGENT")
     print("-" * 70)
 
@@ -600,14 +812,17 @@ def main():
 
     spatial_agent.save_visualization(
         rgb_path,
-        output_path=OUTPUT_DIR / "03_spatial_detection.png"
+        output_path=(
+            OUTPUT_DIR /
+            "03_spatial_detection.png"
+        )
     )
 
     # ========================================================
     # 2. SPECTRAL
     # ========================================================
 
-    print("\n" + "-" * 70)
+    print("\n")
     print("2/5  SPECTRAL AGENT")
     print("-" * 70)
 
@@ -627,14 +842,17 @@ def main():
 
     spectral_agent.save_visualization(
         lwir_path,
-        output_path=OUTPUT_DIR / "04_spectral_analysis.png"
+        output_path=(
+            OUTPUT_DIR /
+            "04_spectral_analysis.png"
+        )
     )
 
     # ========================================================
     # 3. FEATURE
     # ========================================================
 
-    print("\n" + "-" * 70)
+    print("\n")
     print("3/5  FEATURE AGENT")
     print("-" * 70)
 
@@ -661,14 +879,17 @@ def main():
     feature_agent.save_visualization(
         rgb_path=rgb_path,
         lwir_path=lwir_path,
-        output_path=OUTPUT_DIR / "05_feature_analysis.png"
+        output_path=(
+            OUTPUT_DIR /
+            "05_feature_analysis.png"
+        )
     )
 
     # ========================================================
     # 4. CONFLICT
     # ========================================================
 
-    print("\n" + "-" * 70)
+    print("\n")
     print("4/5  CONFLICT AGENT")
     print("-" * 70)
 
@@ -703,14 +924,17 @@ def main():
     conflict_agent.save_visualization(
         rgb_path,
         conflict_result,
-        output_path=OUTPUT_DIR / "06_conflict_analysis.png"
+        output_path=(
+            OUTPUT_DIR /
+            "06_conflict_analysis.png"
+        )
     )
 
     # ========================================================
     # 5. UNCERTAINTY
     # ========================================================
 
-    print("\n" + "-" * 70)
+    print("\n")
     print("5/5  UNCERTAINTY AGENT")
     print("-" * 70)
 
@@ -741,15 +965,18 @@ def main():
     uncertainty_agent.save_visualization(
         rgb_path,
         uncertainty_results,
-        output_path=OUTPUT_DIR / "07_uncertainty_analysis.png"
+        output_path=(
+            OUTPUT_DIR /
+            "07_uncertainty_analysis.png"
+        )
     )
 
     # ========================================================
     # SUMMARY
     # ========================================================
 
-    print("\n" + "-" * 70)
-    print("GENERATING REVIEW 1 SUMMARY")
+    print("\n")
+    print("SUMMARY")
     print("-" * 70)
 
     summary_path = create_summary(
@@ -767,13 +994,21 @@ def main():
         f"{summary_path}"
     )
 
+    # ========================================================
+    # COMPLETE
+    # ========================================================
+
     print("\n")
-    print("=" * 70)
-    print("REVIEW 1 PIPELINE COMPLETE")
+    
+    print("PIPELINE COMPLETE")
     print("=" * 70)
 
     print(
-        f"\nCapture used: #{selected_index}"
+        f"\nTEST capture used: #{selected_index}"
+    )
+
+    print(
+        f"Total TEST captures: {len(captures)}"
     )
 
     print(
@@ -781,7 +1016,7 @@ def main():
     )
 
     print(
-        f"\nCapture index:\n{index_path}"
+        f"\nTEST capture index:\n{index_path}"
     )
 
 

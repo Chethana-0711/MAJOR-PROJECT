@@ -13,7 +13,7 @@ class SpatialAgent:
 
     def __init__(
         self,
-        model_path="runs/detect/train/weights/best.pt",
+        model_path="runs/detect/spatial_train-3/weights/best.pt",
         confidence_threshold=0.25,
         image_size=512,
         device=0,
@@ -31,13 +31,7 @@ class SpatialAgent:
     # --------------------------------------------------
 
     def analyze(self, image_path):
-        """
-        Run spatial detection on an RGB/VIS image.
-
-        Returns:
-            Dictionary containing detections and summary
-            statistics.
-        """
+      
 
         image_path = Path(image_path)
 
@@ -96,9 +90,9 @@ class SpatialAgent:
                 }
             )
 
-        # --------------------------------------------------
+       
         # SUMMARY STATISTICS
-        # --------------------------------------------------
+        
 
         detection_count = len(detections)
 
@@ -135,18 +129,15 @@ class SpatialAgent:
             "class_counts": class_counts,
         }
 
-    # --------------------------------------------------
-    # VISUALIZATION
-    # --------------------------------------------------
+    # ---------------------
+    # VISUALIZATIO
+    
 
     def save_visualization(
         self,
         image_path,
         output_path="outputs/spatial_detection.png",
     ):
-        """
-        Run detection and save YOLO's annotated visualization.
-        """
 
         image_path = Path(image_path)
         output_path = Path(output_path)

@@ -16,3 +16,19 @@ data/cnn/val/
 .ipynb_checkpoints/
 
 *.log
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+.venv/
+venv/
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Temporary files
+*.log
+.DS_Store

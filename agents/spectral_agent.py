@@ -166,9 +166,9 @@ class SpectralAgent:
             local_contrast
         )
 
-    # ========================================================
+    # ============================
     # RANDOM FOREST PREDICTION
-    # ========================================================
+    # ==========
 
     def _predict_probability(
         self,
@@ -311,12 +311,8 @@ class SpectralAgent:
 
         # ====================================================
         # CANDIDATE THRESHOLD
-        # ====================================================
+        # ==============================n =
 
-        # The RF itself is now the decision source.
-        #
-        # We use a fixed probability threshold instead of
-        # combining RF probability with another detector.
 
         RF_THRESHOLD = 0.70
 
@@ -329,7 +325,7 @@ class SpectralAgent:
 
         # ====================================================
         # MORPHOLOGICAL CLEANING
-        # ====================================================
+        # =============
 
         kernel = np.ones(
             (3, 3),
@@ -344,7 +340,7 @@ class SpectralAgent:
 
         # ====================================================
         # CONNECTED COMPONENTS
-        # ====================================================
+        # ====================
 
         (
             num_labels,
@@ -427,8 +423,8 @@ class SpectralAgent:
             )
 
             # =================================================
-            # LARGE ENOUGH → FORMAL REGION
-            # =================================================
+            # LARGE ENOUGH -- FORMAL REGION
+            # ====================
 
             if area >= self.min_area:
 
@@ -460,8 +456,8 @@ class SpectralAgent:
                         "region"
                 })
 
-            # =================================================
-            # TOO SMALL → PRESERVE AS EVIDENCE
+            # =========================
+            # TOO SMALL -- PRESERVE AS EVIDENCE
             # =================================================
 
             else:
@@ -490,7 +486,7 @@ class SpectralAgent:
 
         # ====================================================
         # SORT BY STRENGTH
-        # ====================================================
+        # ==============================================
 
         regions.sort(
             key=lambda region:
@@ -525,8 +521,7 @@ class SpectralAgent:
         # ====================================================
         # COMBINED EVIDENCE
         #
-        # RF-only means this is simply the RF probability.
-        # ====================================================
+
 
         overall_evidence = (
             overall_ml_evidence
@@ -538,7 +533,6 @@ class SpectralAgent:
 
         # ====================================================
         # RETURN
-        # ====================================================
 
         return {
 
@@ -551,7 +545,6 @@ class SpectralAgent:
             "status":
                 status,
 
-            # ------------------------------------------------
             # LWIR STATISTICS
             # ------------------------------------------------
 
@@ -586,7 +579,7 @@ class SpectralAgent:
 
             # ------------------------------------------------
             # REGIONS
-            # ------------------------------------------------
+            # -----------------------------
 
             "regions":
                 regions,
@@ -686,7 +679,7 @@ class SpectralAgent:
 
         # ====================================================
         # LWIR DISPLAY
-        # ====================================================
+        # ====================
 
         lwir_display = cv2.normalize(
             lwir,

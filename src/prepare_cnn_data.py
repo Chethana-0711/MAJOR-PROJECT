@@ -1,19 +1,20 @@
 from pathlib import Path
-import random
+import json
+
 import cv2
 import numpy as np
 
 
 # --------------------------------------------------
-# SETTINGS
-# --------------------------------------------------
+# PATHS
 
-DATASET_DIR = Path("MUDCAD-X/dataset")
-OUTPUT_DIR = Path("data/cnn")
 
-TRAIN_RATIO = 0.70
-VAL_RATIO = 0.15
-TEST_RATIO = 0.15
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+
+DATASET_DIR = PROJECT_DIR / "MUDCAD-X" / "dataset"
+OUTPUT_DIR = PROJECT_DIR / "data" / "cnn"
+
+SPLIT_FILE = PROJECT_DIR / "data" / "capture_splits.json"
 
 PATCH_SIZE = 64
 PATCHES_PER_CLASS = 20
@@ -22,22 +23,151 @@ SEED = 42
 
 
 # --------------------------------------------------
-# CREATE PATCH
-# --------------------------------------------------
+# LOAD MASTER CAPTURE SPLIT
+# -----------------------------
 
-def extract_patch(image, x, y, size):
+if not SPLIT_FILE.exists():
+
+    raise FileNotFoundError(
+        f"Master split file not found:\n"
+        f"{SPLIT_FILE}\n\n"
+        f"Run src/capture_split.py first."
+    )
+
+
+with open(
+    SPLIT_FILE,
+    "r",
+    encoding="utf-8"
+) as f:
+
+    split_data = json.load(f)
+
+
+# ---------------------------------------------------------------
+# LOAD CAPTURES FROM    SPLIT
+
+
+def load_split_captures(split_name):
+
+    captures = []
+
+    for relative_path in split_data[split_name]:
+
+        capture = (
+            PROJECT_DIR / relative_path
+        )
+
+        vis_path = capture / "vis.png"
+        lwir_path = capture / "lwir.png"
+        label_path = capture / "label.png"
+
+        if not (
+            vis_path.exists()
+            and lwir_path.exists()
+            and label_path.exists()
+        ):
+
+            raise FileNotFoundError(
+                f"Incomplete capture:\n"
+                f"{capture}"
+            )
+
+        captures.append(capture)
+
+    return captures
+
+
+splits = {
+
+    "train": load_split_captures(
+        "train"
+    ),
+
+    "val": load_split_captures(
+        "val"
+    ),
+
+    "test": load_split_captures(
+        "test"
+    )
+}
+
+
+# --------------------------------------------------
+# PRINT SPLIT INFORMATION
+
+
+print("=" * 60)
+print("USING MASTER CAPTURE SPLIT")
+print("=" * 60)
+
+print(
+    f"Split file: {SPLIT_FILE}"
+)
+
+print(
+    f"Seed: {split_data['seed']}"
+)
+
+print()
+
+for split_name, captures in splits.items():
+
+    print(
+        f"{split_name}: "
+        f"{len(captures)} captures"
+    )
+
+print()
+
+
+# --------------------------------------------------
+# CREATE PATCH
+
+
+def extract_patch(
+    image,
+    x,
+    y,
+    size
+):
+
     half = size // 2
 
     h, w = image.shape[:2]
 
-    x1 = max(0, x - half)
-    y1 = max(0, y - half)
-    x2 = min(w, x + half)
-    y2 = min(h, y + half)
+    x1 = max(
+        0,
+        x - half
+    )
 
-    patch = image[y1:y2, x1:x2]
+    y1 = max(
+        0,
+        y - half
+    )
 
-    if patch.shape[0] != size or patch.shape[1] != size:
+    x2 = min(
+        w,
+        x + half
+    )
+
+    y2 = min(
+        h,
+        y + half
+    )
+
+    patch = image[
+        y1:y2,
+        x1:x2
+    ]
+
+    if (
+        patch.shape[0] != size
+        or
+        patch.shape[1] != size
+    ):
+
         patch = cv2.copyMakeBorder(
             patch,
             0,
@@ -48,61 +178,6 @@ def extract_patch(image, x, y, size):
         )
 
     return patch
-
-
-# --------------------------------------------------
-# FIND CAPTURES
-# --------------------------------------------------
-
-def find_captures():
-
-    captures = []
-
-    for label_path in DATASET_DIR.rglob("label.png"):
-
-        capture = label_path.parent
-
-        if (
-            (capture / "vis.png").exists()
-            and
-            (capture / "lwir.png").exists()
-        ):
-            captures.append(capture)
-
-    return sorted(captures)
-
-
-# --------------------------------------------------
-# SPLIT CAPTURES
-# --------------------------------------------------
-
-def split_captures(captures):
-
-    random.seed(SEED)
-
-    captures = captures.copy()
-
-    random.shuffle(captures)
-
-    total = len(captures)
-
-    train_end = int(
-        total * TRAIN_RATIO
-    )
-
-    val_end = train_end + int(
-        total * VAL_RATIO
-    )
-
-    train = captures[:train_end]
-
-    val = captures[
-        train_end:val_end
-    ]
-
-    test = captures[val_end:]
-
-    return train, val, test
 
 
 # --------------------------------------------------
@@ -128,16 +203,31 @@ def process_capture(
         str(capture / "label.png")
     )
 
-    if vis is None or lwir is None or label is None:
+    if (
+        vis is None
+        or
+        lwir is None
+        or
+        label is None
+    ):
+
         return 0
 
-    # Target = any non-black label pixel
+
+    # --------------------------------------------------
+    # CREATE TARGET / BACKGROUND MASKS
+   
+
+    # Any non-black label pixel is
+    # considered a target.
+
     target_mask = np.any(
         label != 0,
         axis=2
     )
 
     background_mask = ~target_mask
+
 
     target_y, target_x = np.where(
         target_mask
@@ -147,12 +237,20 @@ def process_capture(
         background_mask
     )
 
+
     if len(target_x) == 0:
+
         return 0
+
+
+    # --------------------------------------------------
+    # RANDOM PATCH SAMPLING
+    # --------------------------------------------------
 
     rng = np.random.default_rng(
         SEED + capture_id
     )
+
 
     target_count = min(
         PATCHES_PER_CLASS,
@@ -163,6 +261,7 @@ def process_capture(
         PATCHES_PER_CLASS,
         len(background_x)
     )
+
 
     target_indices = rng.choice(
         len(target_x),
@@ -176,7 +275,9 @@ def process_capture(
         replace=False
     )
 
+
     count = 0
+
 
     # --------------------------------------------------
     # TARGET PATCHES
@@ -184,8 +285,14 @@ def process_capture(
 
     for i in target_indices:
 
-        x = int(target_x[i])
-        y = int(target_y[i])
+        x = int(
+            target_x[i]
+        )
+
+        y = int(
+            target_y[i]
+        )
+
 
         vis_patch = extract_patch(
             vis,
@@ -194,6 +301,7 @@ def process_capture(
             PATCH_SIZE
         )
 
+
         lwir_patch = extract_patch(
             lwir,
             x,
@@ -201,30 +309,35 @@ def process_capture(
             PATCH_SIZE
         )
 
+
         filename = (
             f"{capture_id:04d}_"
             f"target_{count:03d}"
         )
 
+
         cv2.imwrite(
             str(
-                output_dir /
-                "target" /
-                f"{filename}_rgb.jpg"
+                output_dir
+                / "target"
+                / f"{filename}_rgb.jpg"
             ),
             vis_patch
         )
 
+
         cv2.imwrite(
             str(
-                output_dir /
-                "target" /
-                f"{filename}_lwir.jpg"
+                output_dir
+                / "target"
+                / f"{filename}_lwir.jpg"
             ),
             lwir_patch
         )
 
+
         count += 1
+
 
     # --------------------------------------------------
     # BACKGROUND PATCHES
@@ -232,8 +345,14 @@ def process_capture(
 
     for i in background_indices:
 
-        x = int(background_x[i])
-        y = int(background_y[i])
+        x = int(
+            background_x[i]
+        )
+
+        y = int(
+            background_y[i]
+        )
+
 
         vis_patch = extract_patch(
             vis,
@@ -242,6 +361,7 @@ def process_capture(
             PATCH_SIZE
         )
 
+
         lwir_patch = extract_patch(
             lwir,
             x,
@@ -249,30 +369,35 @@ def process_capture(
             PATCH_SIZE
         )
 
+
         filename = (
             f"{capture_id:04d}_"
             f"background_{i:03d}"
         )
 
+
         cv2.imwrite(
             str(
-                output_dir /
-                "background" /
-                f"{filename}_rgb.jpg"
+                output_dir
+                / "background"
+                / f"{filename}_rgb.jpg"
             ),
             vis_patch
         )
 
+
         cv2.imwrite(
             str(
-                output_dir /
-                "background" /
-                f"{filename}_lwir.jpg"
+                output_dir
+                / "background"
+                / f"{filename}_lwir.jpg"
             ),
             lwir_patch
         )
 
+
         count += 1
+
 
     return count
 
@@ -287,31 +412,37 @@ def process_split(
 ):
 
     output_dir = (
-        OUTPUT_DIR /
-        split_name
+        OUTPUT_DIR
+        / split_name
     )
+
 
     target_dir = (
-        output_dir /
-        "target"
+        output_dir
+        / "target"
     )
 
+
     background_dir = (
-        output_dir /
-        "background"
+        output_dir
+        / "background"
     )
+
 
     target_dir.mkdir(
         parents=True,
         exist_ok=True
     )
 
+
     background_dir.mkdir(
         parents=True,
         exist_ok=True
     )
 
+
     total = 0
+
 
     for i, capture in enumerate(
         captures
@@ -323,19 +454,28 @@ def process_split(
             i
         )
 
+
         total += count
 
-        if (i + 1) % 100 == 0:
+
+        if (
+            (i + 1) % 100 == 0
+        ):
 
             print(
                 f"  {split_name}: "
-                f"{i + 1}/{len(captures)}"
+                f"{i + 1}/"
+                f"{len(captures)}"
             )
+
 
     print(
         f"  {split_name} patches: "
         f"{total}"
     )
+
+
+    return total
 
 
 # --------------------------------------------------
@@ -348,49 +488,96 @@ def main():
         "Preparing multimodal CNN dataset..."
     )
 
-    captures = find_captures()
 
     print(
-        f"Complete captures: "
-        f"{len(captures)}"
+        "\nCapture split:"
     )
 
-    train, val, test = split_captures(
-        captures
-    )
+    for split_name, captures in (
+        splits.items()
+    ):
 
-    print("\nCapture split:")
+        print(
+            f"{split_name}: "
+            f"{len(captures)}"
+        )
 
-    print(
-        f"train: {len(train)}"
-    )
 
-    print(
-        f"val:   {len(val)}"
-    )
+    print()
 
-    print(
-        f"test:  {len(test)}"
-    )
 
-    process_split(
-        train,
+    # --------------------------------------------------
+    # PROCESS TRAIN
+    # --------------------------------------------------
+
+    train_patches = process_split(
+        splits["train"],
         "train"
     )
 
-    process_split(
-        val,
+
+    # --------------------------------------------------
+    # PROCESS VALIDATION
+    # --------------------------------------------------
+
+    val_patches = process_split(
+        splits["val"],
         "val"
     )
 
-    process_split(
-        test,
+
+    # --------------------------------------------------
+    # PROCESS TEST
+    # --------------------------------------------------
+
+    test_patches = process_split(
+        splits["test"],
         "test"
     )
 
+
+    # --------------------------------------------------
+    # SUMMARY
+    # --------------------------------------------------
+
+    print()
+    print("=" * 60)
+    print("CNN DATASET PREPARATION COMPLETE")
+    print("=" * 60)
+
     print(
-        "\nCNN dataset preparation complete!"
+        f"Train captures: "
+        f"{len(splits['train'])}"
     )
+
+    print(
+        f"Validation captures: "
+        f"{len(splits['val'])}"
+    )
+
+    print(
+        f"Test captures: "
+        f"{len(splits['test'])}"
+    )
+
+    print()
+
+    print(
+        f"Train patches: "
+        f"{train_patches}"
+    )
+
+    print(
+        f"Validation patches: "
+        f"{val_patches}"
+    )
+
+    print(
+        f"Test patches: "
+        f"{test_patches}"
+    )
+
+    print()
 
     print(
         f"Output directory: "
