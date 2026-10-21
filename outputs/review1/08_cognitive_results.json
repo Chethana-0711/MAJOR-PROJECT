@@ -1,0 +1,3672 @@
+[
+  {
+    "bbox": [
+      0,
+      0,
+      512,
+      512
+    ],
+    "class": "hedge",
+    "spatial_status": "DETECTED",
+    "spectral_status": "DETECTED",
+    "feature_status": "DETECTED",
+    "spatial_evidence": 0.9781981706619263,
+    "spectral_evidence": 0.7664853473256774,
+    "feature_evidence": 0.8176858425140381,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "support_count": 3,
+    "agreement": 1.0,
+    "conflict": 0.21171282333624886,
+    "conflict_state": "MODERATE",
+    "evidence_pattern": "TRIPLE AGREEMENT",
+    "evidence_strength": 0.8541231201672139,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.14587687983278608,
+    "conflict_uncertainty": 0.21171282333624886,
+    "uncertainty": 0.1218645989339891,
+    "confidence": 0.878135401066011,
+    "reliability": "HIGH",
+    "bayes_decision": "CAMOUFLAGED OBJECT",
+    "bayes_hypothesis": "H0",
+    "bayes_camouflage_detected": true,
+    "bayes_suspicion": 0.6383,
+    "bayes_posterior": {
+      "H0": 0.6383,
+      "H1": 0.3284,
+      "H2": 0.0333
+    },
+    "bayes_flags": [
+      "WEAK_BAYES_FACTOR"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 2.3 (not decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.672, P(H1)=0.328, P(H2)=0.000.",
+      "Metacognition flags: ['WEAK_BAYES_FACTOR'].",
+      "Best hypothesis does not clearly beat the runner-up."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      416,
+      96,
+      39,
+      65
+    ],
+    "class": "tarpgray",
+    "spatial_status": "DETECTED",
+    "spectral_status": "NO_DETECTION",
+    "feature_status": "DETECTED",
+    "spatial_evidence": 0.9771950840950012,
+    "spectral_evidence": 0.0,
+    "feature_evidence": 0.7123101353645325,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spatial",
+      "feature"
+    ],
+    "support_count": 2,
+    "agreement": 0.6666666666666666,
+    "conflict": 0.9771950840950012,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "PARTIAL AGREEMENT",
+    "evidence_strength": 0.5631684064865112,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.43683159351348877,
+    "conflict_uncertainty": 0.9771950840950012,
+    "uncertainty": 0.46789116263389585,
+    "confidence": 0.5321088373661041,
+    "reliability": "MEDIUM",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.331,
+    "bayes_posterior": {
+      "H0": 0.331,
+      "H1": 0.4856,
+      "H2": 0.1833
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H1, BF over H0 = 3.8 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.328, P(H1)=0.672, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.98).",
+      "Only 2/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      352,
+      256,
+      64,
+      68
+    ],
+    "class": "net2dgreen",
+    "spatial_status": "DETECTED",
+    "spectral_status": "NO_DETECTION",
+    "feature_status": "EVIDENCE_PRESENT",
+    "spatial_evidence": 0.9251628518104553,
+    "spectral_evidence": 0.0,
+    "feature_evidence": 0.9795234203338623,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spatial"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.9795234203338623,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "SPATIAL-ONLY EVIDENCE",
+    "evidence_strength": 0.6348954240481058,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.36510457595189416,
+    "conflict_uncertainty": 0.9795234203338623,
+    "uncertainty": 0.4398988564809163,
+    "confidence": 0.5601011435190837,
+    "reliability": "MEDIUM",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.3829,
+    "bayes_posterior": {
+      "H0": 0.3829,
+      "H1": 0.4004,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "WEAK_BAYES_FACTOR",
+      "CAMO_VS_ORDINARY_CONFUSION",
+      "NARROW_MARGIN"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H1, BF over H0 = 1.2 (not decisive); consistent with ['H0'].",
+      "Bayesian posterior: P(H0)=0.475, P(H1)=0.525, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION', 'NARROW_MARGIN'].",
+      "Agents disagree strongly (conflict=0.98).",
+      "Only 2/3 agents reported.",
+      "Best hypothesis does not clearly beat the runner-up.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      490.0806884765625,
+      316.520751953125,
+      21.9193115234375,
+      28.151123046875
+    ],
+    "class": "net3dgreen",
+    "spatial_status": "DETECTED",
+    "spectral_status": "NO_DETECTION",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.9152771830558777,
+    "spectral_evidence": 0.0,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spatial"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.9152771830558777,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "SPATIAL-ONLY EVIDENCE",
+    "evidence_strength": 0.30509239435195923,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.6949076056480408,
+    "conflict_uncertainty": 0.9152771830558777,
+    "uncertainty": 0.5525461971759795,
+    "confidence": 0.4474538028240205,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.3135,
+    "bayes_posterior": {
+      "H0": 0.3135,
+      "H1": 0.4698,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H1, BF over H0 = 8.6 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.277, P(H1)=0.723, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.92).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      0,
+      0,
+      246,
+      256
+    ],
+    "class": "persongreen",
+    "spatial_status": "DETECTED",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.8296374082565308,
+    "spectral_evidence": 0.7659989053308864,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spatial",
+      "spectral"
+    ],
+    "support_count": 2,
+    "agreement": 0.6666666666666666,
+    "conflict": 0.8296374082565308,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "PARTIAL AGREEMENT",
+    "evidence_strength": 0.5318787711958057,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.46812122880419427,
+    "conflict_uncertainty": 0.8296374082565308,
+    "uncertainty": 0.43613971399863694,
+    "confidence": 0.5638602860013631,
+    "reliability": "MEDIUM",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.3858,
+    "bayes_posterior": {
+      "H0": 0.3858,
+      "H1": 0.3976,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "WEAK_BAYES_FACTOR",
+      "CAMO_VS_ORDINARY_CONFUSION",
+      "NARROW_MARGIN"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H1, BF over H0 = 1.1 (not decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.483, P(H1)=0.517, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION', 'NARROW_MARGIN'].",
+      "Agents disagree strongly (conflict=0.83).",
+      "Only 2/3 agents reported.",
+      "Best hypothesis does not clearly beat the runner-up.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      391.77459716796875,
+      10.614964485168457,
+      10.4130859375,
+      16.10076141357422
+    ],
+    "class": "persongreen",
+    "spatial_status": "DETECTED",
+    "spectral_status": "NO_DETECTION",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.672290563583374,
+    "spectral_evidence": 0.0,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spatial"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.672290563583374,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "SPATIAL-ONLY EVIDENCE",
+    "evidence_strength": 0.22409685452779135,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7759031454722086,
+    "conflict_uncertainty": 0.672290563583374,
+    "uncertainty": 0.5120484272638957,
+    "confidence": 0.48795157273610434,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.396,
+    "bayes_posterior": {
+      "H0": 0.396,
+      "H1": 0.3538,
+      "H2": 0.2501
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "WEAK_BAYES_FACTOR",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 2.0 (not decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.584, P(H1)=0.415, P(H2)=0.001.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.67).",
+      "Only 1/3 agents reported.",
+      "Best hypothesis does not clearly beat the runner-up.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      383,
+      416,
+      32,
+      38
+    ],
+    "class": "personyellow",
+    "spatial_status": "DETECTED",
+    "spectral_status": "NO_DETECTION",
+    "feature_status": "DETECTED",
+    "spatial_evidence": 0.4332680404186249,
+    "spectral_evidence": 0.0,
+    "feature_evidence": 0.7400978803634644,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spatial",
+      "feature"
+    ],
+    "support_count": 2,
+    "agreement": 0.6666666666666666,
+    "conflict": 0.7400978803634644,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "PARTIAL AGREEMENT",
+    "evidence_strength": 0.3911219735940297,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.6088780264059703,
+    "conflict_uncertainty": 0.7400978803634644,
+    "uncertainty": 0.46558057467142744,
+    "confidence": 0.5344194253285726,
+    "reliability": "MEDIUM",
+    "bayes_decision": "CAMOUFLAGED OBJECT",
+    "bayes_hypothesis": "H0",
+    "bayes_camouflage_detected": true,
+    "bayes_suspicion": 0.5307,
+    "bayes_posterior": {
+      "H0": 0.5307,
+      "H1": 0.236,
+      "H2": 0.2333
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "OVERCONFIDENT"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 6808.2 (decisive); consistent with ['H0'].",
+      "Bayesian posterior: P(H0)=0.991, P(H1)=0.009, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'OVERCONFIDENT'].",
+      "Agents disagree strongly (conflict=0.74).",
+      "Only 2/3 agents reported.",
+      "Belief is extreme despite shaky evidence; tempered."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      218,
+      160,
+      9,
+      10
+    ],
+    "class": "net3dgray",
+    "spatial_status": "DETECTED",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.33516570925712585,
+    "spectral_evidence": 0.7895522307854832,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spatial",
+      "spectral"
+    ],
+    "support_count": 2,
+    "agreement": 0.6666666666666666,
+    "conflict": 0.7895522307854832,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "PARTIAL AGREEMENT",
+    "evidence_strength": 0.374905980014203,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.6250940199857971,
+    "conflict_uncertainty": 0.7895522307854832,
+    "uncertainty": 0.4869032772299638,
+    "confidence": 0.5130967227700363,
+    "reliability": "MEDIUM",
+    "bayes_decision": "CAMOUFLAGED OBJECT",
+    "bayes_hypothesis": "H0",
+    "bayes_camouflage_detected": true,
+    "bayes_suspicion": 0.5331,
+    "bayes_posterior": {
+      "H0": 0.5331,
+      "H1": 0.2336,
+      "H2": 0.2333
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "OVERCONFIDENT"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 870447.4 (decisive); consistent with ['H0'].",
+      "Bayesian posterior: P(H0)=0.999, P(H1)=0.001, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'OVERCONFIDENT'].",
+      "Agents disagree strongly (conflict=0.79).",
+      "Only 2/3 agents reported.",
+      "Belief is extreme despite shaky evidence; tempered."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      234,
+      351,
+      29,
+      34
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.8168899039558061,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.8168899039558061,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2722966346519354,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7277033653480647,
+    "conflict_uncertainty": 0.8168899039558061,
+    "uncertainty": 0.5361483173259677,
+    "confidence": 0.4638516826740323,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4632,
+    "bayes_posterior": {
+      "H0": 0.4632,
+      "H1": 0.3202,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 6.5 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.704, P(H1)=0.296, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.82).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      382,
+      137,
+      10,
+      11
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.8128758171694401,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.8128758171694401,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.27095860572314673,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7290413942768532,
+    "conflict_uncertainty": 0.8128758171694401,
+    "uncertainty": 0.5354793028615733,
+    "confidence": 0.4645206971384267,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4624,
+    "bayes_posterior": {
+      "H0": 0.4624,
+      "H1": 0.3209,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 6.3 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.702, P(H1)=0.298, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.81).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      391,
+      111,
+      12,
+      15
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.8046478318916821,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.8046478318916821,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.26821594396389403,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.731784056036106,
+    "conflict_uncertainty": 0.8046478318916821,
+    "uncertainty": 0.534107971981947,
+    "confidence": 0.46589202801805296,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4608,
+    "bayes_posterior": {
+      "H0": 0.4608,
+      "H1": 0.3225,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 6.0 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.698, P(H1)=0.302, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.80).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      459,
+      362,
+      18,
+      16
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7918445318298254,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7918445318298254,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.26394817727660846,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7360518227233915,
+    "conflict_uncertainty": 0.7918445318298254,
+    "uncertainty": 0.5319740886383042,
+    "confidence": 0.4680259113616958,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4582,
+    "bayes_posterior": {
+      "H0": 0.4582,
+      "H1": 0.3252,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 5.5 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.690, P(H1)=0.310, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.79).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      132,
+      128,
+      26,
+      19
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7801841622904291,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7801841622904291,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.260061387430143,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.739938612569857,
+    "conflict_uncertainty": 0.7801841622904291,
+    "uncertainty": 0.5300306937150715,
+    "confidence": 0.4699693062849285,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4556,
+    "bayes_posterior": {
+      "H0": 0.4556,
+      "H1": 0.3277,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 5.1 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.683, P(H1)=0.317, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.78).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      300,
+      267,
+      14,
+      14
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7789908664230792,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7789908664230792,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2596636221410264,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7403363778589735,
+    "conflict_uncertainty": 0.7789908664230792,
+    "uncertainty": 0.5298318110705131,
+    "confidence": 0.47016818892948686,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4553,
+    "bayes_posterior": {
+      "H0": 0.4553,
+      "H1": 0.328,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 5.1 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.682, P(H1)=0.318, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.78).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      132,
+      24,
+      14,
+      16
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7714600951423717,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7714600951423717,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2571533650474572,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7428466349525428,
+    "conflict_uncertainty": 0.7714600951423717,
+    "uncertainty": 0.5285766825237286,
+    "confidence": 0.4714233174762714,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4536,
+    "bayes_posterior": {
+      "H0": 0.4536,
+      "H1": 0.3297,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.8 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.677, P(H1)=0.323, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.77).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      373,
+      162,
+      6,
+      8
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7704058817963682,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7704058817963682,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2568019605987894,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7431980394012105,
+    "conflict_uncertainty": 0.7704058817963682,
+    "uncertainty": 0.5284009802993946,
+    "confidence": 0.47159901970060536,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4533,
+    "bayes_posterior": {
+      "H0": 0.4533,
+      "H1": 0.33,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.8 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.676, P(H1)=0.324, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.77).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      133,
+      46,
+      10,
+      8
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7700000604170617,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7700000604170617,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2566666868056872,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7433333131943127,
+    "conflict_uncertainty": 0.7700000604170617,
+    "uncertainty": 0.5283333434028437,
+    "confidence": 0.47166665659715634,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4532,
+    "bayes_posterior": {
+      "H0": 0.4532,
+      "H1": 0.3301,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.8 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.676, P(H1)=0.324, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.77).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      77,
+      156,
+      22,
+      18
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7691195823525173,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7691195823525173,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.25637319411750575,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7436268058824942,
+    "conflict_uncertainty": 0.7691195823525173,
+    "uncertainty": 0.5281865970587529,
+    "confidence": 0.4718134029412471,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.453,
+    "bayes_posterior": {
+      "H0": 0.453,
+      "H1": 0.3303,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.7 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.675, P(H1)=0.325, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.77).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      162,
+      48,
+      21,
+      17
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.765407944605669,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.765407944605669,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.255135981535223,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.744864018464777,
+    "conflict_uncertainty": 0.765407944605669,
+    "uncertainty": 0.5275679907676115,
+    "confidence": 0.4724320092323885,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4521,
+    "bayes_posterior": {
+      "H0": 0.4521,
+      "H1": 0.3312,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.6 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.673, P(H1)=0.327, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.77).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      205,
+      28,
+      8,
+      13
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7597247413182561,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7597247413182561,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2532415804394187,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7467584195605813,
+    "conflict_uncertainty": 0.7597247413182561,
+    "uncertainty": 0.5266207902197093,
+    "confidence": 0.4733792097802907,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4507,
+    "bayes_posterior": {
+      "H0": 0.4507,
+      "H1": 0.3326,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.669, P(H1)=0.331, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.76).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      84,
+      49,
+      8,
+      5
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7589846965178368,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7589846965178368,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.25299489883927895,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.747005101160721,
+    "conflict_uncertainty": 0.7589846965178368,
+    "uncertainty": 0.5264974494196395,
+    "confidence": 0.4735025505803605,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4506,
+    "bayes_posterior": {
+      "H0": 0.4506,
+      "H1": 0.3328,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.668, P(H1)=0.332, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.76).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      64,
+      89,
+      34,
+      36
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.758536961008331,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.758536961008331,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.25284565366944367,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7471543463305563,
+    "conflict_uncertainty": 0.758536961008331,
+    "uncertainty": 0.5264228268347219,
+    "confidence": 0.47357717316527814,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4504,
+    "bayes_posterior": {
+      "H0": 0.4504,
+      "H1": 0.3329,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.668, P(H1)=0.332, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.76).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      46,
+      9,
+      8,
+      6
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7579651622657596,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7579651622657596,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2526550540885865,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7473449459114134,
+    "conflict_uncertainty": 0.7579651622657596,
+    "uncertainty": 0.5263275270442933,
+    "confidence": 0.4736724729557067,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4503,
+    "bayes_posterior": {
+      "H0": 0.4503,
+      "H1": 0.333,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.668, P(H1)=0.332, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.76).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      98,
+      124,
+      22,
+      28
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7560105821910224,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7560105821910224,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.25200352739700743,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7479964726029926,
+    "conflict_uncertainty": 0.7560105821910224,
+    "uncertainty": 0.5260017636985037,
+    "confidence": 0.4739982363014963,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4498,
+    "bayes_posterior": {
+      "H0": 0.4498,
+      "H1": 0.3335,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.3 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.666, P(H1)=0.334, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.76).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      161,
+      5,
+      13,
+      24
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7554224306419619,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7554224306419619,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.25180747688065397,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.748192523119346,
+    "conflict_uncertainty": 0.7554224306419619,
+    "uncertainty": 0.525903738440327,
+    "confidence": 0.474096261559673,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4497,
+    "bayes_posterior": {
+      "H0": 0.4497,
+      "H1": 0.3337,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.3 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.666, P(H1)=0.334, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.76).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      328,
+      268,
+      14,
+      13
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.754571143928347,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.754571143928347,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.25152371464278234,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7484762853572177,
+    "conflict_uncertainty": 0.754571143928347,
+    "uncertainty": 0.5257618573213911,
+    "confidence": 0.47423814267860886,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4494,
+    "bayes_posterior": {
+      "H0": 0.4494,
+      "H1": 0.3339,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.665, P(H1)=0.335, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.75).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      336,
+      185,
+      8,
+      8
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7542013171441674,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7542013171441674,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2514004390480558,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7485995609519442,
+    "conflict_uncertainty": 0.7542013171441674,
+    "uncertainty": 0.5257002195240279,
+    "confidence": 0.4742997804759721,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4493,
+    "bayes_posterior": {
+      "H0": 0.4493,
+      "H1": 0.334,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.665, P(H1)=0.335, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.75).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      24,
+      14,
+      10,
+      8
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7537719939974428,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7537719939974428,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2512573313324809,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7487426686675192,
+    "conflict_uncertainty": 0.7537719939974428,
+    "uncertainty": 0.5256286656662404,
+    "confidence": 0.47437133433375955,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4492,
+    "bayes_posterior": {
+      "H0": 0.4492,
+      "H1": 0.3341,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.664, P(H1)=0.335, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.75).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      216,
+      5,
+      6,
+      9
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7527257210316934,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7527257210316934,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.25090857367723113,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7490914263227688,
+    "conflict_uncertainty": 0.7527257210316934,
+    "uncertainty": 0.5254542868386156,
+    "confidence": 0.4745457131613844,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.449,
+    "bayes_posterior": {
+      "H0": 0.449,
+      "H1": 0.3343,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.664, P(H1)=0.336, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.75).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      29,
+      186,
+      32,
+      29
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7510791506966729,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7510791506966729,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.25035971689889097,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7496402831011091,
+    "conflict_uncertainty": 0.7510791506966729,
+    "uncertainty": 0.5251798584494455,
+    "confidence": 0.4748201415505545,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4485,
+    "bayes_posterior": {
+      "H0": 0.4485,
+      "H1": 0.3348,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.1 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.662, P(H1)=0.337, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.75).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      101,
+      171,
+      7,
+      5
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7497104381585412,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7497104381585412,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2499034793861804,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7500965206138196,
+    "conflict_uncertainty": 0.7497104381585412,
+    "uncertainty": 0.5249517396930903,
+    "confidence": 0.4750482603069097,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4482,
+    "bayes_posterior": {
+      "H0": 0.4482,
+      "H1": 0.3351,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.1 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.661, P(H1)=0.338, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.75).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      370,
+      496,
+      16,
+      13
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7495236089624746,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7495236089624746,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24984120298749155,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7501587970125084,
+    "conflict_uncertainty": 0.7495236089624746,
+    "uncertainty": 0.5249206014937458,
+    "confidence": 0.47507939850625425,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4481,
+    "bayes_posterior": {
+      "H0": 0.4481,
+      "H1": 0.3352,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.1 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.661, P(H1)=0.339, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.75).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      64,
+      69,
+      10,
+      8
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.747606969778145,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.747606969778145,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24920232325938166,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7507976767406184,
+    "conflict_uncertainty": 0.747606969778145,
+    "uncertainty": 0.5246011616296908,
+    "confidence": 0.47539883837030916,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4476,
+    "bayes_posterior": {
+      "H0": 0.4476,
+      "H1": 0.3357,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.0 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.660, P(H1)=0.340, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.75).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      212,
+      17,
+      7,
+      9
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7466054117531482,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7466054117531482,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24886847058438274,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7511315294156172,
+    "conflict_uncertainty": 0.7466054117531482,
+    "uncertainty": 0.5244342352921914,
+    "confidence": 0.47556576470780865,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4474,
+    "bayes_posterior": {
+      "H0": 0.4474,
+      "H1": 0.3359,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 4.0 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.659, P(H1)=0.341, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.75).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      90,
+      40,
+      24,
+      26
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7445570710215474,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7445570710215474,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24818569034051582,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7518143096594841,
+    "conflict_uncertainty": 0.7445570710215474,
+    "uncertainty": 0.5240928451702579,
+    "confidence": 0.4759071548297421,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4468,
+    "bayes_posterior": {
+      "H0": 0.4468,
+      "H1": 0.3365,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.9 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.658, P(H1)=0.342, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.74).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      6,
+      214,
+      8,
+      7
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7393380221282413,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7393380221282413,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24644600737608044,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7535539926239195,
+    "conflict_uncertainty": 0.7393380221282413,
+    "uncertainty": 0.5232230036880402,
+    "confidence": 0.4767769963119598,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4454,
+    "bayes_posterior": {
+      "H0": 0.4454,
+      "H1": 0.3379,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.8 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.654, P(H1)=0.346, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.74).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      117,
+      159,
+      6,
+      6
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7387074999546944,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7387074999546944,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24623583331823148,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7537641666817685,
+    "conflict_uncertainty": 0.7387074999546944,
+    "uncertainty": 0.5231179166591158,
+    "confidence": 0.4768820833408842,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4452,
+    "bayes_posterior": {
+      "H0": 0.4452,
+      "H1": 0.3381,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.8 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.653, P(H1)=0.347, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.74).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      172,
+      457,
+      7,
+      5
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7385881168704561,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7385881168704561,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2461960389568187,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7538039610431813,
+    "conflict_uncertainty": 0.7385881168704561,
+    "uncertainty": 0.5230980194784094,
+    "confidence": 0.4769019805215906,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4452,
+    "bayes_posterior": {
+      "H0": 0.4452,
+      "H1": 0.3381,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.8 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.653, P(H1)=0.347, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.74).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      60,
+      0,
+      12,
+      11
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7373183845028456,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7373183845028456,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24577279483428185,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7542272051657182,
+    "conflict_uncertainty": 0.7373183845028456,
+    "uncertainty": 0.5228863974171409,
+    "confidence": 0.47711360258285906,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4448,
+    "bayes_posterior": {
+      "H0": 0.4448,
+      "H1": 0.3385,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.7 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.652, P(H1)=0.348, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.74).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      111,
+      60,
+      25,
+      22
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7371720732766163,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7371720732766163,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24572402442553876,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7542759755744612,
+    "conflict_uncertainty": 0.7371720732766163,
+    "uncertainty": 0.5228620122127694,
+    "confidence": 0.4771379877872306,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4448,
+    "bayes_posterior": {
+      "H0": 0.4448,
+      "H1": 0.3385,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.7 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.652, P(H1)=0.348, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.74).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      143,
+      54,
+      10,
+      14
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7369864657960495,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7369864657960495,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24566215526534985,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7543378447346502,
+    "conflict_uncertainty": 0.7369864657960495,
+    "uncertainty": 0.522831077632675,
+    "confidence": 0.477168922367325,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4448,
+    "bayes_posterior": {
+      "H0": 0.4448,
+      "H1": 0.3385,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.7 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.652, P(H1)=0.348, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].",
+      "Agents disagree strongly (conflict=0.74).",
+      "Only 1/3 agents reported."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      464,
+      337,
+      9,
+      5
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7342778888624995,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7342778888624995,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24475929628749982,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7552407037125002,
+    "conflict_uncertainty": 0.7342778888624995,
+    "uncertainty": 0.5223796481437499,
+    "confidence": 0.47762035185625007,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.444,
+    "bayes_posterior": {
+      "H0": 0.444,
+      "H1": 0.3393,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.650, P(H1)=0.350, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.73).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      116,
+      0,
+      34,
+      24
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7339099593714284,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7339099593714284,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24463665312380947,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7553633468761906,
+    "conflict_uncertainty": 0.7339099593714284,
+    "uncertainty": 0.5223183265619047,
+    "confidence": 0.4776816734380953,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4439,
+    "bayes_posterior": {
+      "H0": 0.4439,
+      "H1": 0.3394,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.649, P(H1)=0.351, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.73).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      132,
+      53,
+      5,
+      9
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7328069673014772,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7328069673014772,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2442689891004924,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7557310108995076,
+    "conflict_uncertainty": 0.7328069673014772,
+    "uncertainty": 0.5221344945502462,
+    "confidence": 0.4778655054497538,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4436,
+    "bayes_posterior": {
+      "H0": 0.4436,
+      "H1": 0.3397,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.648, P(H1)=0.352, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.73).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      29,
+      64,
+      10,
+      12
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7318777707941468,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7318777707941468,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2439592569313823,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7560407430686177,
+    "conflict_uncertainty": 0.7318777707941468,
+    "uncertainty": 0.5219796284656911,
+    "confidence": 0.4780203715343089,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4433,
+    "bayes_posterior": {
+      "H0": 0.4433,
+      "H1": 0.34,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.648, P(H1)=0.352, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.73).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      353,
+      155,
+      17,
+      28
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7303305412662857,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7303305412662857,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24344351375542858,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7565564862445714,
+    "conflict_uncertainty": 0.7303305412662857,
+    "uncertainty": 0.5217217568777143,
+    "confidence": 0.47827824312228573,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4429,
+    "bayes_posterior": {
+      "H0": 0.4429,
+      "H1": 0.3404,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.5 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.646, P(H1)=0.354, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.73).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      164,
+      102,
+      12,
+      17
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7298511238207207,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7298511238207207,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24328370794024023,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7567162920597598,
+    "conflict_uncertainty": 0.7298511238207207,
+    "uncertainty": 0.5216418539701201,
+    "confidence": 0.4783581460298799,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4427,
+    "bayes_posterior": {
+      "H0": 0.4427,
+      "H1": 0.3405,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.5 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.646, P(H1)=0.354, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.73).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      353,
+      35,
+      15,
+      11
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7282682771903561,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7282682771903561,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2427560923967854,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7572439076032146,
+    "conflict_uncertainty": 0.7282682771903561,
+    "uncertainty": 0.5213780461983927,
+    "confidence": 0.4786219538016073,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4423,
+    "bayes_posterior": {
+      "H0": 0.4423,
+      "H1": 0.341,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.5 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.645, P(H1)=0.355, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.73).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      37,
+      0,
+      7,
+      10
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.727272509469538,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.727272509469538,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.24242416982317935,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7575758301768206,
+    "conflict_uncertainty": 0.727272509469538,
+    "uncertainty": 0.5212120849115897,
+    "confidence": 0.47878791508841034,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.442,
+    "bayes_posterior": {
+      "H0": 0.442,
+      "H1": 0.3413,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.4 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.644, P(H1)=0.356, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.73).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      5,
+      7,
+      18,
+      9
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.719542547509612,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.719542547509612,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.23984751583653732,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7601524841634627,
+    "conflict_uncertainty": 0.719542547509612,
+    "uncertainty": 0.5199237579182687,
+    "confidence": 0.4800762420817313,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4397,
+    "bayes_posterior": {
+      "H0": 0.4397,
+      "H1": 0.3436,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.637, P(H1)=0.363, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.72).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      123,
+      151,
+      10,
+      7
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7185132677765866,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7185132677765866,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.23950442259219554,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7604955774078045,
+    "conflict_uncertainty": 0.7185132677765866,
+    "uncertainty": 0.5197522112960978,
+    "confidence": 0.48024778870390217,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4394,
+    "bayes_posterior": {
+      "H0": 0.4394,
+      "H1": 0.3439,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.636, P(H1)=0.363, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.72).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      0,
+      61,
+      7,
+      7
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7179846236623695,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7179846236623695,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.23932820788745648,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7606717921125435,
+    "conflict_uncertainty": 0.7179846236623695,
+    "uncertainty": 0.5196641039437283,
+    "confidence": 0.4803358960562717,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4393,
+    "bayes_posterior": {
+      "H0": 0.4393,
+      "H1": 0.344,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.636, P(H1)=0.364, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.72).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      19,
+      216,
+      6,
+      7
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.717172270525967,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.717172270525967,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.23905742350865566,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7609425764913443,
+    "conflict_uncertainty": 0.717172270525967,
+    "uncertainty": 0.5195287117543279,
+    "confidence": 0.4804712882456721,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.439,
+    "bayes_posterior": {
+      "H0": 0.439,
+      "H1": 0.3443,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.635, P(H1)=0.365, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.72).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      97,
+      100,
+      10,
+      8
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7145017550859707,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7145017550859707,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.23816725169532357,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7618327483046764,
+    "conflict_uncertainty": 0.7145017550859707,
+    "uncertainty": 0.5190836258476618,
+    "confidence": 0.48091637415233823,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4382,
+    "bayes_posterior": {
+      "H0": 0.4382,
+      "H1": 0.3451,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.1 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.633, P(H1)=0.367, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.71).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      67,
+      324,
+      6,
+      6
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7135105089674687,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7135105089674687,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.23783683632248956,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7621631636775105,
+    "conflict_uncertainty": 0.7135105089674687,
+    "uncertainty": 0.5189184181612448,
+    "confidence": 0.48108158183875516,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4379,
+    "bayes_posterior": {
+      "H0": 0.4379,
+      "H1": 0.3454,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.1 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.632, P(H1)=0.368, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.71).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      350,
+      50,
+      14,
+      13
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7111059835125297,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7111059835125297,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2370353278375099,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7629646721624901,
+    "conflict_uncertainty": 0.7111059835125297,
+    "uncertainty": 0.518517663918755,
+    "confidence": 0.481482336081245,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4372,
+    "bayes_posterior": {
+      "H0": 0.4372,
+      "H1": 0.3461,
+      "H2": 0.2167
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 3.0 (decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.630, P(H1)=0.370, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.71).",
+      "Only 1/3 agents reported.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      179,
+      488,
+      8,
+      7
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7069471394314454,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7069471394314454,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.23564904647714846,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7643509535228515,
+    "conflict_uncertainty": 0.7069471394314454,
+    "uncertainty": 0.5178245232385742,
+    "confidence": 0.4821754767614258,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4066,
+    "bayes_posterior": {
+      "H0": 0.4066,
+      "H1": 0.3434,
+      "H2": 0.25
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "WEAK_BAYES_FACTOR",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 2.9 (not decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.626, P(H1)=0.374, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.71).",
+      "Only 1/3 agents reported.",
+      "Best hypothesis does not clearly beat the runner-up.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      77,
+      40,
+      6,
+      5
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.7038258436961714,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.7038258436961714,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.23460861456539048,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7653913854346095,
+    "conflict_uncertainty": 0.7038258436961714,
+    "uncertainty": 0.5173043072826953,
+    "confidence": 0.4826956927173047,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4059,
+    "bayes_posterior": {
+      "H0": 0.4059,
+      "H1": 0.3441,
+      "H2": 0.2501
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "WEAK_BAYES_FACTOR",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 2.8 (not decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.623, P(H1)=0.376, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.70).",
+      "Only 1/3 agents reported.",
+      "Best hypothesis does not clearly beat the runner-up.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      140,
+      442,
+      10,
+      9
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.702152092215981,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.702152092215981,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.234050697405327,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.765949302594673,
+    "conflict_uncertainty": 0.702152092215981,
+    "uncertainty": 0.5170253487026635,
+    "confidence": 0.4829746512973365,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4055,
+    "bayes_posterior": {
+      "H0": 0.4055,
+      "H1": 0.3445,
+      "H2": 0.2501
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "WEAK_BAYES_FACTOR",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 2.8 (not decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.622, P(H1)=0.378, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.70).",
+      "Only 1/3 agents reported.",
+      "Best hypothesis does not clearly beat the runner-up.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      197,
+      432,
+      8,
+      8
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.6837058028634215,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.6837058028634215,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.22790193428780717,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7720980657121929,
+    "conflict_uncertainty": 0.6837058028634215,
+    "uncertainty": 0.5139509671439035,
+    "confidence": 0.48604903285609646,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4011,
+    "bayes_posterior": {
+      "H0": 0.4011,
+      "H1": 0.3488,
+      "H2": 0.2501
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "WEAK_BAYES_FACTOR",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 2.4 (not decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.604, P(H1)=0.395, P(H2)=0.000.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.68).",
+      "Only 1/3 agents reported.",
+      "Best hypothesis does not clearly beat the runner-up.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  },
+  {
+    "bbox": [
+      355,
+      376,
+      7,
+      6
+    ],
+    "class": "unknown",
+    "spatial_status": "NO_DETECTION",
+    "spectral_status": "DETECTED",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.0,
+    "spectral_evidence": 0.6588995278811632,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spectral"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.6588995278811632,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "THERMAL-ONLY EVIDENCE",
+    "evidence_strength": 0.21963317596038776,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7803668240396122,
+    "conflict_uncertainty": 0.6588995278811632,
+    "uncertainty": 0.5098165879801939,
+    "confidence": 0.4901834120198061,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.3946,
+    "bayes_posterior": {
+      "H0": 0.3946,
+      "H1": 0.3552,
+      "H2": 0.2502
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "WEAK_BAYES_FACTOR",
+      "CAMO_VS_ORDINARY_CONFUSION"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 1.9 (not decisive); consistent with ['H0', 'H1'].",
+      "Bayesian posterior: P(H0)=0.578, P(H1)=0.421, P(H2)=0.001.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].",
+      "Agents disagree strongly (conflict=0.66).",
+      "Only 1/3 agents reported.",
+      "Best hypothesis does not clearly beat the runner-up.",
+      "Cannot separate camouflaged from ordinary object."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0
+  }
+]

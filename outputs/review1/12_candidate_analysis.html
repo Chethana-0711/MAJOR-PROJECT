@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Candidate Analysis — Capture 1</title>
+<style>
+:root { color-scheme:light; --ink:#253247; --muted:#687386; --line:#dce2ea; --paper:#fff; --page:#f5f7fa; --accent:#416987; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font:15px/1.55 "Segoe UI",Arial,sans-serif; }
+main { max-width:1240px; margin:auto; padding:26px 18px 42px; }
+header,.section { background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:22px; }
+.section { margin-top:17px; }
+h1 { margin:0 0 8px; font-size:26px; font-weight:650; }
+h2 { margin:0 0 12px; font-size:19px; }
+.meta,footer { color:var(--muted); overflow-wrap:anywhere; }
+.image-card img { display:block; width:100%; max-height:700px; object-fit:contain; background:#edf0f4; }
+.table-wrap { overflow-x:auto; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th,td { border-bottom:1px solid var(--line); padding:10px; text-align:left; vertical-align:top; }
+th { background:#f8fafc; color:#475467; white-space:nowrap; }
+.status { display:inline-block; padding:4px 7px; border-radius:4px; font-size:12px; font-weight:650; }
+.status.review { background:#fff1d0; color:#795b13; } .status.normal { background:#edf1f5; color:#475467; }
+.explanation { min-width:250px; max-width:480px; }
+.note { color:#475467; background:#f8fafc; border-left:4px solid var(--accent); padding:12px 15px; }
+@media(max-width:800px) { main { padding:12px 8px 24px; } header,.section { padding:15px; } h1 { font-size:22px; } }
+</style></head><body><main>
+<header><h1>Multi-Agent Camouflage Detection — Candidate Results</h1>
+<p class="meta">Capture #1</p><p class="meta">Capture directory: MUDCAD-X\dataset\01_Spring\2022-05-10\rk1\a\1\h0r\2</p>
+<p class="meta">Candidates analysed: <strong>61</strong> &nbsp; | &nbsp; Valid candidate boxes: <strong>61</strong></p></header>
+<section class="section"><h2>Candidate output image</h2>
+<div class="image-card"><img src="11_candidate_output.png" alt="Candidate output image with numbered bounding boxes"></div>
+<p class="meta">The numbered boxes correspond to candidate IDs in the table below.</p></section>
+<section class="section"><h2>Candidate information</h2>
+<p class="note"><strong>H0:</strong> camouflage hypothesis. <strong>H1:</strong> ordinary-object hypothesis. <strong>H2:</strong> no-object hypothesis. These values are model estimates, not verified ground truth.</p>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Decision</th><th>Suspicion</th><th>H0</th><th>H1</th><th>H2</th><th>Rule check</th><th>Flags</th><th>Explanation</th></tr></thead>
+<tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="status normal">CAMOUFLAGED OBJECT</span></td>
+          <td>63.8%</td>
+          <td>63.8%</td>
+          <td>32.8%</td>
+          <td>3.3%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>WEAK_BAYES_FACTOR</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 2.3 (not decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.672, P(H1)=0.328, P(H2)=0.000. Metacognition flags: [&#x27;WEAK_BAYES_FACTOR&#x27;]. Best hypothesis does not clearly beat the runner-up.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>33.1%</td>
+          <td>33.1%</td>
+          <td>48.6%</td>
+          <td>18.3%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H1, BF over H0 = 3.8 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.328, P(H1)=0.672, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.98). Only 2/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>29.7%</td>
+          <td>29.7%</td>
+          <td>48.7%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H1, BF over H0 = 8.8 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.229, P(H1)=0.771, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.98). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>31.4%</td>
+          <td>31.4%</td>
+          <td>47.0%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H1, BF over H0 = 8.6 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.277, P(H1)=0.723, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.92). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>38.6%</td>
+          <td>38.6%</td>
+          <td>39.8%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION, NARROW_MARGIN</td>
+          <td class="explanation">Hypothesis test: best=H1, BF over H0 = 1.1 (not decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.483, P(H1)=0.517, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;WEAK_BAYES_FACTOR&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;, &#x27;NARROW_MARGIN&#x27;]. Agents disagree strongly (conflict=0.83). Only 2/3 agents reported. Best hypothesis does not clearly beat the runner-up. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>39.6%</td>
+          <td>39.6%</td>
+          <td>35.4%</td>
+          <td>25.0%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 2.0 (not decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.584, P(H1)=0.415, P(H2)=0.001. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;WEAK_BAYES_FACTOR&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.67). Only 1/3 agents reported. Best hypothesis does not clearly beat the runner-up. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="status normal">CAMOUFLAGED OBJECT</span></td>
+          <td>53.1%</td>
+          <td>53.1%</td>
+          <td>23.6%</td>
+          <td>23.3%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, OVERCONFIDENT</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 6808.2 (decisive); consistent with [&#x27;H0&#x27;]. Bayesian posterior: P(H0)=0.991, P(H1)=0.009, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;OVERCONFIDENT&#x27;]. Agents disagree strongly (conflict=0.74). Only 2/3 agents reported. Belief is extreme despite shaky evidence; tempered.</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><span class="status normal">CAMOUFLAGED OBJECT</span></td>
+          <td>53.3%</td>
+          <td>53.3%</td>
+          <td>23.4%</td>
+          <td>23.3%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, OVERCONFIDENT</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 870447.4 (decisive); consistent with [&#x27;H0&#x27;]. Bayesian posterior: P(H0)=0.999, P(H1)=0.001, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;OVERCONFIDENT&#x27;]. Agents disagree strongly (conflict=0.79). Only 2/3 agents reported. Belief is extreme despite shaky evidence; tempered.</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>46.3%</td>
+          <td>46.3%</td>
+          <td>32.0%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 6.5 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.704, P(H1)=0.296, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.82). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>46.2%</td>
+          <td>46.2%</td>
+          <td>32.1%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 6.3 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.702, P(H1)=0.298, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.81). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>46.1%</td>
+          <td>46.1%</td>
+          <td>32.2%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 6.0 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.698, P(H1)=0.302, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.80). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.8%</td>
+          <td>45.8%</td>
+          <td>32.5%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 5.5 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.690, P(H1)=0.310, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.79). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.6%</td>
+          <td>45.6%</td>
+          <td>32.8%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 5.1 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.683, P(H1)=0.317, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.78). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.5%</td>
+          <td>45.5%</td>
+          <td>32.8%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 5.1 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.682, P(H1)=0.318, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.78). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.4%</td>
+          <td>45.4%</td>
+          <td>33.0%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.8 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.677, P(H1)=0.323, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.77). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.3%</td>
+          <td>45.3%</td>
+          <td>33.0%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.8 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.676, P(H1)=0.324, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.77). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.3%</td>
+          <td>45.3%</td>
+          <td>33.0%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.8 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.676, P(H1)=0.324, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.77). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.3%</td>
+          <td>45.3%</td>
+          <td>33.0%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.7 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.675, P(H1)=0.325, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.77). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.2%</td>
+          <td>45.2%</td>
+          <td>33.1%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.6 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.673, P(H1)=0.327, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.77). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.1%</td>
+          <td>45.1%</td>
+          <td>33.3%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.669, P(H1)=0.331, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.76). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.1%</td>
+          <td>45.1%</td>
+          <td>33.3%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.668, P(H1)=0.332, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.76). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>22</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.0%</td>
+          <td>45.0%</td>
+          <td>33.3%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.668, P(H1)=0.332, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.76). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>23</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.0%</td>
+          <td>45.0%</td>
+          <td>33.3%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.668, P(H1)=0.332, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.76). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>24</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.0%</td>
+          <td>45.0%</td>
+          <td>33.4%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.3 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.666, P(H1)=0.334, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.76). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>25</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>45.0%</td>
+          <td>45.0%</td>
+          <td>33.4%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.3 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.666, P(H1)=0.334, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.76). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>26</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.9%</td>
+          <td>44.9%</td>
+          <td>33.4%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.665, P(H1)=0.335, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.75). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>27</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.9%</td>
+          <td>44.9%</td>
+          <td>33.4%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.665, P(H1)=0.335, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.75). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>28</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.9%</td>
+          <td>44.9%</td>
+          <td>33.4%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.664, P(H1)=0.335, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.75). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>29</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.9%</td>
+          <td>44.9%</td>
+          <td>33.4%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.664, P(H1)=0.336, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.75). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>30</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.9%</td>
+          <td>44.9%</td>
+          <td>33.5%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.1 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.662, P(H1)=0.337, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.75). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>31</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.8%</td>
+          <td>44.8%</td>
+          <td>33.5%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.1 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.661, P(H1)=0.338, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.75). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>32</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.8%</td>
+          <td>44.8%</td>
+          <td>33.5%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.1 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.661, P(H1)=0.339, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.75). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>33</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.8%</td>
+          <td>44.8%</td>
+          <td>33.6%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.0 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.660, P(H1)=0.340, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.75). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>34</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.7%</td>
+          <td>44.7%</td>
+          <td>33.6%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 4.0 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.659, P(H1)=0.341, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.75). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>35</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.7%</td>
+          <td>44.7%</td>
+          <td>33.7%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.9 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.658, P(H1)=0.342, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.74). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>36</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.5%</td>
+          <td>44.5%</td>
+          <td>33.8%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.8 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.654, P(H1)=0.346, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.74). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>37</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.5%</td>
+          <td>44.5%</td>
+          <td>33.8%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.8 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.653, P(H1)=0.347, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.74). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>38</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.5%</td>
+          <td>44.5%</td>
+          <td>33.8%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.8 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.653, P(H1)=0.347, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.74). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>39</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.5%</td>
+          <td>44.5%</td>
+          <td>33.9%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.7 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.652, P(H1)=0.348, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.74). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>40</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.5%</td>
+          <td>44.5%</td>
+          <td>33.9%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.7 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.652, P(H1)=0.348, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.74). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>41</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.5%</td>
+          <td>44.5%</td>
+          <td>33.9%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.7 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.652, P(H1)=0.348, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;]. Agents disagree strongly (conflict=0.74). Only 1/3 agents reported.</td>
+        </tr>
+        <tr>
+          <td>42</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.4%</td>
+          <td>44.4%</td>
+          <td>33.9%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.650, P(H1)=0.350, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.73). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>43</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.4%</td>
+          <td>44.4%</td>
+          <td>33.9%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.649, P(H1)=0.351, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.73). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>44</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.4%</td>
+          <td>44.4%</td>
+          <td>34.0%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.648, P(H1)=0.352, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.73). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>45</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.3%</td>
+          <td>44.3%</td>
+          <td>34.0%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.648, P(H1)=0.352, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.73). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>46</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.3%</td>
+          <td>44.3%</td>
+          <td>34.0%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.5 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.646, P(H1)=0.354, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.73). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>47</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.3%</td>
+          <td>44.3%</td>
+          <td>34.1%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.5 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.646, P(H1)=0.354, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.73). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>48</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.2%</td>
+          <td>44.2%</td>
+          <td>34.1%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.5 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.645, P(H1)=0.355, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.73). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>49</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.2%</td>
+          <td>44.2%</td>
+          <td>34.1%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.4 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.644, P(H1)=0.356, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.73). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>50</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>44.0%</td>
+          <td>44.0%</td>
+          <td>34.4%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.637, P(H1)=0.363, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.72). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>51</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>43.9%</td>
+          <td>43.9%</td>
+          <td>34.4%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.636, P(H1)=0.363, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.72). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>52</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>43.9%</td>
+          <td>43.9%</td>
+          <td>34.4%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.636, P(H1)=0.364, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.72). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>53</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>43.9%</td>
+          <td>43.9%</td>
+          <td>34.4%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.635, P(H1)=0.365, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.72). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>54</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>43.8%</td>
+          <td>43.8%</td>
+          <td>34.5%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.1 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.633, P(H1)=0.367, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.71). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>55</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>43.8%</td>
+          <td>43.8%</td>
+          <td>34.5%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.1 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.632, P(H1)=0.368, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.71). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>56</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>43.7%</td>
+          <td>43.7%</td>
+          <td>34.6%</td>
+          <td>21.7%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 3.0 (decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.630, P(H1)=0.370, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.71). Only 1/3 agents reported. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>57</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>40.7%</td>
+          <td>40.7%</td>
+          <td>34.3%</td>
+          <td>25.0%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 2.9 (not decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.626, P(H1)=0.374, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;WEAK_BAYES_FACTOR&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.71). Only 1/3 agents reported. Best hypothesis does not clearly beat the runner-up. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>58</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>40.6%</td>
+          <td>40.6%</td>
+          <td>34.4%</td>
+          <td>25.0%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 2.8 (not decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.623, P(H1)=0.376, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;WEAK_BAYES_FACTOR&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.70). Only 1/3 agents reported. Best hypothesis does not clearly beat the runner-up. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>59</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>40.6%</td>
+          <td>40.6%</td>
+          <td>34.4%</td>
+          <td>25.0%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 2.8 (not decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.622, P(H1)=0.378, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;WEAK_BAYES_FACTOR&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.70). Only 1/3 agents reported. Best hypothesis does not clearly beat the runner-up. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>60</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>40.1%</td>
+          <td>40.1%</td>
+          <td>34.9%</td>
+          <td>25.0%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 2.4 (not decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.604, P(H1)=0.395, P(H2)=0.000. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;WEAK_BAYES_FACTOR&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.68). Only 1/3 agents reported. Best hypothesis does not clearly beat the runner-up. Cannot separate camouflaged from ordinary object.</td>
+        </tr>
+        <tr>
+          <td>61</td>
+          <td><span class="status review">UNCERTAIN - REVIEW</span></td>
+          <td>39.5%</td>
+          <td>39.5%</td>
+          <td>35.5%</td>
+          <td>25.0%</td>
+          <td>UNCERTAIN - REVIEW</td>
+          <td>HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION</td>
+          <td class="explanation">Hypothesis test: best=H0, BF over H1 = 1.9 (not decisive); consistent with [&#x27;H0&#x27;, &#x27;H1&#x27;]. Bayesian posterior: P(H0)=0.578, P(H1)=0.421, P(H2)=0.001. Metacognition flags: [&#x27;HIGH_CONFLICT&#x27;, &#x27;MODERATE_UNCERTAINTY&#x27;, &#x27;MISSING_EVIDENCE&#x27;, &#x27;WEAK_BAYES_FACTOR&#x27;, &#x27;CAMO_VS_ORDINARY_CONFUSION&#x27;]. Agents disagree strongly (conflict=0.66). Only 1/3 agents reported. Best hypothesis does not clearly beat the runner-up. Cannot separate camouflaged from ordinary object.</td>
+        </tr></tbody></table></div></section>
+<footer>Generated by the multi-agent camouflage detection pipeline.</footer>
+</main></body></html>

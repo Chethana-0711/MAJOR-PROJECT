@@ -1,0 +1,1085 @@
+MULTI-AGENT CAMOUFLAGE DETECTION — PLAIN-LANGUAGE RESULTS
+====================================================================
+Test capture: #1
+Capture folder: MUDCAD-X\dataset\01_Spring\2022-05-10\rk1\a\1\h0r\2
+Candidates analysed: 61
+
+HOW TO UNDERSTAND THE RESULTS
+- H0 is the system's camouflage hypothesis.
+- H1 is the ordinary-object hypothesis.
+- H2 is the no-object hypothesis.
+- The suspicion score and probabilities are model estimates, not proof.
+- UNCERTAIN / REVIEW means the system does not have enough consistent evidence for a firm decision.
+
+CANDIDATE-BY-CANDIDATE EXPLANATION
+--------------------------------------------------------------------
+Candidate 1
+  Final system decision: CAMOUFLAGED OBJECT
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 63.8%
+  H0 (camouflage): 63.8%
+  H1 (ordinary object): 32.8%
+  H2 (no object): 3.3%
+  Candidate type: hedge
+  Image region (bounding box): [0, 0, 512, 512]
+  Flags or warnings: WEAK_BAYES_FACTOR
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 2.3 (not decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.672, P(H1)=0.328, P(H2)=0.000.
+    - Metacognition flags: ['WEAK_BAYES_FACTOR'].
+    - Best hypothesis does not clearly beat the runner-up.
+
+Candidate 2
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 33.1%
+  H0 (camouflage): 33.1%
+  H1 (ordinary object): 48.6%
+  H2 (no object): 18.3%
+  Candidate type: tarpgray
+  Image region (bounding box): [416, 96, 39, 65]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H1, BF over H0 = 3.8 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.328, P(H1)=0.672, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.98).
+    - Only 2/3 agents reported.
+
+Candidate 3
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 29.7%
+  H0 (camouflage): 29.7%
+  H1 (ordinary object): 48.7%
+  H2 (no object): 21.7%
+  Candidate type: net2dgreen
+  Image region (bounding box): [352, 256, 64, 68]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H1, BF over H0 = 8.8 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.229, P(H1)=0.771, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.98).
+    - Only 1/3 agents reported.
+
+Candidate 4
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 31.4%
+  H0 (camouflage): 31.4%
+  H1 (ordinary object): 47.0%
+  H2 (no object): 21.7%
+  Candidate type: net3dgreen
+  Image region (bounding box): [490.0806884765625, 316.520751953125, 21.9193115234375, 28.151123046875]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H1, BF over H0 = 8.6 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.277, P(H1)=0.723, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.92).
+    - Only 1/3 agents reported.
+
+Candidate 5
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 38.6%
+  H0 (camouflage): 38.6%
+  H1 (ordinary object): 39.8%
+  H2 (no object): 21.7%
+  Candidate type: persongreen
+  Image region (bounding box): [0, 0, 246, 256]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION, NARROW_MARGIN
+  Why the system reached this result:
+    - Hypothesis test: best=H1, BF over H0 = 1.1 (not decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.483, P(H1)=0.517, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION', 'NARROW_MARGIN'].
+    - Agents disagree strongly (conflict=0.83).
+    - Only 2/3 agents reported.
+    - Best hypothesis does not clearly beat the runner-up.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 6
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 39.6%
+  H0 (camouflage): 39.6%
+  H1 (ordinary object): 35.4%
+  H2 (no object): 25.0%
+  Candidate type: persongreen
+  Image region (bounding box): [391.77459716796875, 10.614964485168457, 10.4130859375, 16.10076141357422]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 2.0 (not decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.584, P(H1)=0.415, P(H2)=0.001.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.67).
+    - Only 1/3 agents reported.
+    - Best hypothesis does not clearly beat the runner-up.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 7
+  Final system decision: CAMOUFLAGED OBJECT
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 53.1%
+  H0 (camouflage): 53.1%
+  H1 (ordinary object): 23.6%
+  H2 (no object): 23.3%
+  Candidate type: personyellow
+  Image region (bounding box): [383, 416, 32, 38]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, OVERCONFIDENT
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 6808.2 (decisive); consistent with ['H0'].
+    - Bayesian posterior: P(H0)=0.991, P(H1)=0.009, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'OVERCONFIDENT'].
+    - Agents disagree strongly (conflict=0.74).
+    - Only 2/3 agents reported.
+    - Belief is extreme despite shaky evidence; tempered.
+
+Candidate 8
+  Final system decision: CAMOUFLAGED OBJECT
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 53.3%
+  H0 (camouflage): 53.3%
+  H1 (ordinary object): 23.4%
+  H2 (no object): 23.3%
+  Candidate type: net3dgray
+  Image region (bounding box): [218, 160, 9, 10]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, OVERCONFIDENT
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 870447.4 (decisive); consistent with ['H0'].
+    - Bayesian posterior: P(H0)=0.999, P(H1)=0.001, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'OVERCONFIDENT'].
+    - Agents disagree strongly (conflict=0.79).
+    - Only 2/3 agents reported.
+    - Belief is extreme despite shaky evidence; tempered.
+
+Candidate 9
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 46.3%
+  H0 (camouflage): 46.3%
+  H1 (ordinary object): 32.0%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [234, 351, 29, 34]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 6.5 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.704, P(H1)=0.296, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.82).
+    - Only 1/3 agents reported.
+
+Candidate 10
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 46.2%
+  H0 (camouflage): 46.2%
+  H1 (ordinary object): 32.1%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [382, 137, 10, 11]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 6.3 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.702, P(H1)=0.298, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.81).
+    - Only 1/3 agents reported.
+
+Candidate 11
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 46.1%
+  H0 (camouflage): 46.1%
+  H1 (ordinary object): 32.2%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [391, 111, 12, 15]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 6.0 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.698, P(H1)=0.302, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.80).
+    - Only 1/3 agents reported.
+
+Candidate 12
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.8%
+  H0 (camouflage): 45.8%
+  H1 (ordinary object): 32.5%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [459, 362, 18, 16]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 5.5 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.690, P(H1)=0.310, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.79).
+    - Only 1/3 agents reported.
+
+Candidate 13
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.6%
+  H0 (camouflage): 45.6%
+  H1 (ordinary object): 32.8%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [132, 128, 26, 19]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 5.1 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.683, P(H1)=0.317, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.78).
+    - Only 1/3 agents reported.
+
+Candidate 14
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.5%
+  H0 (camouflage): 45.5%
+  H1 (ordinary object): 32.8%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [300, 267, 14, 14]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 5.1 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.682, P(H1)=0.318, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.78).
+    - Only 1/3 agents reported.
+
+Candidate 15
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.4%
+  H0 (camouflage): 45.4%
+  H1 (ordinary object): 33.0%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [132, 24, 14, 16]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.8 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.677, P(H1)=0.323, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.77).
+    - Only 1/3 agents reported.
+
+Candidate 16
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.3%
+  H0 (camouflage): 45.3%
+  H1 (ordinary object): 33.0%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [373, 162, 6, 8]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.8 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.676, P(H1)=0.324, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.77).
+    - Only 1/3 agents reported.
+
+Candidate 17
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.3%
+  H0 (camouflage): 45.3%
+  H1 (ordinary object): 33.0%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [133, 46, 10, 8]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.8 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.676, P(H1)=0.324, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.77).
+    - Only 1/3 agents reported.
+
+Candidate 18
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.3%
+  H0 (camouflage): 45.3%
+  H1 (ordinary object): 33.0%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [77, 156, 22, 18]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.7 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.675, P(H1)=0.325, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.77).
+    - Only 1/3 agents reported.
+
+Candidate 19
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.2%
+  H0 (camouflage): 45.2%
+  H1 (ordinary object): 33.1%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [162, 48, 21, 17]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.6 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.673, P(H1)=0.327, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.77).
+    - Only 1/3 agents reported.
+
+Candidate 20
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.1%
+  H0 (camouflage): 45.1%
+  H1 (ordinary object): 33.3%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [205, 28, 8, 13]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.669, P(H1)=0.331, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.76).
+    - Only 1/3 agents reported.
+
+Candidate 21
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.1%
+  H0 (camouflage): 45.1%
+  H1 (ordinary object): 33.3%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [84, 49, 8, 5]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.668, P(H1)=0.332, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.76).
+    - Only 1/3 agents reported.
+
+Candidate 22
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.0%
+  H0 (camouflage): 45.0%
+  H1 (ordinary object): 33.3%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [64, 89, 34, 36]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.668, P(H1)=0.332, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.76).
+    - Only 1/3 agents reported.
+
+Candidate 23
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.0%
+  H0 (camouflage): 45.0%
+  H1 (ordinary object): 33.3%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [46, 9, 8, 6]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.4 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.668, P(H1)=0.332, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.76).
+    - Only 1/3 agents reported.
+
+Candidate 24
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.0%
+  H0 (camouflage): 45.0%
+  H1 (ordinary object): 33.4%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [98, 124, 22, 28]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.3 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.666, P(H1)=0.334, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.76).
+    - Only 1/3 agents reported.
+
+Candidate 25
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 45.0%
+  H0 (camouflage): 45.0%
+  H1 (ordinary object): 33.4%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [161, 5, 13, 24]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.3 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.666, P(H1)=0.334, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.76).
+    - Only 1/3 agents reported.
+
+Candidate 26
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.9%
+  H0 (camouflage): 44.9%
+  H1 (ordinary object): 33.4%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [328, 268, 14, 13]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.665, P(H1)=0.335, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.75).
+    - Only 1/3 agents reported.
+
+Candidate 27
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.9%
+  H0 (camouflage): 44.9%
+  H1 (ordinary object): 33.4%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [336, 185, 8, 8]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.665, P(H1)=0.335, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.75).
+    - Only 1/3 agents reported.
+
+Candidate 28
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.9%
+  H0 (camouflage): 44.9%
+  H1 (ordinary object): 33.4%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [24, 14, 10, 8]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.664, P(H1)=0.335, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.75).
+    - Only 1/3 agents reported.
+
+Candidate 29
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.9%
+  H0 (camouflage): 44.9%
+  H1 (ordinary object): 33.4%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [216, 5, 6, 9]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.2 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.664, P(H1)=0.336, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.75).
+    - Only 1/3 agents reported.
+
+Candidate 30
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.9%
+  H0 (camouflage): 44.9%
+  H1 (ordinary object): 33.5%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [29, 186, 32, 29]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.1 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.662, P(H1)=0.337, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.75).
+    - Only 1/3 agents reported.
+
+Candidate 31
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.8%
+  H0 (camouflage): 44.8%
+  H1 (ordinary object): 33.5%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [101, 171, 7, 5]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.1 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.661, P(H1)=0.338, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.75).
+    - Only 1/3 agents reported.
+
+Candidate 32
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.8%
+  H0 (camouflage): 44.8%
+  H1 (ordinary object): 33.5%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [370, 496, 16, 13]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.1 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.661, P(H1)=0.339, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.75).
+    - Only 1/3 agents reported.
+
+Candidate 33
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.8%
+  H0 (camouflage): 44.8%
+  H1 (ordinary object): 33.6%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [64, 69, 10, 8]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.0 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.660, P(H1)=0.340, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.75).
+    - Only 1/3 agents reported.
+
+Candidate 34
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.7%
+  H0 (camouflage): 44.7%
+  H1 (ordinary object): 33.6%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [212, 17, 7, 9]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 4.0 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.659, P(H1)=0.341, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.75).
+    - Only 1/3 agents reported.
+
+Candidate 35
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.7%
+  H0 (camouflage): 44.7%
+  H1 (ordinary object): 33.7%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [90, 40, 24, 26]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.9 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.658, P(H1)=0.342, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.74).
+    - Only 1/3 agents reported.
+
+Candidate 36
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.5%
+  H0 (camouflage): 44.5%
+  H1 (ordinary object): 33.8%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [6, 214, 8, 7]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.8 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.654, P(H1)=0.346, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.74).
+    - Only 1/3 agents reported.
+
+Candidate 37
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.5%
+  H0 (camouflage): 44.5%
+  H1 (ordinary object): 33.8%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [117, 159, 6, 6]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.8 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.653, P(H1)=0.347, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.74).
+    - Only 1/3 agents reported.
+
+Candidate 38
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.5%
+  H0 (camouflage): 44.5%
+  H1 (ordinary object): 33.8%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [172, 457, 7, 5]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.8 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.653, P(H1)=0.347, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.74).
+    - Only 1/3 agents reported.
+
+Candidate 39
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.5%
+  H0 (camouflage): 44.5%
+  H1 (ordinary object): 33.9%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [60, 0, 12, 11]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.7 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.652, P(H1)=0.348, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.74).
+    - Only 1/3 agents reported.
+
+Candidate 40
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.5%
+  H0 (camouflage): 44.5%
+  H1 (ordinary object): 33.9%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [111, 60, 25, 22]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.7 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.652, P(H1)=0.348, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.74).
+    - Only 1/3 agents reported.
+
+Candidate 41
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.5%
+  H0 (camouflage): 44.5%
+  H1 (ordinary object): 33.9%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [143, 54, 10, 14]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.7 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.652, P(H1)=0.348, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE'].
+    - Agents disagree strongly (conflict=0.74).
+    - Only 1/3 agents reported.
+
+Candidate 42
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.4%
+  H0 (camouflage): 44.4%
+  H1 (ordinary object): 33.9%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [464, 337, 9, 5]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.650, P(H1)=0.350, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.73).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 43
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.4%
+  H0 (camouflage): 44.4%
+  H1 (ordinary object): 33.9%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [116, 0, 34, 24]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.649, P(H1)=0.351, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.73).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 44
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.4%
+  H0 (camouflage): 44.4%
+  H1 (ordinary object): 34.0%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [132, 53, 5, 9]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.648, P(H1)=0.352, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.73).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 45
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.3%
+  H0 (camouflage): 44.3%
+  H1 (ordinary object): 34.0%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [29, 64, 10, 12]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.6 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.648, P(H1)=0.352, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.73).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 46
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.3%
+  H0 (camouflage): 44.3%
+  H1 (ordinary object): 34.0%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [353, 155, 17, 28]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.5 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.646, P(H1)=0.354, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.73).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 47
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.3%
+  H0 (camouflage): 44.3%
+  H1 (ordinary object): 34.1%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [164, 102, 12, 17]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.5 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.646, P(H1)=0.354, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.73).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 48
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.2%
+  H0 (camouflage): 44.2%
+  H1 (ordinary object): 34.1%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [353, 35, 15, 11]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.5 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.645, P(H1)=0.355, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.73).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 49
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.2%
+  H0 (camouflage): 44.2%
+  H1 (ordinary object): 34.1%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [37, 0, 7, 10]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.4 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.644, P(H1)=0.356, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.73).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 50
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 44.0%
+  H0 (camouflage): 44.0%
+  H1 (ordinary object): 34.4%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [5, 7, 18, 9]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.637, P(H1)=0.363, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.72).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 51
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 43.9%
+  H0 (camouflage): 43.9%
+  H1 (ordinary object): 34.4%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [123, 151, 10, 7]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.636, P(H1)=0.363, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.72).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 52
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 43.9%
+  H0 (camouflage): 43.9%
+  H1 (ordinary object): 34.4%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [0, 61, 7, 7]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.636, P(H1)=0.364, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.72).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 53
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 43.9%
+  H0 (camouflage): 43.9%
+  H1 (ordinary object): 34.4%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [19, 216, 6, 7]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.2 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.635, P(H1)=0.365, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.72).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 54
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 43.8%
+  H0 (camouflage): 43.8%
+  H1 (ordinary object): 34.5%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [97, 100, 10, 8]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.1 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.633, P(H1)=0.367, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.71).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 55
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 43.8%
+  H0 (camouflage): 43.8%
+  H1 (ordinary object): 34.5%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [67, 324, 6, 6]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.1 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.632, P(H1)=0.368, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.71).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 56
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 43.7%
+  H0 (camouflage): 43.7%
+  H1 (ordinary object): 34.6%
+  H2 (no object): 21.7%
+  Candidate type: unknown
+  Image region (bounding box): [350, 50, 14, 13]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 3.0 (decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.630, P(H1)=0.370, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.71).
+    - Only 1/3 agents reported.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 57
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 40.7%
+  H0 (camouflage): 40.7%
+  H1 (ordinary object): 34.3%
+  H2 (no object): 25.0%
+  Candidate type: unknown
+  Image region (bounding box): [179, 488, 8, 7]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 2.9 (not decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.626, P(H1)=0.374, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.71).
+    - Only 1/3 agents reported.
+    - Best hypothesis does not clearly beat the runner-up.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 58
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 40.6%
+  H0 (camouflage): 40.6%
+  H1 (ordinary object): 34.4%
+  H2 (no object): 25.0%
+  Candidate type: unknown
+  Image region (bounding box): [77, 40, 6, 5]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 2.8 (not decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.623, P(H1)=0.376, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.70).
+    - Only 1/3 agents reported.
+    - Best hypothesis does not clearly beat the runner-up.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 59
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 40.6%
+  H0 (camouflage): 40.6%
+  H1 (ordinary object): 34.4%
+  H2 (no object): 25.0%
+  Candidate type: unknown
+  Image region (bounding box): [140, 442, 10, 9]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 2.8 (not decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.622, P(H1)=0.378, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.70).
+    - Only 1/3 agents reported.
+    - Best hypothesis does not clearly beat the runner-up.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 60
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 40.1%
+  H0 (camouflage): 40.1%
+  H1 (ordinary object): 34.9%
+  H2 (no object): 25.0%
+  Candidate type: unknown
+  Image region (bounding box): [197, 432, 8, 8]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 2.4 (not decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.604, P(H1)=0.395, P(H2)=0.000.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.68).
+    - Only 1/3 agents reported.
+    - Best hypothesis does not clearly beat the runner-up.
+    - Cannot separate camouflaged from ordinary object.
+
+Candidate 61
+  Final system decision: UNCERTAIN - REVIEW
+  Rule-based cross-check: UNCERTAIN - REVIEW
+  Camouflage suspicion: 39.5%
+  H0 (camouflage): 39.5%
+  H1 (ordinary object): 35.5%
+  H2 (no object): 25.0%
+  Candidate type: unknown
+  Image region (bounding box): [355, 376, 7, 6]
+  Flags or warnings: HIGH_CONFLICT, MODERATE_UNCERTAINTY, MISSING_EVIDENCE, WEAK_BAYES_FACTOR, CAMO_VS_ORDINARY_CONFUSION
+  Why the system reached this result:
+    - Hypothesis test: best=H0, BF over H1 = 1.9 (not decisive); consistent with ['H0', 'H1'].
+    - Bayesian posterior: P(H0)=0.578, P(H1)=0.421, P(H2)=0.001.
+    - Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'WEAK_BAYES_FACTOR', 'CAMO_VS_ORDINARY_CONFUSION'].
+    - Agents disagree strongly (conflict=0.66).
+    - Only 1/3 agents reported.
+    - Best hypothesis does not clearly beat the runner-up.
+    - Cannot separate camouflaged from ordinary object.
+
+IMPORTANT NOTE
+These results describe what the model inferred from the available agent evidence.
+They do not independently confirm that a candidate is truly camouflaged.

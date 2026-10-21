@@ -12,6 +12,26 @@ from agents.feature_agent import FeatureAgent
 from agents.conflict_agent import ConflictAgent
 from agents.uncertainty_agent import UncertaintyAgent
 
+# The older rule-based cognitive agent is optional: if agents/cognitive_agent.py
+# is not present, the pipeline still runs with the Bayesian cognitive layer only.
+try:
+    from agents.cognitive_agent import CognitiveAgent as RuleCognitiveAgent
+except ImportError:
+    RuleCognitiveAgent = None
+
+from agents.cognitive import (
+    CognitiveAgent as BayesCognitiveAgent,
+    analyze_candidates,
+    to_legacy_candidate,
+)
+from agents.fusion import FusionAgent, SimpleFusionAgent
+
+# Learned fusion (Method 1) is optional: used only when a trained model file exists.
+try:
+    from agents.learned_fusion.learned_fusion_agent import LearnedFusionAgent
+except ImportError:
+    LearnedFusionAgent = None
+
 
 # ============================================================
 # REVIEW 1 MULTI-AGENT PIPELINE
@@ -27,6 +47,15 @@ SPLIT_FILE = PROJECT_DIR / "data" / "capture_splits.json"
 MODEL_PATH = (
     PROJECT_DIR / "runs" / "detect" / "train" / "weights" / "best.pt"
 )
+
+# Trained by: python -m agents.learned_fusion.train --data data/fusion/val.csv
+LEARNED_FUSION_MODEL = PROJECT_DIR / "models" / "learned_fusion.joblib"
+
+# Which fusion layer decides the final output:
+#   "simple"   - detectors carry the weight, cognitive layer smallest (recommended to start)
+#   "weighted" - reliability-weighted fusion of all layers
+#   "learned"  - trained meta-classifier (needs models/learned_fusion.joblib)
+FUSION_METHOD = "simple"
 
 
 # ============================================================
@@ -297,7 +326,9 @@ def create_summary(
     spectral_result,
     feature_result,
     conflict_result,
-    uncertainty_result
+    uncertainty_result,
+    cognitive_results=None,
+    fusion_results=None
 ):
 
     spatial_count = len(
@@ -598,6 +629,144 @@ def create_summary(
         y += 30
 
     # ========================================================
+    # COGNITIVE ANALYSIS
+    # ========================================================
+
+    cognitive_results = cognitive_results or []
+
+    hyp_counts = {"H0": 0, "H1": 0, "H2": 0, "REVIEW": 0}
+
+    for candidate in cognitive_results:
+
+        hypothesis = candidate.get("bayes_hypothesis")
+
+        if hypothesis in hyp_counts:
+            hyp_counts[hypothesis] += 1
+        else:
+            hyp_counts["REVIEW"] += 1
+
+    average_suspicion = (
+        float(np.mean([
+            candidate.get("bayes_suspicion", 0.0)
+            for candidate in cognitive_results
+        ]))
+        if cognitive_results
+        else 0.0
+    )
+
+    cv2.putText(
+        summary,
+        "COGNITIVE ANALYSIS",
+        (35, 525),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.60,
+        (255, 255, 255),
+        2,
+        cv2.LINE_AA
+    )
+
+    cognitive_lines = [
+        f"Camouflaged object (H0): {hyp_counts['H0']}",
+        f"Ordinary object (H1): {hyp_counts['H1']}",
+        f"No object (H2): {hyp_counts['H2']}",
+        f"Under review: {hyp_counts['REVIEW']}",
+        f"Average suspicion P(H0): {average_suspicion:.3f}"
+    ]
+
+    y = 560
+
+    for line in cognitive_lines:
+
+        cv2.putText(
+            summary,
+            line,
+            (35, y),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.44,
+            (220, 220, 220),
+            1,
+            cv2.LINE_AA
+        )
+
+        y += 30
+
+    cv2.putText(
+        summary,
+        "CANDIDATE DECISIONS",
+        (620, 525),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.60,
+        (255, 255, 255),
+        2,
+        cv2.LINE_AA
+    )
+
+    y = 560
+
+    for index, candidate in enumerate(
+        cognitive_results[:7],
+        start=1
+    ):
+
+        decision = candidate.get(
+            "bayes_decision",
+            "UNKNOWN"
+        )
+
+        suspicion = candidate.get(
+            "bayes_suspicion",
+            0.0
+        )
+
+        cv2.putText(
+            summary,
+            f"C{index}: {decision}  (P(H0)={suspicion:.2f})",
+            (620, y),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.42,
+            (220, 220, 220),
+            1,
+            cv2.LINE_AA
+        )
+
+        y += 30
+
+    # ========================================================
+    # FINAL OUTPUT (FUSION)
+    # ========================================================
+
+    fusion_results = fusion_results or []
+
+    final_counts = {
+        "CAMOUFLAGE DETECTED": 0,
+        "NOT DETECTED": 0,
+        "REVIEW": 0
+    }
+
+    for candidate in fusion_results:
+
+        status = candidate.get("final_status", "REVIEW")
+
+        if status in final_counts:
+            final_counts[status] += 1
+
+    cv2.putText(
+        summary,
+        (
+            f"FINAL (FUSION)  Detected: "
+            f"{final_counts['CAMOUFLAGE DETECTED']}   "
+            f"Not detected: {final_counts['NOT DETECTED']}   "
+            f"Review: {final_counts['REVIEW']}"
+        ),
+        (35, 770),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.55,
+        (255, 255, 255),
+        1,
+        cv2.LINE_AA
+    )
+
+    # ========================================================
     # SAVE SUMMARY
     # ========================================================
 
@@ -798,7 +967,7 @@ def main():
     # ========================================================
 
     
-    print("1/5  SPATIAL AGENT")
+    print("1/7  SPATIAL AGENT")
     print("-" * 70)
 
     spatial_result = spatial_agent.analyze(
@@ -823,7 +992,7 @@ def main():
     # ========================================================
 
     print("\n")
-    print("2/5  SPECTRAL AGENT")
+    print("2/7  SPECTRAL AGENT")
     print("-" * 70)
 
     spectral_result = spectral_agent.analyze(
@@ -853,7 +1022,7 @@ def main():
     # ========================================================
 
     print("\n")
-    print("3/5  FEATURE AGENT")
+    print("3/7  FEATURE AGENT")
     print("-" * 70)
 
     feature_result = feature_agent.analyze(
@@ -890,7 +1059,7 @@ def main():
     # ========================================================
 
     print("\n")
-    print("4/5  CONFLICT AGENT")
+    print("4/7  CONFLICT AGENT")
     print("-" * 70)
 
     conflict_result = conflict_agent.analyze(
@@ -935,7 +1104,7 @@ def main():
     # ========================================================
 
     print("\n")
-    print("5/5  UNCERTAINTY AGENT")
+    print("5/7  UNCERTAINTY AGENT")
     print("-" * 70)
 
     uncertainty_results = uncertainty_agent.analyze(
@@ -972,6 +1141,196 @@ def main():
     )
 
     # ========================================================
+    # 6. COGNITIVE
+    # ========================================================
+
+    print("\n")
+    print("6/7  COGNITIVE AGENT")
+    print("-" * 70)
+
+    bayes_agent = BayesCognitiveAgent()
+    rule_agent = (
+        RuleCognitiveAgent()
+        if RuleCognitiveAgent is not None
+        else None
+    )
+
+    if rule_agent is None:
+
+        print(
+            "  (agents/cognitive_agent.py not found - "
+            "running Bayesian cognitive layer only)"
+        )
+
+    cognitive_results = analyze_candidates(
+        bayes_agent,
+        uncertainty_results
+    )
+
+    for index, candidate in enumerate(
+        cognitive_results,
+        start=1
+    ):
+
+        if rule_agent is not None:
+
+            baseline = rule_agent.reason(
+                to_legacy_candidate(candidate)
+            )
+
+            candidate["rule_decision"] = baseline["decision"]
+            candidate["rule_confidence"] = baseline["confidence"]
+
+        else:
+
+            candidate["rule_decision"] = "N/A"
+            candidate["rule_confidence"] = 0.0
+
+        posterior = candidate["bayes_posterior"]
+
+        print(
+            f"  C{index}: "
+            f"Bayesian: {candidate['bayes_decision']} | "
+            f"P(H0)={posterior['H0']:.2f} "
+            f"P(H1)={posterior['H1']:.2f} "
+            f"P(H2)={posterior['H2']:.2f} | "
+            f"Rule-based: {candidate['rule_decision']}"
+        )
+
+        for line in candidate["bayes_explanation"]:
+            print(f"        - {line}")
+
+    cognitive_path = OUTPUT_DIR / "08_cognitive_results.json"
+
+    with open(
+        cognitive_path,
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        json.dump(
+            cognitive_results,
+            file,
+            indent=2,
+            default=str
+        )
+
+    print(
+        f"Cognitive results saved to: "
+        f"{cognitive_path}"
+    )
+
+    # ========================================================
+    # 7. FUSION
+    # ========================================================
+
+    print("\n")
+    print("7/7  FUSION AGENT")
+    print("-" * 70)
+
+    if (
+        FUSION_METHOD == "learned"
+        and LearnedFusionAgent is not None
+        and LEARNED_FUSION_MODEL.exists()
+    ):
+
+        fusion_agent = LearnedFusionAgent(
+            str(LEARNED_FUSION_MODEL)
+        )
+
+        print("  Method: LEARNED fusion (trained meta-classifier)")
+
+    elif FUSION_METHOD == "weighted":
+
+        fusion_agent = FusionAgent()
+
+        print("  Method: WEIGHTED fusion (all layers)")
+
+    else:
+
+        fusion_agent = SimpleFusionAgent()
+
+        print(
+            "  Method: SIMPLE fusion "
+            "(spatial/spectral/feature weighted most, cognitive least)"
+        )
+
+    fusion_results = fusion_agent.analyze(
+        cognitive_results
+    )
+
+    cleared = 0
+
+    for index, candidate in enumerate(
+        fusion_results,
+        start=1
+    ):
+
+        if candidate["final_status"] == "NOT DETECTED":
+            cleared += 1
+            continue
+
+        signals = candidate["fusion_signals"]
+
+        print(
+            f"  C{index}: {candidate['final_status']} | "
+            f"{candidate['final_label']} "
+            f"({candidate['final_sublabel'] or '-'}) | "
+            f"Suspicion {candidate['final_suspicion']:.2f}"
+        )
+
+        print(f"        signals: {signals}")
+
+        for reason in candidate["fusion_reasons"]:
+            print(f"        - {reason}")
+
+    print(f"  ({cleared} candidates cleared as NOT DETECTED)")
+
+    fusion_path = OUTPUT_DIR / "09_fusion_results.json"
+
+    with open(
+        fusion_path,
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        json.dump(
+            fusion_results,
+            file,
+            indent=2,
+            default=str
+        )
+
+    # all candidates (debug view)
+    fusion_agent.save_visualization(
+        rgb_path,
+        fusion_results,
+        output_path=(
+            OUTPUT_DIR /
+            "10b_all_candidates.png"
+        )
+    )
+
+    # FINAL OUTPUT: only camouflaged objects, with the evidence behind each one
+    fusion_agent.save_certified_output(
+        rgb_path,
+        fusion_results,
+        output_path=(
+            OUTPUT_DIR /
+            "10_final_output.png"
+        ),
+        report_path=(
+            OUTPUT_DIR /
+            "11_camouflaged_objects.json"
+        )
+    )
+
+    print(
+        f"Fusion results saved to: "
+        f"{fusion_path}"
+    )
+
+    # ========================================================
     # SUMMARY
     # ========================================================
 
@@ -986,7 +1345,9 @@ def main():
         spectral_result,
         feature_result,
         conflict_result,
-        uncertainty_results
+        uncertainty_results,
+        cognitive_results,
+        fusion_results
     )
 
     print(
