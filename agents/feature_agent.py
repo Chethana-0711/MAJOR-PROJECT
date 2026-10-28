@@ -97,7 +97,9 @@ class MultimodalCNN(nn.Module):
 
 class FeatureAgent:
     """
+    Feature Agent requiring both an RGB/VIS image and an LWIR image.
 
+    It scans aligned image patches with the trained multimodal CNN,
     combines patch probabilities into an image-level probability map,
     and extracts candidate regions.
     """
@@ -177,8 +179,8 @@ class FeatureAgent:
         return patches, boxes
 
     # ==================================================
-    # BATCH PREDICTION:
-
+    # BATCH PREDICTION: BOTH MODALITIES REQUIRED
+    # ==================================================
 
     def predict_batches(self, rgb_patches, lwir_patches):
         if len(rgb_patches) != len(lwir_patches):
