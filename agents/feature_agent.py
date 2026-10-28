@@ -6,11 +6,12 @@ import torch
 import torch.nn as nn
 
 
-# --------------------------------------------------
+# ==================================================
 # SETTINGS
-# --------------------------------------------------
+# ==================================================
 
 MODEL_DIR = Path("models")
+MODEL_PATH = MODEL_DIR / "multimodal_cnn.pt"
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -19,8 +20,8 @@ STRIDE = 32
 BATCH_SIZE = 128
 
 THRESHOLD = 0.70
-
 MIN_AREA = 20
+LOCAL_EVIDENCE_THRESHOLD = 0.75
 
 
 # ==================================================
@@ -28,112 +29,36 @@ MIN_AREA = 20
 # ==================================================
 
 class CNNBranch(nn.Module):
-
     def __init__(self, input_channels):
-
         super().__init__()
 
         self.features = nn.Sequential(
-
             nn.Conv2d(
-                input_channels,
-                32,
-                kernel_size=3,
-                padding=1
+                input_channels, 32,
+                kernel_size=3, padding=1
             ),
-
             nn.ReLU(),
-
             nn.MaxPool2d(2),
 
             nn.Conv2d(
-                32,
-                64,
-                kernel_size=3,
-                padding=1
+                32, 64,
+                kernel_size=3, padding=1
             ),
-
             nn.ReLU(),
-
             nn.MaxPool2d(2),
 
             nn.Conv2d(
-                64,
-                128,
-                kernel_size=3,
-                padding=1
+                64, 128,
+                kernel_size=3, padding=1
             ),
-
             nn.ReLU(),
 
             nn.AdaptiveAvgPool2d((1, 1))
         )
 
     def forward(self, x):
-
         x = self.features(x)
-
         return x.flatten(1)
-
-
-# ==================================================
-# SINGLE-MODALITY CNN
-# ==================================================
-
-class FeatureCNN(nn.Module):
-
-    def __init__(self, input_channels):
-
-        super().__init__()
-
-        self.features = nn.Sequential(
-
-            nn.Conv2d(
-                input_channels,
-                32,
-                kernel_size=3,
-                padding=1
-            ),
-
-            nn.ReLU(),
-
-            nn.MaxPool2d(2),
-
-            nn.Conv2d(
-                32,
-                64,
-                kernel_size=3,
-                padding=1
-            ),
-
-            nn.ReLU(),
-
-            nn.MaxPool2d(2),
-
-            nn.Conv2d(
-                64,
-                128,
-                kernel_size=3,
-                padding=1
-            ),
-
-            nn.ReLU(),
-
-            nn.AdaptiveAvgPool2d((1, 1))
-        )
-
-        self.classifier = nn.Linear(
-            128,
-            1
-        )
-
-    def forward(self, x):
-
-        x = self.features(x)
-
-        x = x.flatten(1)
-
-        return self.classifier(x).squeeze(1)
 
 
 # ==================================================
@@ -141,49 +66,29 @@ class FeatureCNN(nn.Module):
 # ==================================================
 
 class MultimodalCNN(nn.Module):
-
     def __init__(self):
-
         super().__init__()
 
         self.rgb_branch = CNNBranch(3)
-
         self.lwir_branch = CNNBranch(1)
 
         self.classifier = nn.Sequential(
-
-            nn.Linear(
-                256,
-                128
-            ),
-
+            nn.Linear(256, 128),
             nn.ReLU(),
-
             nn.Dropout(0.3),
-
-            nn.Linear(
-                128,
-                1
-            )
+            nn.Linear(128, 1)
         )
 
     def forward(self, rgb, lwir):
-
         rgb_features = self.rgb_branch(rgb)
-
         lwir_features = self.lwir_branch(lwir)
 
         combined = torch.cat(
-            [
-                rgb_features,
-                lwir_features
-            ],
+            [rgb_features, lwir_features],
             dim=1
         )
 
-        return self.classifier(
-            combined
-        ).squeeze(1)
+        return self.classifier(combined).squeeze(1)
 
 
 # ==================================================
@@ -191,533 +96,210 @@ class MultimodalCNN(nn.Module):
 # ==================================================
 
 class FeatureAgent:
+    """
+
+    combines patch probabilities into an image-level probability map,
+    and extracts candidate regions.
+    """
 
     def __init__(self):
+        if not MODEL_PATH.exists():
+            raise FileNotFoundError(
+                f"Multimodal CNN model not found: {MODEL_PATH}"
+            )
 
-        self.rgb_model = None
-        self.lwir_model = None
-        self.multimodal_model = None
+        print(f"Feature Agent device: {DEVICE}")
 
-        print(
-            f"Feature Agent device: {DEVICE}"
+        self.model = MultimodalCNN()
+        self.model.load_state_dict(
+            torch.load(MODEL_PATH, map_location=DEVICE)
         )
-
-        # ------------------------------------------
-        # RGB CNN
-        # ------------------------------------------
-
-        rgb_path = MODEL_DIR / "rgb_cnn.pt"
-
-        if rgb_path.exists():
-
-            self.rgb_model = FeatureCNN(3)
-
-            self.rgb_model.load_state_dict(
-                torch.load(
-                    rgb_path,
-                    map_location=DEVICE
-                )
-            )
-
-            self.rgb_model.to(DEVICE)
-            self.rgb_model.eval()
-
-        # ------------------------------------------
-        # LWIR CNN
-        # ------------------------------------------
-
-        lwir_path = MODEL_DIR / "lwir_cnn.pt"
-
-        if lwir_path.exists():
-
-            self.lwir_model = FeatureCNN(1)
-
-            self.lwir_model.load_state_dict(
-                torch.load(
-                    lwir_path,
-                    map_location=DEVICE
-                )
-            )
-
-            self.lwir_model.to(DEVICE)
-            self.lwir_model.eval()
-
-        # ------------------------------------------
-        # MULTIMODAL CNN
-        # ------------------------------------------
-
-        multimodal_path = (
-            MODEL_DIR /
-            "multimodal_cnn.pt"
-        )
-
-        if multimodal_path.exists():
-
-            self.multimodal_model = MultimodalCNN()
-
-            self.multimodal_model.load_state_dict(
-                torch.load(
-                    multimodal_path,
-                    map_location=DEVICE
-                )
-            )
-
-            self.multimodal_model.to(DEVICE)
-            self.multimodal_model.eval()
+        self.model.to(DEVICE)
+        self.model.eval()
 
     # ==================================================
-    # RGB PATCH PREPARATION
+    # PATCH PREPARATION
     # ==================================================
 
     def prepare_rgb_patch(self, patch):
-
         patch = cv2.resize(
-            patch,
-            (IMAGE_SIZE, IMAGE_SIZE)
+            patch, (IMAGE_SIZE, IMAGE_SIZE)
         )
-
         patch = cv2.cvtColor(
-            patch,
-            cv2.COLOR_BGR2RGB
+            patch, cv2.COLOR_BGR2RGB
         )
+        patch = patch.astype(np.float32) / 255.0
 
-        patch = (
-            patch.astype(np.float32) /
-            255.0
-        )
-
-        return torch.from_numpy(
-            patch
-        ).permute(2, 0, 1)
-
-    # ==================================================
-    # LWIR PATCH PREPARATION
-    # ==================================================
+        return torch.from_numpy(patch).permute(2, 0, 1)
 
     def prepare_lwir_patch(self, patch):
-
         patch = cv2.resize(
-            patch,
-            (IMAGE_SIZE, IMAGE_SIZE)
+            patch, (IMAGE_SIZE, IMAGE_SIZE)
         )
+        patch = patch.astype(np.float32) / 255.0
 
-        patch = (
-            patch.astype(np.float32) /
-            255.0
-        )
-
-        return torch.from_numpy(
-            patch
-        ).unsqueeze(0)
+        return torch.from_numpy(patch).unsqueeze(0)
 
     # ==================================================
     # GENERATE PATCHES
     # ==================================================
 
     def generate_patches(self, image):
-
         height, width = image.shape[:2]
 
         patches = []
         boxes = []
 
         y_positions = range(
-            0,
-            max(
-                height - IMAGE_SIZE + 1,
-                1
-            ),
-            STRIDE
+            0, max(height - IMAGE_SIZE + 1, 1), STRIDE
         )
-
         x_positions = range(
-            0,
-            max(
-                width - IMAGE_SIZE + 1,
-                1
-            ),
-            STRIDE
+            0, max(width - IMAGE_SIZE + 1, 1), STRIDE
         )
 
         for y in y_positions:
-
             for x in x_positions:
+                x2 = min(x + IMAGE_SIZE, width)
+                y2 = min(y + IMAGE_SIZE, height)
 
-                x2 = min(
-                    x + IMAGE_SIZE,
-                    width
-                )
+                patch = image[y:y2, x:x2]
 
-                y2 = min(
-                    y + IMAGE_SIZE,
-                    height
-                )
-
-                patch = image[
-                    y:y2,
-                    x:x2
-                ]
-
+                # This implementation only processes full-size patches.
                 if (
                     patch.shape[0] != IMAGE_SIZE
-                    or
-                    patch.shape[1] != IMAGE_SIZE
+                    or patch.shape[1] != IMAGE_SIZE
                 ):
                     continue
 
                 patches.append(patch)
-
-                boxes.append(
-                    [
-                        x,
-                        y,
-                        IMAGE_SIZE,
-                        IMAGE_SIZE
-                    ]
-                )
+                boxes.append([x, y, IMAGE_SIZE, IMAGE_SIZE])
 
         return patches, boxes
 
     # ==================================================
-    # BATCH PREDICTION
-    # ==================================================
+    # BATCH PREDICTION:
 
-    def predict_batches(
-        self,
-        rgb_patches=None,
-        lwir_patches=None
-    ):
+
+    def predict_batches(self, rgb_patches, lwir_patches):
+        if len(rgb_patches) != len(lwir_patches):
+            raise ValueError(
+                "RGB and LWIR patch counts do not match. "
+                "Ensure the images are aligned and have the same dimensions."
+            )
 
         probabilities = []
+        total = len(rgb_patches)
 
-        if rgb_patches is not None:
+        for start in range(0, total, BATCH_SIZE):
+            end = min(start + BATCH_SIZE, total)
 
-            total = len(rgb_patches)
+            rgb_batch = torch.stack([
+                self.prepare_rgb_patch(p)
+                for p in rgb_patches[start:end]
+            ]).to(DEVICE)
 
-        else:
+            lwir_batch = torch.stack([
+                self.prepare_lwir_patch(p)
+                for p in lwir_patches[start:end]
+            ]).to(DEVICE)
 
-            total = len(lwir_patches)
-
-        for start in range(
-            0,
-            total,
-            BATCH_SIZE
-        ):
-
-            end = min(
-                start + BATCH_SIZE,
-                total
-            )
-
-            # --------------------------------------
-            # RGB + LWIR
-            # --------------------------------------
-
-            if (
-                rgb_patches is not None
-                and
-                lwir_patches is not None
-            ):
-
-                if self.multimodal_model is None:
-
-                    raise RuntimeError(
-                        "Multimodal CNN model is not available."
-                    )
-
-                rgb_batch = torch.stack(
-                    [
-                        self.prepare_rgb_patch(p)
-                        for p in rgb_patches[start:end]
-                    ]
-                ).to(DEVICE)
-
-                lwir_batch = torch.stack(
-                    [
-                        self.prepare_lwir_patch(p)
-                        for p in lwir_patches[start:end]
-                    ]
-                ).to(DEVICE)
-
-                with torch.no_grad():
-
-                    output = self.multimodal_model(
-                        rgb_batch,
-                        lwir_batch
-                    )
-
-            # --------------------------------------
-            # RGB ONLY
-            # --------------------------------------
-
-            elif rgb_patches is not None:
-
-                if self.rgb_model is None:
-
-                    raise RuntimeError(
-                        "RGB CNN model is not available."
-                    )
-
-                rgb_batch = torch.stack(
-                    [
-                        self.prepare_rgb_patch(p)
-                        for p in rgb_patches[start:end]
-                    ]
-                ).to(DEVICE)
-
-                with torch.no_grad():
-
-                    output = self.rgb_model(
-                        rgb_batch
-                    )
-
-            # --------------------------------------
-            # LWIR ONLY
-            # --------------------------------------
-
-            else:
-
-                if self.lwir_model is None:
-
-                    raise RuntimeError(
-                        "LWIR CNN model is not available."
-                    )
-
-                lwir_batch = torch.stack(
-                    [
-                        self.prepare_lwir_patch(p)
-                        for p in lwir_patches[start:end]
-                    ]
-                ).to(DEVICE)
-
-                with torch.no_grad():
-
-                    output = self.lwir_model(
-                        lwir_batch
-                    )
-
-            batch_probability = (
-                torch.sigmoid(output)
-                .cpu()
-                .numpy()
-            )
+            with torch.no_grad():
+                logits = self.model(rgb_batch, lwir_batch)
+                batch_probabilities = torch.sigmoid(logits)
 
             probabilities.extend(
-                batch_probability.tolist()
+                batch_probabilities.cpu().numpy().tolist()
             )
 
-        return np.array(
-            probabilities
-        )
+        return np.asarray(probabilities, dtype=np.float32)
 
     # ==================================================
-    # ANALYZE
+    # ANALYZE: BOTH IMAGES REQUIRED
     # ==================================================
 
-    def analyze(
-        self,
-        rgb_path=None,
-        lwir_path=None
-    ):
-
-        if (
-            rgb_path is None
-            and
-            lwir_path is None
-        ):
-
+    def analyze(self, rgb_path, lwir_path):
+        if rgb_path is None or lwir_path is None:
             raise ValueError(
-                "RGB or LWIR image is required."
+                "Both RGB and LWIR image paths are required."
             )
 
-        rgb_image = None
-        lwir_image = None
+        rgb_path = Path(rgb_path)
+        lwir_path = Path(lwir_path)
 
-        # ------------------------------------------
-        # LOAD RGB
-        # ------------------------------------------
-
-        if rgb_path is not None:
-
-            rgb_image = cv2.imread(
-                str(rgb_path)
+        if not rgb_path.exists():
+            raise FileNotFoundError(
+                f"RGB image not found: {rgb_path}"
             )
 
-            if rgb_image is None:
-
-                raise ValueError(
-                    f"Could not load RGB image: {rgb_path}"
-                )
-
-        # ------------------------------------------
-        # LOAD LWIR
-        # ------------------------------------------
-
-        if lwir_path is not None:
-
-            lwir_image = cv2.imread(
-                str(lwir_path),
-                cv2.IMREAD_GRAYSCALE
+        if not lwir_path.exists():
+            raise FileNotFoundError(
+                f"LWIR image not found: {lwir_path}"
             )
 
-            if lwir_image is None:
+        rgb_image = cv2.imread(str(rgb_path))
+        lwir_image = cv2.imread(
+            str(lwir_path),
+            cv2.IMREAD_GRAYSCALE
+        )
 
-                raise ValueError(
-                    f"Could not load LWIR image: {lwir_path}"
-                )
+        if rgb_image is None:
+            raise ValueError(f"Could not load RGB image: {rgb_path}")
 
-        # ------------------------------------------
-        # DETERMINE MODALITY
-        # ------------------------------------------
+        if lwir_image is None:
+            raise ValueError(f"Could not load LWIR image: {lwir_path}")
 
-        if (
-            rgb_image is not None
-            and
-            lwir_image is not None
-        ):
-
-            modality = "rgb+lwir"
-
-            height, width = rgb_image.shape[:2]
-
+        # Resize LWIR to the RGB image dimensions so patch positions match.
+        height, width = rgb_image.shape[:2]
+        if lwir_image.shape[:2] != (height, width):
             lwir_image = cv2.resize(
-                lwir_image,
-                (width, height)
+                lwir_image, (width, height)
             )
 
-            rgb_patches, boxes = (
-                self.generate_patches(
-                    rgb_image
-                )
+        rgb_patches, boxes = self.generate_patches(rgb_image)
+        lwir_patches, lwir_boxes = self.generate_patches(lwir_image)
+
+        # Both images must produce the same patch grid.
+        if boxes != lwir_boxes:
+            raise ValueError(
+                "RGB and LWIR patch grids do not match."
             )
 
-            lwir_patches, _ = (
-                self.generate_patches(
-                    lwir_image
-                )
-            )
+        probabilities = self.predict_batches(
+            rgb_patches, lwir_patches
+        )
 
-            probabilities = (
-                self.predict_batches(
-                    rgb_patches,
-                    lwir_patches
-                )
-            )
-
-        elif rgb_image is not None:
-
-            modality = "rgb"
-
-            rgb_patches, boxes = (
-                self.generate_patches(
-                    rgb_image
-                )
-            )
-
-            probabilities = (
-                self.predict_batches(
-                    rgb_patches=rgb_patches
-                )
-            )
-
-        else:
-
-            modality = "lwir"
-
-            lwir_patches, boxes = (
-                self.generate_patches(
-                    lwir_image
-                )
-            )
-
-            probabilities = (
-                self.predict_batches(
-                    lwir_patches=lwir_patches
-                )
-            )
-
-        # ------------------------------------------
-        # CREATE PROBABILITY MAP
-        # ------------------------------------------
-
-        if modality in [
-            "rgb",
-            "rgb+lwir"
-        ]:
-
-            height, width = (
-                rgb_image.shape[:2]
-            )
-
-        else:
-
-            height, width = (
-                lwir_image.shape[:2]
-            )
-
+        # Build a full-image probability map by averaging probabilities
+        # from every patch covering each pixel.
         probability_map = np.zeros(
-            (height, width),
-            dtype=np.float32
+            (height, width), dtype=np.float32
         )
-
         count_map = np.zeros(
-            (height, width),
-            dtype=np.float32
+            (height, width), dtype=np.float32
         )
 
-        for probability, box in zip(
-            probabilities,
-            boxes
-        ):
-
+        for probability, box in zip(probabilities, boxes):
             x, y, w, h = box
-
-            probability_map[
-                y:y+h,
-                x:x+w
-            ] += probability
-
-            count_map[
-                y:y+h,
-                x:x+w
-            ] += 1
+            probability_map[y:y+h, x:x+w] += probability
+            count_map[y:y+h, x:x+w] += 1
 
         valid = count_map > 0
+        probability_map[valid] /= count_map[valid]
 
-        probability_map[valid] /= (
-            count_map[valid]
-        )
-
-        # ------------------------------------------
-        # DETECTION MASK
-        # ------------------------------------------
-
+        # Threshold the probability map to create a binary mask.
         detection_mask = (
             probability_map >= THRESHOLD
         ).astype(np.uint8) * 255
 
-        kernel = np.ones(
-            (5, 5),
-            np.uint8
-        )
-
+        # Remove tiny noise, then close small gaps.
+        kernel = np.ones((5, 5), np.uint8)
         detection_mask = cv2.morphologyEx(
-            detection_mask,
-            cv2.MORPH_OPEN,
-            kernel
+            detection_mask, cv2.MORPH_OPEN, kernel
         )
-
         detection_mask = cv2.morphologyEx(
-            detection_mask,
-            cv2.MORPH_CLOSE,
-            kernel
+            detection_mask, cv2.MORPH_CLOSE, kernel
         )
 
-        # ------------------------------------------
-        # CONNECTED COMPONENTS
-        # ------------------------------------------
-
-        num_labels, labels, stats, centroids = (
+        num_labels, labels, stats, _ = (
             cv2.connectedComponentsWithStats(
                 detection_mask,
                 connectivity=8
@@ -726,248 +308,82 @@ class FeatureAgent:
 
         regions = []
 
-        for i in range(
-            1,
-            num_labels
-        ):
-
-            x = stats[
-                i,
-                cv2.CC_STAT_LEFT
-            ]
-
-            y = stats[
-                i,
-                cv2.CC_STAT_TOP
-            ]
-
-            w = stats[
-                i,
-                cv2.CC_STAT_WIDTH
-            ]
-
-            h = stats[
-                i,
-                cv2.CC_STAT_HEIGHT
-            ]
-
-            area = stats[
-                i,
-                cv2.CC_STAT_AREA
-            ]
+        for i in range(1, num_labels):
+            x = int(stats[i, cv2.CC_STAT_LEFT])
+            y = int(stats[i, cv2.CC_STAT_TOP])
+            w = int(stats[i, cv2.CC_STAT_WIDTH])
+            h = int(stats[i, cv2.CC_STAT_HEIGHT])
+            area = int(stats[i, cv2.CC_STAT_AREA])
 
             if area < MIN_AREA:
                 continue
 
-            region_mask = (
-                labels == i
-            )
-
-            region_probability = (
-                probability_map[
-                    region_mask
-                ]
-            )
+            region_mask = labels == i
+            region_probabilities = probability_map[region_mask]
 
             regions.append({
-
-                "bbox": [
-                    int(x),
-                    int(y),
-                    int(w),
-                    int(h)
-                ],
-
-                "area":
-                    int(area),
-
-                "evidence":
-                    float(
-                        region_probability.mean()
-                    ),
-
-                "max_probability":
-                    float(
-                        region_probability.max()
-                    )
+                "bbox": [x, y, w, h],
+                "area": area,
+                "evidence": float(region_probabilities.mean()),
+                "max_probability": float(region_probabilities.max())
             })
 
         regions.sort(
-            key=lambda r: r["evidence"],
+            key=lambda region: region["evidence"],
             reverse=True
         )
 
-       
-
-        # ------------------------------------------
-        # ------------------------------------------
-        # OVERALL EVIDENCE
-        # ------------------------------------------
-
         if len(probabilities) > 0:
-
-            overall_evidence = float(
-                np.mean(probabilities)
-            )
-
-            max_probability = float(
-                np.max(probabilities)
-            )
-
-            max_index = int(
-                np.argmax(probabilities)
-            )
-
+            overall_evidence = float(np.mean(probabilities))
+            max_probability = float(np.max(probabilities))
+            max_index = int(np.argmax(probabilities))
         else:
-
             overall_evidence = 0.0
             max_probability = 0.0
             max_index = -1
 
-        # ------------------------------------------
-        # LOCALIZED FEATURE EVIDENCE
-        # ------------------------------------------
-
         localized_evidence_regions = []
 
-        # Preserve a strong local CNN response even
-        # when it does not survive final candidate
-        # region post-processing.
-
-        LOCAL_EVIDENCE_THRESHOLD = 0.75
-
+        # Preserve the strongest patch as localized evidence when it
+        # exceeds the evidence threshold but no formal region survives.
         if (
             max_index >= 0
-            and
-            max_probability >= LOCAL_EVIDENCE_THRESHOLD
+            and max_probability >= LOCAL_EVIDENCE_THRESHOLD
         ):
-
             peak_box = boxes[max_index]
-
             localized_evidence_regions.append({
-
                 "bbox": [
                     int(peak_box[0]),
                     int(peak_box[1]),
                     int(peak_box[2]),
                     int(peak_box[3])
                 ],
-
-                "area": int(
-                    peak_box[2] *
-                    peak_box[3]
-                ),
-
-                "evidence":
-                    max_probability,
-
-                "max_probability":
-                    max_probability,
-
-                "evidence_type":
-                    "localized"
+                "area": int(peak_box[2] * peak_box[3]),
+                "evidence": max_probability,
+                "max_probability": max_probability,
+                "evidence_type": "localized"
             })
 
-        # ------------------------------------------
-        # AGENT STATUS
-        # ------------------------------------------
-
-        if len(regions) > 0:
-
+        if regions:
             status = "DETECTED"
-
-        elif len(localized_evidence_regions) > 0:
-
+        elif localized_evidence_regions:
             status = "EVIDENCE_PRESENT"
-
         else:
-
             status = "NO_DETECTION"
 
-        # ------------------------------------------
-        # RESULT
-        # ------------------------------------------
-
         return {
-
-            "agent":
-                "feature",
-
-            "status":
-                status,
-
-            "modality":
-                modality,
-
-            "rgb_available":
-                rgb_image is not None,
-
-            "lwir_available":
-                lwir_image is not None,
-
-            "overall_evidence":
-                overall_evidence,
-
-            "max_probability":
-                max_probability,
-
-            "regions":
-                regions,
-
-            "localized_evidence_regions":
-                localized_evidence_regions,
-
-            "probability_map":
-                probability_map,
-
-            "num_patches":
-                len(probabilities)
-        }
-
-        # ------------------------------------------
-        # AGENT STATUS
-        # ------------------------------------------
-
-        if len(regions) > 0:
-
-            status = "DETECTED"
-
-        else:
-
-            status = "NO_DETECTION"
-
-        # ------------------------------------------
-        # RESULT
-        # ------------------------------------------
-
-        return {
-
-            "agent":
-                "feature",
-
-            "status":
-                status,
-
-            "modality":
-                modality,
-
-            "rgb_available":
-                rgb_image is not None,
-
-            "lwir_available":
-                lwir_image is not None,
-
-            "overall_evidence":
-                overall_evidence,
-
-            "regions":
-                regions,
-
-            "probability_map":
-                probability_map,
-
-            "num_patches":
-                len(probabilities)
+            "agent": "feature",
+            "status": status,
+            "modality": "rgb+lwir",
+            "rgb_available": True,
+            "lwir_available": True,
+            "overall_evidence": overall_evidence,
+            "max_probability": max_probability,
+            "regions": regions,
+            "localized_evidence_regions": localized_evidence_regions,
+            "probability_map": probability_map,
+            "detection_mask": detection_mask,
+            "num_patches": len(probabilities)
         }
 
     # ==================================================
@@ -976,18 +392,13 @@ class FeatureAgent:
 
     def save_visualization(
         self,
-        rgb_path=None,
-        lwir_path=None,
+        rgb_path,
+        lwir_path,
         output_path="outputs/feature_analysis.png"
     ):
-
-        output_path = Path(
-            output_path
-        )
-
+        output_path = Path(output_path)
         output_path.parent.mkdir(
-            parents=True,
-            exist_ok=True
+            parents=True, exist_ok=True
         )
 
         result = self.analyze(
@@ -995,86 +406,29 @@ class FeatureAgent:
             lwir_path=lwir_path
         )
 
-        probability_map = result[
-            "probability_map"
-        ]
+        rgb_image = cv2.imread(str(rgb_path))
+        if rgb_image is None:
+            raise ValueError(f"Could not load RGB image for visualization: {rgb_path}")
 
-        modality = result[
-            "modality"
-        ]
+        probability_map = result["probability_map"]
+        modality = result["modality"]
 
-        status = result[
-            "status"
-        ]
-
-        # ------------------------------------------
-        # DISPLAY IMAGE
-        # ------------------------------------------
-
-        if rgb_path is not None:
-
-            display_image = cv2.imread(
-                str(rgb_path)
-            )
-
-        else:
-
-            display_image = cv2.imread(
-                str(lwir_path),
-                cv2.IMREAD_GRAYSCALE
-            )
-
-            display_image = cv2.cvtColor(
-                display_image,
-                cv2.COLOR_GRAY2BGR
-            )
-
-        if display_image is None:
-
-            raise ValueError(
-                "Could not load image for visualization."
-            )
-
-        # ------------------------------------------
-        # HEATMAP
-        # ------------------------------------------
-
+        # Probability heatmap.
         heatmap = (
-            np.clip(
-                probability_map,
-                0,
-                1
-            ) * 255
+            np.clip(probability_map, 0, 1) * 255
         ).astype(np.uint8)
-
         heatmap = cv2.applyColorMap(
-            heatmap,
-            cv2.COLORMAP_JET
+            heatmap, cv2.COLORMAP_JET
         )
-
-        # ------------------------------------------
-        # OVERLAY
-        # ------------------------------------------
 
         overlay = cv2.addWeighted(
-            display_image,
-            0.55,
-            heatmap,
-            0.45,
-            0
+            rgb_image, 0.55, heatmap, 0.45, 0
         )
 
-        # ------------------------------------------
-        # REGIONS
-        # ------------------------------------------
-
-        regions_image = display_image.copy()
-
+        regions_image = rgb_image.copy()
         for index, region in enumerate(
-            result["regions"][:10],
-            start=1
+            result["regions"][:10], start=1
         ):
-
             x, y, w, h = region["bbox"]
 
             cv2.rectangle(
@@ -1085,18 +439,11 @@ class FeatureAgent:
                 2
             )
 
-            label = (
-                f"R{index} "
-                f"E={region['evidence']:.2f}"
-            )
-
+            label = f"R{index} E={region['evidence']:.2f}"
             cv2.putText(
                 regions_image,
                 label,
-                (
-                    x,
-                    max(y - 8, 20)
-                ),
+                (x, max(y - 8, 20)),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.5,
                 (0, 255, 0),
@@ -1104,28 +451,15 @@ class FeatureAgent:
                 cv2.LINE_AA
             )
 
-        # ------------------------------------------
-        # TITLES
-        # ------------------------------------------
-
-        def add_title(
-            image,
-            title
-        ):
-
+        def add_title(image, title):
             canvas = image.copy()
-
             cv2.rectangle(
                 canvas,
                 (0, 0),
-                (
-                    canvas.shape[1],
-                    38
-                ),
+                (canvas.shape[1], 38),
                 (0, 0, 0),
                 -1
             )
-
             cv2.putText(
                 canvas,
                 title,
@@ -1136,70 +470,47 @@ class FeatureAgent:
                 2,
                 cv2.LINE_AA
             )
-
             return canvas
 
-        display_image = add_title(
-            display_image,
-            f"INPUT ({modality.upper()})"
+        input_display = add_title(
+            rgb_image, f"RGB INPUT ({modality.upper()})"
+        )
+        heatmap_display = add_title(
+            heatmap, "CNN FEATURE PROBABILITY MAP"
+        )
+        overlay_display = add_title(
+            overlay, "FEATURE EVIDENCE OVERLAY"
+        )
+        regions_display = add_title(
+            regions_image, "FEATURE CANDIDATE REGIONS"
         )
 
-        heatmap = add_title(
-            heatmap,
-            "CNN FEATURE EVIDENCE"
-        )
-
-        overlay = add_title(
-            overlay,
-            "FEATURE EVIDENCE OVERLAY"
-        )
-
-        regions_image = add_title(
-            regions_image,
-            "FEATURE CANDIDATE REGIONS"
-        )
-
-        # ------------------------------------------
-        # SUMMARY
-        # ------------------------------------------
+        top_row = np.hstack([
+            input_display, heatmap_display
+        ])
+        bottom_row = np.hstack([
+            overlay_display, regions_display
+        ])
+        grid = np.vstack([top_row, bottom_row])
 
         summary_height = 145
-
         summary = np.zeros(
-            (
-                summary_height,
-                display_image.shape[1] * 2,
-                3
-            ),
+            (summary_height, grid.shape[1], 3),
             dtype=np.uint8
         )
 
         summary_lines = [
-
-    f"FEATURE AGENT",
-
-    f"Mode: {modality.upper()}",
-
-    f"Status: "
-    f"{result['status']}",
-
-    f"Patches scanned: "
-    f"{result['num_patches']}",
-
-    f"Overall evidence: "
-    f"{result['overall_evidence']:.3f}",
-
-    f"Maximum probability: "
-    f"{result['max_probability']:.3f}",
-
-    f"Candidate regions: "
-    f"{len(result['regions'])}"
-]
+            "FEATURE AGENT",
+            f"Mode: {modality.upper()}",
+            f"Status: {result['status']}",
+            f"Patches scanned: {result['num_patches']}",
+            f"Overall evidence: {result['overall_evidence']:.3f}",
+            f"Maximum probability: {result['max_probability']:.3f}",
+            f"Candidate regions: {len(result['regions'])}"
+        ]
 
         y_position = 22
-
         for line in summary_lines:
-
             cv2.putText(
                 summary,
                 line,
@@ -1210,176 +521,54 @@ class FeatureAgent:
                 1,
                 cv2.LINE_AA
             )
-
             y_position += 18
 
-        # ------------------------------------------
-        # GRID
-        # ------------------------------------------
-
-        top_row = np.hstack([
-            display_image,
-            heatmap
-        ])
-
-        bottom_row = np.hstack([
-            overlay,
-            regions_image
-        ])
-
-        grid = np.vstack([
-            top_row,
-            bottom_row
-        ])
-
-        final_visualization = np.vstack([
-            grid,
-            summary
-        ])
-
-        cv2.imwrite(
-            str(output_path),
-            final_visualization
-        )
+        final_visualization = np.vstack([grid, summary])
+        cv2.imwrite(str(output_path), final_visualization)
 
         return output_path
 
 
 # ==================================================
-# TEST
+# STANDALONE TEST
 # ==================================================
 
 if __name__ == "__main__":
+    dataset = Path("MUDCAD-X/dataset")
 
-    dataset = Path(
-        "MUDCAD-X/dataset"
-    )
-
-    rgb_path = next(
-        dataset.rglob("vis.png")
-    )
-
-    lwir_path = (
-        rgb_path.parent /
-        "lwir.png"
-    )
+    rgb_path = next(dataset.rglob("vis.png"))
+    lwir_path = rgb_path.parent / "lwir.png"
 
     agent = FeatureAgent()
-
-    print("\nFEATURE AGENT")
-    print("=========================")
-
     result = agent.analyze(
         rgb_path=rgb_path,
         lwir_path=lwir_path
     )
 
+    print("\nFEATURE AGENT")
+    print("=========================")
+    print(f"Modality: {result['modality']}")
+    print(f"Status: {result['status']}")
+    print(f"RGB available: {result['rgb_available']}")
+    print(f"LWIR available: {result['lwir_available']}")
+    print(f"Patches scanned: {result['num_patches']}")
+    print(f"Overall feature evidence: {result['overall_evidence']:.3f}")
+    print(f"Maximum feature probability: {result['max_probability']:.3f}")
+    print(f"Feature regions: {len(result['regions'])}")
     print(
-        f"Modality: "
-        f"{result['modality']}"
+        "Localized evidence regions: "
+        f"{len(result['localized_evidence_regions'])}"
     )
 
-    print(
-        f"Status: "
-        f"{result['status']}"
+    for i, region in enumerate(result["regions"][:10], start=1):
+        print(f"\nRegion {i}")
+        print(f"  Box: {region['bbox']}")
+        print(f"  Area: {region['area']}")
+        print(f"  Evidence: {region['evidence']:.3f}")
+        print(f"  Max probability: {region['max_probability']:.3f}")
+
+    visualization_path = agent.save_visualization(
+        rgb_path=rgb_path,
+        lwir_path=lwir_path
     )
-
-    print(
-        f"RGB available: "
-        f"{result['rgb_available']}"
-    )
-
-    print(
-        f"LWIR available: "
-        f"{result['lwir_available']}"
-    )
-
-    print(
-        f"Patches scanned: "
-        f"{result['num_patches']}"
-    )
-
-    print(
-        f"Overall feature evidence: "
-        f"{result['overall_evidence']:.3f}"
-    )
-
-    print(
-        f"Maximum feature probability: "
-        f"{result.get('max_probability', 0.0):.3f}"
-    )
-
-    print(
-        f"Feature regions: "
-        f"{len(result['regions'])}"
-    )
-
-    print(
-        f"Localized evidence regions: "
-        f"{len(result.get('localized_evidence_regions', []))}"
-    )
-
-    for i, region in enumerate(
-        result.get("localized_evidence_regions", [])[:10],
-        start=1
-    ):
-
-        print(
-            f"\\nLocalized Evidence {i}"
-        )
-
-        print(
-            f"  Box: "
-            f"{region['bbox']}"
-        )
-
-        print(
-            f"  Evidence: "
-            f"{region['evidence']:.3f}"
-        )
-
-        print(
-            f"  Max probability: "
-            f"{region['max_probability']:.3f}"
-        )
-
-    for i, region in enumerate(
-        result["regions"][:10],
-        start=1
-    ):
-
-        print(
-            f"\nRegion {i}"
-        )
-
-        print(
-            f"  Box: "
-            f"{region['bbox']}"
-        )
-
-        print(
-            f"  Area: "
-            f"{region['area']}"
-        )
-
-        print(
-            f"  Evidence: "
-            f"{region['evidence']:.3f}"
-        )
-
-        print(
-            f"  Max probability: "
-            f"{region['max_probability']:.3f}"
-        )
-
-    visualization_path = (
-        agent.save_visualization(
-            rgb_path=rgb_path,
-            lwir_path=lwir_path
-        )
-    )
-
-    print(
-        f"\nVisualization saved to:"
-        f"\n{visualization_path}"
-    )
+    print(f"\nVisualization saved to:\n{visualization_path}")

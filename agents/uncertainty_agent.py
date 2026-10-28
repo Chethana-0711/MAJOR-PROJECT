@@ -1,1225 +1,368 @@
+"""Uncertainty Agent for the multimodal camouflage-detection pipeline.
+
+The calculation logic and output schema are preserved from the supplied
+implementation. The visualization is reorganized into small helper methods so
+that drawing and statistics are easier to maintain.
+"""
+
 from pathlib import Path
 
 import cv2
 import numpy as np
 
 
-# ============================================================
-# UNCERTAINTY AGENT
-# ============================================================
-
 class UncertaintyAgent:
-    """
-    Uncertainty Agent
+    """Estimate candidate reliability from agent coverage, evidence, and conflict.
 
-    Estimates confidence/reliability for each candidate
-    produced by the Conflict Agent.
+    Status handling:
+      * NOT_AVAILABLE: exclude this agent from the evidence average.
+      * NO_DETECTION: include zero evidence in the average.
+      * DETECTED / EVIDENCE_PRESENT: include the clipped evidence value.
 
-    The agent combines:
-
-        1. Coverage uncertainty
-        2. Evidence uncertainty
-        3. Conflict uncertainty
-
-    Important:
-
-        NOT_AVAILABLE
-            -> excluded from evidence calculation
-
-        NO_DETECTION
-            -> contributes zero evidence
-
-        DETECTED
-            -> contributes its evidence value
-
-        EVIDENCE_PRESENT
-            -> contributes its localized evidence value
+    The weighted uncertainty formula and reliability thresholds are intentionally
+    unchanged. The visualization may look different from the original version.
     """
 
-    # --------------------------------------------------------
-    # WEIGHTS
-    # --------------------------------------------------------
-
+    # Keep these values identical to the supplied implementation.
     COVERAGE_WEIGHT = 0.30
     EVIDENCE_WEIGHT = 0.40
     CONFLICT_WEIGHT = 0.30
 
-    # --------------------------------------------------------
-    # RELIABILITY THRESHOLDS
-    # --------------------------------------------------------
-
     HIGH_RELIABILITY_THRESHOLD = 0.75
     MEDIUM_RELIABILITY_THRESHOLD = 0.50
 
-    # ========================================================
-    # INITIALIZATION
-    # ========================================================
+    AGENT_NAMES = ("spatial", "spectral", "feature")
+    RELIABILITY_COLORS = {
+        "HIGH": (0, 200, 0),
+        "MEDIUM": (0, 220, 220),
+        "LOW": (0, 0, 255),
+    }
 
     def __init__(self):
+        """Initialize the agent. No model state is required."""
 
-        pass
+    # ------------------------------------------------------------------
+    # Evidence handling
+    # ------------------------------------------------------------------
 
-    # ========================================================
-    # GET EVIDENCE
-    # ========================================================
-
-    def _get_agent_evidence(
-        self,
-        status,
-        evidence
-    ):
-        """
-        Convert an agent status/evidence pair into a usable
-        uncertainty-analysis value.
-
-        NOT_AVAILABLE is represented by None so it can be
-        excluded from the evidence average.
-        """
-
+    @staticmethod
+    def _get_agent_evidence(status, evidence):
+        """Map one agent's status/evidence pair to a usable numeric value."""
         if status == "NOT_AVAILABLE":
-
             return None
-
         if status == "NO_DETECTION":
-
             return 0.0
-
-        if status in [
-            "DETECTED",
-            "EVIDENCE_PRESENT"
-        ]:
-
-            return float(
-                np.clip(
-                    evidence,
-                    0.0,
-                    1.0
-                )
-            )
-
+        if status in ("DETECTED", "EVIDENCE_PRESENT"):
+            return float(np.clip(evidence, 0.0, 1.0))
         return None
 
-    # ========================================================
-    # ANALYZE ONE CANDIDATE
-    # ========================================================
+    def _analyze_candidate(self, candidate):
+        """Calculate the uncertainty fields for a single conflict candidate."""
+        # Read the three statuses using the same defaults as the original.
+        spatial_status = candidate.get("spatial_status", "NOT_AVAILABLE")
+        spectral_status = candidate.get("spectral_status", "NOT_AVAILABLE")
+        feature_status = candidate.get("feature_status", "NOT_AVAILABLE")
 
-    def _analyze_candidate(
-        self,
-        candidate
-    ):
-        """
-        Calculate uncertainty for one Conflict Agent
-        candidate.
-        """
+        # Preserve the original float conversion and default values.
+        spatial_evidence = float(candidate.get("spatial_evidence", 0.0))
+        spectral_evidence = float(candidate.get("spectral_evidence", 0.0))
+        feature_evidence = float(candidate.get("feature_evidence", 0.0))
 
-        # ----------------------------------------------------
-        # AGENT STATUS
-        # ----------------------------------------------------
-
-        spatial_status = candidate.get(
-            "spatial_status",
-            "NOT_AVAILABLE"
-        )
-
-        spectral_status = candidate.get(
-            "spectral_status",
-            "NOT_AVAILABLE"
-        )
-
-        feature_status = candidate.get(
-            "feature_status",
-            "NOT_AVAILABLE"
-        )
-
-        # ----------------------------------------------------
-        # AGENT EVIDENCE
-        # ----------------------------------------------------
-
-        spatial_evidence = float(
-            candidate.get(
-                "spatial_evidence",
-                0.0
-            )
-        )
-
-        spectral_evidence = float(
-            candidate.get(
-                "spectral_evidence",
-                0.0
-            )
-        )
-
-        feature_evidence = float(
-            candidate.get(
-                "feature_evidence",
-                0.0
-            )
-        )
-
-        # ----------------------------------------------------
-        # AVAILABLE AGENTS
-        # ----------------------------------------------------
-
-        available_agents = candidate.get(
-            "available_agents",
-            []
-        )
-
+        available_agents = candidate.get("available_agents", [])
         available_count = int(
-            candidate.get(
-                "available_count",
-                len(available_agents)
-            )
+            candidate.get("available_count", len(available_agents))
         )
+        available_count = max(0, min(available_count, 3))
 
-        # Safety clamp
-
-        available_count = max(
-            0,
-            min(
-                available_count,
-                3
-            )
-        )
-
-        # ----------------------------------------------------
-        # SUPPORTING AGENTS
-        # ----------------------------------------------------
-
-        supporting_agents = candidate.get(
-            "supporting_agents",
-            []
-        )
-
+        supporting_agents = candidate.get("supporting_agents", [])
         support_count = int(
-            candidate.get(
-                "support_count",
-                len(supporting_agents)
-            )
+            candidate.get("support_count", len(supporting_agents))
         )
 
-        # ----------------------------------------------------
-        # CONFLICT
-        # ----------------------------------------------------
-
-        conflict = float(
-            np.clip(
-                candidate.get(
-                    "conflict",
-                    0.0
-                ),
-                0.0,
-                1.0
-            )
-        )
-
+        conflict = float(np.clip(candidate.get("conflict", 0.0), 0.0, 1.0))
         agreement = float(
             np.clip(
                 candidate.get(
                     "agreement",
-                    support_count / 3.0
-                    if support_count >= 0
-                    else 0.0
+                    support_count / 3.0 if support_count >= 0 else 0.0,
                 ),
                 0.0,
-                1.0
+                1.0,
             )
         )
 
-        # ====================================================
-        # EVIDENCE VALUES
-        # ====================================================
-
+        # Build evidence in the same spatial/spectral/feature order.
         evidence_values = []
+        for status, value in (
+            (spatial_status, spatial_evidence),
+            (spectral_status, spectral_evidence),
+            (feature_status, feature_evidence),
+        ):
+            agent_value = self._get_agent_evidence(status, value)
+            if agent_value is not None:
+                evidence_values.append(agent_value)
 
-        spatial_value = self._get_agent_evidence(
-            spatial_status,
-            spatial_evidence
-        )
-
-        if spatial_value is not None:
-
-            evidence_values.append(
-                spatial_value
-            )
-
-        spectral_value = self._get_agent_evidence(
-            spectral_status,
-            spectral_evidence
-        )
-
-        if spectral_value is not None:
-
-            evidence_values.append(
-                spectral_value
-            )
-
-        feature_value = self._get_agent_evidence(
-            feature_status,
-            feature_evidence
-        )
-
-        if feature_value is not None:
-
-            evidence_values.append(
-                feature_value
-            )
-
-        # ====================================================
-        # EVIDENCE STRENGTH
-        # ====================================================
-
+        # Keep the original mean, empty-list fallback, and clipping.
         if evidence_values:
-
-            evidence_strength = float(
-                np.mean(
-                    evidence_values
-                )
-            )
-
+            evidence_strength = float(np.mean(evidence_values))
         else:
-
             evidence_strength = 0.0
+        evidence_strength = float(np.clip(evidence_strength, 0.0, 1.0))
 
-        evidence_strength = float(
-            np.clip(
-                evidence_strength,
-                0.0,
-                1.0
-            )
-        )
-
-        # ====================================================
-        # COVERAGE UNCERTAINTY
-        # ====================================================
-
-        coverage_uncertainty = (
-            1.0 -
-            (
-                available_count /
-                3.0
-            )
-        )
-
+        # These component calculations are unchanged.
+        coverage_uncertainty = 1.0 - (available_count / 3.0)
         coverage_uncertainty = float(
-            np.clip(
-                coverage_uncertainty,
-                0.0,
-                1.0
-            )
+            np.clip(coverage_uncertainty, 0.0, 1.0)
         )
 
-        # ====================================================
-        # EVIDENCE UNCERTAINTY
-        # ====================================================
-
-        evidence_uncertainty = (
-            1.0 -
-            evidence_strength
-        )
-
+        evidence_uncertainty = 1.0 - evidence_strength
         evidence_uncertainty = float(
-            np.clip(
-                evidence_uncertainty,
-                0.0,
-                1.0
-            )
+            np.clip(evidence_uncertainty, 0.0, 1.0)
         )
-
-        # ====================================================
-        # CONFLICT UNCERTAINTY
-        # ====================================================
 
         conflict_uncertainty = conflict
 
-        # ====================================================
-        # OVERALL UNCERTAINTY
-        # ====================================================
-
+        # Preserve the exact weighted formula and its clipping.
         overall_uncertainty = (
-
-            self.COVERAGE_WEIGHT *
-            coverage_uncertainty
-
-            +
-
-            self.EVIDENCE_WEIGHT *
-            evidence_uncertainty
-
-            +
-
-            self.CONFLICT_WEIGHT *
-            conflict_uncertainty
+            self.COVERAGE_WEIGHT * coverage_uncertainty
+            + self.EVIDENCE_WEIGHT * evidence_uncertainty
+            + self.CONFLICT_WEIGHT * conflict_uncertainty
         )
-
         overall_uncertainty = float(
-            np.clip(
-                overall_uncertainty,
-                0.0,
-                1.0
-            )
+            np.clip(overall_uncertainty, 0.0, 1.0)
         )
 
-        # ====================================================
-        # CONFIDENCE
-        # ====================================================
+        confidence = 1.0 - overall_uncertainty
+        confidence = float(np.clip(confidence, 0.0, 1.0))
 
-        confidence = (
-            1.0 -
-            overall_uncertainty
-        )
-
-        confidence = float(
-            np.clip(
-                confidence,
-                0.0,
-                1.0
-            )
-        )
-
-        # ====================================================
-        # RELIABILITY
-        # ====================================================
-
-        if (
-            confidence >=
-            self.HIGH_RELIABILITY_THRESHOLD
-        ):
-
+        # Keep the original threshold comparisons, including equality.
+        if confidence >= self.HIGH_RELIABILITY_THRESHOLD:
             reliability = "HIGH"
-
-        elif (
-            confidence >=
-            self.MEDIUM_RELIABILITY_THRESHOLD
-        ):
-
+        elif confidence >= self.MEDIUM_RELIABILITY_THRESHOLD:
             reliability = "MEDIUM"
-
         else:
-
             reliability = "LOW"
 
-        # ====================================================
-        # RESULT
-        # ====================================================
-
+        # Preserve every key consumed by downstream pipeline stages.
         return {
-
-            "bbox":
-                candidate.get(
-                    "bbox",
-                    [0, 0, 0, 0]
-                ),
-
-            "class":
-                candidate.get(
-                    "class",
-                    "unknown"
-                ),
-
-            # ----------------------------------------------
-            # STATUS
-            # ----------------------------------------------
-
-            "spatial_status":
-                spatial_status,
-
-            "spectral_status":
-                spectral_status,
-
-            "feature_status":
-                feature_status,
-
-            # ----------------------------------------------
-            # EVIDENCE
-            # ----------------------------------------------
-
-            "spatial_evidence":
-                spatial_evidence,
-
-            "spectral_evidence":
-                spectral_evidence,
-
-            "feature_evidence":
-                feature_evidence,
-
-            # ----------------------------------------------
-            # AVAILABILITY
-            # ----------------------------------------------
-
-            "available_agents":
-                available_agents,
-
-            "available_count":
-                available_count,
-
-            # ----------------------------------------------
-            # SUPPORT
-            # ----------------------------------------------
-
-            "supporting_agents":
-                supporting_agents,
-
-            "support_count":
-                support_count,
-
-            # ----------------------------------------------
-            # CONFLICT
-            # ----------------------------------------------
-
-            "agreement":
-                agreement,
-
-            "conflict":
-                conflict,
-
-            "conflict_state":
-                candidate.get(
-                    "conflict_state",
-                    "UNKNOWN"
-                ),
-
-            "evidence_pattern":
-                candidate.get(
-                    "evidence_pattern",
-                    "UNKNOWN"
-                ),
-
-            # ----------------------------------------------
-            # UNCERTAINTY
-            # ----------------------------------------------
-
-            "evidence_strength":
-                evidence_strength,
-
-            "coverage_uncertainty":
-                coverage_uncertainty,
-
-            "evidence_uncertainty":
-                evidence_uncertainty,
-
-            "conflict_uncertainty":
-                conflict_uncertainty,
-
-            "uncertainty":
-                overall_uncertainty,
-
-            # ----------------------------------------------
-            # CONFIDENCE
-            # ----------------------------------------------
-
-            "confidence":
-                confidence,
-
-            "reliability":
-                reliability
+            "bbox": candidate.get("bbox", [0, 0, 0, 0]),
+            "class": candidate.get("class", "unknown"),
+            "spatial_status": spatial_status,
+            "spectral_status": spectral_status,
+            "feature_status": feature_status,
+            "spatial_evidence": spatial_evidence,
+            "spectral_evidence": spectral_evidence,
+            "feature_evidence": feature_evidence,
+            "available_agents": available_agents,
+            "available_count": available_count,
+            "supporting_agents": supporting_agents,
+            "support_count": support_count,
+            "agreement": agreement,
+            "conflict": conflict,
+            "conflict_state": candidate.get("conflict_state", "UNKNOWN"),
+            "evidence_pattern": candidate.get("evidence_pattern", "UNKNOWN"),
+            "evidence_strength": evidence_strength,
+            "coverage_uncertainty": coverage_uncertainty,
+            "evidence_uncertainty": evidence_uncertainty,
+            "conflict_uncertainty": conflict_uncertainty,
+            "uncertainty": overall_uncertainty,
+            "confidence": confidence,
+            "reliability": reliability,
         }
 
-    # ========================================================
-    # MAIN ANALYSIS
-    # ========================================================
-
-    def analyze(
-        self,
-        conflict_result
-    ):
-        """
-        Analyze candidates produced by the Conflict Agent.
-
-        Accepts either:
-
-            conflict_result["candidates"]
-
-        or directly:
-
-            candidates
-        """
-
-        # ----------------------------------------------------
-        # Accept dictionary or candidate list
-        # ----------------------------------------------------
-
-        if isinstance(
-            conflict_result,
-            dict
-        ):
-
-            candidates = conflict_result.get(
-                "candidates",
-                []
-            )
-
-        elif isinstance(
-            conflict_result,
-            list
-        ):
-
+    def analyze(self, conflict_result):
+        """Analyze either a result dictionary or a direct list of candidates."""
+        if isinstance(conflict_result, dict):
+            candidates = conflict_result.get("candidates", [])
+        elif isinstance(conflict_result, list):
             candidates = conflict_result
-
         else:
-
             candidates = []
+        return [self._analyze_candidate(candidate) for candidate in candidates]
 
-        # ----------------------------------------------------
-        # Analyze candidates
-        # ----------------------------------------------------
+    # ------------------------------------------------------------------
+    # Visualization helpers
+    # ------------------------------------------------------------------
 
-        results = []
+    @staticmethod
+    def _draw_text(image, text, position, scale=0.48, color=(225, 225, 225),
+                   thickness=1):
+        """Draw a consistently styled line of text on a panel."""
+        cv2.putText(
+            image,
+            str(text),
+            position,
+            cv2.FONT_HERSHEY_SIMPLEX,
+            scale,
+            color,
+            thickness,
+            cv2.LINE_AA,
+        )
 
-        for candidate in candidates:
+    def _draw_candidate_boxes(self, image, results):
+        """Draw candidate boxes colored by their reliability label."""
+        image_height, image_width = image.shape[:2]
 
-            results.append(
-                self._analyze_candidate(
-                    candidate
-                )
+        for index, candidate in enumerate(results, start=1):
+            bbox = candidate.get("bbox", [0, 0, 0, 0])
+            x, y, width, height = [
+                int(round(float(value))) for value in bbox
+            ]
+
+            # Retain the original coordinate clamping behavior.
+            x = max(0, min(x, image_width - 1))
+            y = max(0, min(y, image_height - 1))
+            width = max(1, min(width, image_width - x))
+            height = max(1, min(height, image_height - y))
+
+            reliability = candidate.get("reliability", "LOW")
+            color = self.RELIABILITY_COLORS.get(
+                reliability, self.RELIABILITY_COLORS["LOW"]
             )
 
-        return results
+            cv2.rectangle(
+                image,
+                (x, y),
+                (x + width, y + height),
+                color,
+                2,
+            )
+            self._draw_text(
+                image,
+                f"C{index}",
+                (x, max(y - 8, 20)),
+                scale=0.55,
+                color=color,
+                thickness=2,
+            )
 
-    # ========================================================
-    # VISUALIZATION
-    # ========================================================
+    @staticmethod
+    def _mean_field(results, field):
+        """Return the mean of a result field, or zero for no candidates."""
+        values = [float(item.get(field, 0.0)) for item in results]
+        return float(np.mean(values)) if values else 0.0
+
+    @staticmethod
+    def _reliability_counts(results):
+        """Count candidates assigned to each known reliability category."""
+        counts = {"HIGH": 0, "MEDIUM": 0, "LOW": 0}
+        for candidate in results:
+            reliability = candidate.get("reliability", "LOW")
+            if reliability in counts:
+                counts[reliability] += 1
+        return counts
+
+    def _build_statistics_panel(self, image_height, results):
+        """Create a compact panel with aggregate uncertainty statistics."""
+        panel_width = 430
+        panel = np.zeros((image_height, panel_width, 3), dtype=np.uint8)
+        counts = self._reliability_counts(results)
+
+        # A helper keeps each panel label concise and visually consistent.
+        def line(text, y, scale=0.46, strong=False):
+            self._draw_text(
+                panel,
+                text,
+                (20, y),
+                scale=scale,
+                color=(255, 255, 255) if strong else (220, 220, 220),
+                thickness=2 if strong else 1,
+            )
+
+        line("UNCERTAINTY AGENT", 35, 0.70, True)
+        line(f"Candidates: {len(results)}", 70)
+
+        line("UNCERTAINTY", 115, 0.58, True)
+        line(f"Average: {self._mean_field(results, 'uncertainty'):.3f}", 150)
+        line(f"Confidence: {self._mean_field(results, 'confidence'):.3f}", 180)
+
+        line("RELIABILITY", 230, 0.58, True)
+        line(f"High: {counts['HIGH']}", 265)
+        line(f"Medium: {counts['MEDIUM']}", 295)
+        line(f"Low: {counts['LOW']}", 325)
+
+        line("UNCERTAINTY COMPONENTS", 370, 0.52, True)
+        line(
+            f"Coverage: {self._mean_field(results, 'coverage_uncertainty'):.3f}",
+            405,
+            0.42,
+        )
+        line(
+            f"Evidence weakness: {self._mean_field(results, 'evidence_uncertainty'):.3f}",
+            433,
+            0.42,
+        )
+        line(
+            f"Conflict: {self._mean_field(results, 'conflict_uncertainty'):.3f}",
+            461,
+            0.42,
+        )
+        return panel
 
     def save_visualization(
         self,
         rgb_path,
         results,
-        output_path="outputs/uncertainty_analysis.png"
+        output_path="outputs/uncertainty_analysis.png",
     ):
+        """Save the RGB image with reliability boxes and a statistics panel.
+
+        The panel layout is intentionally simplified compared with the original.
+        This method does not alter candidate scores or analysis results.
         """
-        Presentation-ready Uncertainty Agent visualization.
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        Left:
-            RGB image with candidate boxes.
-
-        Right:
-            Compact uncertainty statistics.
-
-        Box colors represent reliability:
-
-            GREEN  = HIGH
-            YELLOW = MEDIUM
-            RED    = LOW
-        """
-
-        output_path = Path(
-            output_path
-        )
-
-        output_path.parent.mkdir(
-            parents=True,
-            exist_ok=True
-        )
-
-        # ====================================================
-        # LOAD RGB
-        # ====================================================
-
-        image = cv2.imread(
-            str(rgb_path)
-        )
-
+        image = cv2.imread(str(rgb_path))
         if image is None:
-
-            raise ValueError(
-                f"Could not load RGB image: "
-                f"{rgb_path}"
-            )
-
-        # Make a copy so the input is not modified.
+            raise ValueError(f"Could not load RGB image: {rgb_path}")
 
         display_image = image.copy()
+        self._draw_candidate_boxes(display_image, results)
+        panel = self._build_statistics_panel(display_image.shape[0], results)
+        final_image = np.hstack((display_image, panel))
 
-        # ====================================================
-        # DRAW CANDIDATES
-        # ====================================================
+        if not cv2.imwrite(str(output_path), final_image):
+            raise OSError(f"Could not save visualization: {output_path}")
 
-        for index, candidate in enumerate(
-            results,
-            start=1
-        ):
-
-            bbox = candidate.get(
-                "bbox",
-                [0, 0, 0, 0]
-            )
-
-            x, y, w, h = [
-                int(
-                    round(
-                        float(value)
-                    )
-                )
-                for value in bbox
-            ]
-
-            # ----------------------------------------------
-            # Clamp coordinates
-            # ----------------------------------------------
-
-            x = max(
-                0,
-                min(
-                    x,
-                    display_image.shape[1] - 1
-                )
-            )
-
-            y = max(
-                0,
-                min(
-                    y,
-                    display_image.shape[0] - 1
-                )
-            )
-
-            w = max(
-                1,
-                min(
-                    w,
-                    display_image.shape[1] - x
-                )
-            )
-
-            h = max(
-                1,
-                min(
-                    h,
-                    display_image.shape[0] - y
-                )
-            )
-
-            # ----------------------------------------------
-            # RELIABILITY COLOR
-            # ----------------------------------------------
-
-            reliability = candidate.get(
-                "reliability",
-                "LOW"
-            )
-
-            if reliability == "HIGH":
-
-                # Green
-
-                color = (
-                    0,
-                    200,
-                    0
-                )
-
-            elif reliability == "MEDIUM":
-
-                # Yellow
-
-                color = (
-                    0,
-                    220,
-                    220
-                )
-
-            else:
-
-                # Red
-
-                color = (
-                    0,
-                    0,
-                    255
-                )
-
-            # ----------------------------------------------
-            # BOX
-            # ----------------------------------------------
-
-            cv2.rectangle(
-                display_image,
-                (x, y),
-                (
-                    x + w,
-                    y + h
-                ),
-                color,
-                2
-            )
-
-            # ----------------------------------------------
-            # LABEL
-            # ----------------------------------------------
-
-            cv2.putText(
-                display_image,
-                f"C{index}",
-                (
-                    x,
-                    max(
-                        y - 8,
-                        20
-                    )
-                ),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.55,
-                color,
-                2,
-                cv2.LINE_AA
-            )
-
-        # ====================================================
-        # STATISTICS
-        # ====================================================
-
-        candidate_count = len(
-            results
-        )
-
-        uncertainty_values = [
-            float(
-                candidate.get(
-                    "uncertainty",
-                    0.0
-                )
-            )
-            for candidate in results
-        ]
-
-        confidence_values = [
-            float(
-                candidate.get(
-                    "confidence",
-                    0.0
-                )
-            )
-            for candidate in results
-        ]
-
-        if uncertainty_values:
-
-            average_uncertainty = float(
-                np.mean(
-                    uncertainty_values
-                )
-            )
-
-        else:
-
-            average_uncertainty = 0.0
-
-        if confidence_values:
-
-            average_confidence = float(
-                np.mean(
-                    confidence_values
-                )
-            )
-
-        else:
-
-            average_confidence = 0.0
-
-        # ----------------------------------------------------
-        # Reliability counts
-        # ----------------------------------------------------
-
-        reliability_counts = {
-            "HIGH": 0,
-            "MEDIUM": 0,
-            "LOW": 0
-        }
-
-        for candidate in results:
-
-            reliability = candidate.get(
-                "reliability",
-                "LOW"
-            )
-
-            if reliability in reliability_counts:
-
-                reliability_counts[
-                    reliability
-                ] += 1
-
-        # ====================================================
-        # PANEL
-        # ====================================================
-
-        panel_width = 430
-
-        panel_height = display_image.shape[0]
-
-        panel = np.zeros(
-            (
-                panel_height,
-                panel_width,
-                3
-            ),
-            dtype=np.uint8
-        )
-
-        # ====================================================
-        # HEADER
-        # ====================================================
-
-        cv2.putText(
-            panel,
-            "UNCERTAINTY AGENT",
-            (20, 35),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.70,
-            (255, 255, 255),
-            2,
-            cv2.LINE_AA
-        )
-
-        cv2.putText(
-            panel,
-            f"Candidates: {candidate_count}",
-            (20, 70),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.50,
-            (220, 220, 220),
-            1,
-            cv2.LINE_AA
-        )
-
-        # ====================================================
-        # UNCERTAINTY
-        # ====================================================
-
-        cv2.putText(
-            panel,
-            "UNCERTAINTY",
-            (20, 115),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.58,
-            (255, 255, 255),
-            2,
-            cv2.LINE_AA
-        )
-
-        cv2.putText(
-            panel,
-            (
-                f"Average: "
-                f"{average_uncertainty:.3f}"
-            ),
-            (25, 150),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.46,
-            (220, 220, 220),
-            1,
-            cv2.LINE_AA
-        )
-
-        cv2.putText(
-            panel,
-            (
-                f"Confidence: "
-                f"{average_confidence:.3f}"
-            ),
-            (25, 180),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.46,
-            (220, 220, 220),
-            1,
-            cv2.LINE_AA
-        )
-
-        # ====================================================
-        # RELIABILITY
-        # ====================================================
-
-        cv2.putText(
-            panel,
-            "RELIABILITY",
-            (20, 230),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.58,
-            (255, 255, 255),
-            2,
-            cv2.LINE_AA
-        )
-
-        reliability_lines = [
-            (
-                "High: "
-                f"{reliability_counts['HIGH']}"
-            ),
-            (
-                "Medium: "
-                f"{reliability_counts['MEDIUM']}"
-            ),
-            (
-                "Low: "
-                f"{reliability_counts['LOW']}"
-            )
-        ]
-
-        y_position = 265
-
-        for line in reliability_lines:
-
-            cv2.putText(
-                panel,
-                line,
-                (25, y_position),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.46,
-                (220, 220, 220),
-                1,
-                cv2.LINE_AA
-            )
-
-            y_position += 30
-
-        # ====================================================
-        # UNCERTAINTY COMPONENTS
-        # ====================================================
-
-        if results:
-
-            coverage_values = [
-                candidate.get(
-                    "coverage_uncertainty",
-                    0.0
-                )
-                for candidate in results
-            ]
-
-            evidence_values = [
-                candidate.get(
-                    "evidence_uncertainty",
-                    0.0
-                )
-                for candidate in results
-            ]
-
-            conflict_values = [
-                candidate.get(
-                    "conflict_uncertainty",
-                    0.0
-                )
-                for candidate in results
-            ]
-
-            average_coverage = float(
-                np.mean(
-                    coverage_values
-                )
-            )
-
-            average_evidence_uncertainty = float(
-                np.mean(
-                    evidence_values
-                )
-            )
-
-            average_conflict_uncertainty = float(
-                np.mean(
-                    conflict_values
-                )
-            )
-
-        else:
-
-            average_coverage = 0.0
-            average_evidence_uncertainty = 0.0
-            average_conflict_uncertainty = 0.0
-
-        # ----------------------------------------------------
-        # Components section
-        # ----------------------------------------------------
-
-        cv2.putText(
-            panel,
-            "UNCERTAINTY COMPONENTS",
-            (20, 370),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.52,
-            (255, 255, 255),
-            2,
-            cv2.LINE_AA
-        )
-
-        component_lines = [
-            (
-                "Coverage: "
-                f"{average_coverage:.3f}"
-            ),
-            (
-                "Evidence weakness: "
-                f"{average_evidence_uncertainty:.3f}"
-            ),
-            (
-                "Conflict: "
-                f"{average_conflict_uncertainty:.3f}"
-            )
-        ]
-
-        y_position = 405
-
-        for line in component_lines:
-
-            cv2.putText(
-                panel,
-                line,
-                (25, y_position),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.42,
-                (220, 220, 220),
-                1,
-                cv2.LINE_AA
-            )
-
-            y_position += 28
-
-        # ====================================================
-        # COMBINE
-        # ====================================================
-
-        final_image = np.hstack([
-            display_image,
-            panel
-        ])
-
-        cv2.imwrite(
-            str(output_path),
-            final_image
-        )
-
-        print(
-            f"Visualization saved to: "
-            f"{output_path}"
-        )
-
+        print(f"Visualization saved to: {output_path}")
         return output_path
 
 
-# ============================================================
-# TEST
-# ============================================================
-
 if __name__ == "__main__":
-
     agent = UncertaintyAgent()
-
     test_candidates = [
-
         {
-            "bbox": [
-                100,
-                100,
-                80,
-                80
-            ],
-
-            "class":
-                "test",
-
-            "spatial_status":
-                "DETECTED",
-
-            "spectral_status":
-                "DETECTED",
-
-            "feature_status":
-                "DETECTED",
-
-            "spatial_evidence":
-                0.90,
-
-            "spectral_evidence":
-                0.85,
-
-            "feature_evidence":
-                0.80,
-
-            "available_agents":
-                [
-                    "spatial",
-                    "spectral",
-                    "feature"
-                ],
-
-            "available_count":
-                3,
-
-            "supporting_agents":
-                [
-                    "spatial",
-                    "spectral",
-                    "feature"
-                ],
-
-            "support_count":
-                3,
-
-            "agreement":
-                1.0,
-
-            "conflict":
-                0.10,
-
-            "conflict_state":
-                "LOW",
-
-            "evidence_pattern":
-                "THREE-AGENT AGREEMENT"
+            "bbox": [100, 100, 80, 80],
+            "class": "test",
+            "spatial_status": "DETECTED",
+            "spectral_status": "DETECTED",
+            "feature_status": "DETECTED",
+            "spatial_evidence": 0.90,
+            "spectral_evidence": 0.85,
+            "feature_evidence": 0.80,
+            "available_agents": ["spatial", "spectral", "feature"],
+            "available_count": 3,
+            "supporting_agents": ["spatial", "spectral", "feature"],
+            "support_count": 3,
+            "agreement": 1.0,
+            "conflict": 0.10,
+            "conflict_state": "LOW",
+            "evidence_pattern": "THREE-AGENT AGREEMENT",
         }
     ]
 
-    results = agent.analyze(
-        test_candidates
-    )
-
-    print(
-        "\nUNCERTAINTY AGENT"
-    )
-
-    print(
-        "=" * 60
-    )
-
-    for index, result in enumerate(
-        results,
-        start=1
-    ):
-
-        print(
-            f"\nCandidate {index}"
-        )
-
-        print(
-            f"  Evidence strength: "
-            f"{result['evidence_strength']:.3f}"
-        )
-
-        print(
-            f"  Coverage uncertainty: "
-            f"{result['coverage_uncertainty']:.3f}"
-        )
-
-        print(
-            f"  Evidence uncertainty: "
-            f"{result['evidence_uncertainty']:.3f}"
-        )
-
-        print(
-            f"  Conflict uncertainty: "
-            f"{result['conflict_uncertainty']:.3f}"
-        )
-
-        print(
-            f"  Overall uncertainty: "
-            f"{result['uncertainty']:.3f}"
-        )
-
-        print(
-            f"  Confidence: "
-            f"{result['confidence']:.3f}"
-        )
-
-        print(
-            f"  Reliability: "
-            f"{result['reliability']}"
-        )
+    for index, result in enumerate(agent.analyze(test_candidates), start=1):
+        print(f"\nCandidate {index}")
+        for key in (
+            "evidence_strength",
+            "coverage_uncertainty",
+            "evidence_uncertainty",
+            "conflict_uncertainty",
+            "uncertainty",
+            "confidence",
+            "reliability",
+        ):
+            value = result[key]
+            label = key.replace("_", " ").title()
+            print(f"  {label}: {value:.3f}" if isinstance(value, float) else f"  {label}: {value}")
