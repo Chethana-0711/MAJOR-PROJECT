@@ -10,35 +10,7 @@ from pathlib import Path
 # ============================================================
 
 class SpectralAgent:
-    """
-    Spectral Agent
 
-    Uses the trained Random Forest model to analyse LWIR
-    spectral/thermal characteristics.
-
-    The Random Forest receives four pixel-level features:
-
-        1. Normalized LWIR intensity
-        2. Local mean
-        3. Local standard deviation
-        4. Local contrast
-
-    The RF probability map is treated as the primary
-    spectral evidence.
-
-    Output states:
-
-        DETECTED
-            Strong RF evidence formed a sufficiently large
-            connected region.
-
-        EVIDENCE_PRESENT
-            Strong RF evidence exists, but the region was
-            too small to be treated as a formal candidate.
-
-        NO_DETECTION
-            No meaningful RF evidence was found.
-    """
 
     # ========================================================
     # INITIALIZATION

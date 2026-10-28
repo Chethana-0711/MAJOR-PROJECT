@@ -1,0 +1,75 @@
+{
+  "image": "MUDCAD-X\\dataset\\01_Spring\\2022-05-10\\rk1\\a\\2\\h0\\3\\vis.png",
+  "camouflaged_objects": [
+    {
+      "id": 1,
+      "bbox_xywh": [
+        0,
+        0,
+        512,
+        384
+      ],
+      "detector_class": "personyellow",
+      "decision": "CAMOUFLAGE DETECTED",
+      "confidence": 0.7943,
+      "parameters": {
+        "spatial_evidence": 0.777,
+        "spectral_evidence": 0.759,
+        "feature_evidence": 0.894,
+        "agents_supporting": "2/3",
+        "conflict": 0.135,
+        "uncertainty": 0.117,
+        "cognitive_p_camouflaged": 0.873
+      },
+      "rule": "Score 0.79 >= 0.45.",
+      "fusion_method": "simple"
+    },
+    {
+      "id": 2,
+      "bbox_xywh": [
+        341,
+        422,
+        88,
+        90
+      ],
+      "detector_class": "turf",
+      "decision": "CAMOUFLAGE DETECTED",
+      "confidence": 0.5892,
+      "parameters": {
+        "spatial_evidence": 0.843,
+        "spectral_evidence": 0.763,
+        "feature_evidence": null,
+        "agents_supporting": "2/3",
+        "conflict": 0.843,
+        "uncertainty": 0.439,
+        "cognitive_p_camouflaged": 0.379
+      },
+      "rule": "Score 0.59 >= 0.45.",
+      "fusion_method": "simple"
+    },
+    {
+      "id": 3,
+      "bbox_xywh": [
+        439,
+        403,
+        73,
+        51
+      ],
+      "detector_class": "net3dyellow",
+      "decision": "CAMOUFLAGE DETECTED",
+      "confidence": 0.5535,
+      "parameters": {
+        "spatial_evidence": 0.754,
+        "spectral_evidence": 0.727,
+        "feature_evidence": null,
+        "agents_supporting": "2/3",
+        "conflict": 0.754,
+        "uncertainty": 0.429,
+        "cognitive_p_camouflaged": 0.416
+      },
+      "rule": "Score 0.55 >= 0.45.",
+      "fusion_method": "simple"
+    }
+  ],
+  "uncertain_candidates_not_shown": 66
+}
