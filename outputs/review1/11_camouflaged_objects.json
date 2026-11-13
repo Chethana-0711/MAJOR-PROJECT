@@ -1,75 +1,121 @@
 {
-  "image": "MUDCAD-X\\dataset\\01_Spring\\2022-05-10\\rk1\\a\\2\\h0\\3\\vis.png",
+  "image": "MUDCAD-X\\dataset\\03_Autumn\\2022-11-09\\rk1\\b\\7\\v2\\2\\vis.png",
   "camouflaged_objects": [
     {
       "id": 1,
       "bbox_xywh": [
-        0,
-        0,
-        512,
-        384
+        381,
+        480,
+        35,
+        32
       ],
-      "detector_class": "personyellow",
+      "detector_class": "tarpgreen",
       "decision": "CAMOUFLAGE DETECTED",
-      "confidence": 0.7943,
+      "confidence": 0.8773,
       "parameters": {
-        "spatial_evidence": 0.777,
-        "spectral_evidence": 0.759,
-        "feature_evidence": 0.894,
-        "agents_supporting": "2/3",
-        "conflict": 0.135,
-        "uncertainty": 0.117,
-        "cognitive_p_camouflaged": 0.873
+        "spatial_evidence": 0.924,
+        "spectral_evidence": 0.749,
+        "feature_evidence": 0.937,
+        "agents_supporting": "3/3",
+        "conflict": 0.188,
+        "uncertainty": 0.109,
+        "cognitive_p_camouflaged": 0.733
       },
-      "rule": "Score 0.79 >= 0.45.",
+      "rule": "Score 0.88 >= 0.45.",
       "fusion_method": "simple"
     },
     {
       "id": 2,
       "bbox_xywh": [
-        341,
-        422,
-        88,
-        90
+        0,
+        128,
+        83,
+        97
       ],
-      "detector_class": "turf",
+      "detector_class": "hedge",
       "decision": "CAMOUFLAGE DETECTED",
-      "confidence": 0.5892,
+      "confidence": 0.8757,
       "parameters": {
-        "spatial_evidence": 0.843,
-        "spectral_evidence": 0.763,
-        "feature_evidence": null,
-        "agents_supporting": "2/3",
-        "conflict": 0.843,
-        "uncertainty": 0.439,
-        "cognitive_p_camouflaged": 0.379
+        "spatial_evidence": 0.981,
+        "spectral_evidence": 0.754,
+        "feature_evidence": 0.851,
+        "agents_supporting": "3/3",
+        "conflict": 0.227,
+        "uncertainty": 0.123,
+        "cognitive_p_camouflaged": 0.65
       },
-      "rule": "Score 0.59 >= 0.45.",
+      "rule": "Score 0.88 >= 0.45.",
       "fusion_method": "simple"
     },
     {
       "id": 3,
       "bbox_xywh": [
-        439,
-        403,
-        73,
-        51
+        288,
+        32,
+        33,
+        32
       ],
-      "detector_class": "net3dyellow",
+      "detector_class": "persongreen",
       "decision": "CAMOUFLAGE DETECTED",
-      "confidence": 0.5535,
+      "confidence": 0.6235,
       "parameters": {
-        "spatial_evidence": 0.754,
-        "spectral_evidence": 0.727,
+        "spatial_evidence": 0.273,
+        "spectral_evidence": 0.832,
+        "feature_evidence": 0.759,
+        "agents_supporting": "3/3",
+        "conflict": 0.559,
+        "uncertainty": 0.319,
+        "cognitive_p_camouflaged": 0.8
+      },
+      "rule": "Score 0.62 >= 0.45.",
+      "fusion_method": "simple"
+    },
+    {
+      "id": 4,
+      "bbox_xywh": [
+        192,
+        192,
+        64,
+        64
+      ],
+      "detector_class": "net2dgreen",
+      "decision": "CAMOUFLAGE DETECTED",
+      "confidence": 0.5995,
+      "parameters": {
+        "spatial_evidence": 0.973,
+        "spectral_evidence": null,
+        "feature_evidence": 1.0,
+        "agents_supporting": "1/3",
+        "conflict": 1.0,
+        "uncertainty": 0.637,
+        "cognitive_p_camouflaged": 0.333
+      },
+      "rule": "Score 0.60 >= 0.45.",
+      "fusion_method": "simple"
+    },
+    {
+      "id": 5,
+      "bbox_xywh": [
+        216,
+        129,
+        18,
+        23
+      ],
+      "detector_class": "persongreen",
+      "decision": "CAMOUFLAGE DETECTED",
+      "confidence": 0.5566,
+      "parameters": {
+        "spatial_evidence": 0.69,
+        "spectral_evidence": 0.829,
         "feature_evidence": null,
         "agents_supporting": "2/3",
-        "conflict": 0.754,
-        "uncertainty": 0.429,
-        "cognitive_p_camouflaged": 0.416
+        "conflict": 0.829,
+        "uncertainty": 0.546,
+        "cognitive_p_camouflaged": 0.516
       },
-      "rule": "Score 0.55 >= 0.45.",
+      "rule": "Score 0.56 >= 0.45.",
       "fusion_method": "simple"
     }
   ],
-  "uncertain_candidates_not_shown": 66
+  "uncertain_candidates_not_shown": 9
 }

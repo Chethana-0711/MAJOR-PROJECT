@@ -1,9 +1,3 @@
-"""Uncertainty Agent for the multimodal camouflage-detection pipeline.
-
-The calculation logic and output schema are preserved from the supplied
-implementation. The visualization is reorganized into small helper methods so
-that drawing and statistics are easier to maintain.
-"""
 
 from pathlib import Path
 
@@ -12,16 +6,8 @@ import numpy as np
 
 
 class UncertaintyAgent:
-    """Estimate candidate reliability from agent coverage, evidence, and conflict.
-
-    Status handling:
-      * NOT_AVAILABLE: exclude this agent from the evidence average.
-      * NO_DETECTION: include zero evidence in the average.
-      * DETECTED / EVIDENCE_PRESENT: include the clipped evidence value.
-
-    The weighted uncertainty formula and reliability thresholds are intentionally
-    unchanged. The visualization may look different from the original version.
-    """
+   
+   
 
     # Keep these values identical to the supplied implementation.
     COVERAGE_WEIGHT = 0.30
@@ -68,11 +54,14 @@ class UncertaintyAgent:
         spectral_evidence = float(candidate.get("spectral_evidence", 0.0))
         feature_evidence = float(candidate.get("feature_evidence", 0.0))
 
+        # Preserve availability metadata for compatibility, but do not use it
+        # to calculate coverage uncertainty: all three agents are assumed available.
         available_agents = candidate.get("available_agents", [])
         available_count = int(
             candidate.get("available_count", len(available_agents))
         )
         available_count = max(0, min(available_count, 3))
+
 
         supporting_agents = candidate.get("supporting_agents", [])
         support_count = int(
@@ -109,8 +98,16 @@ class UncertaintyAgent:
             evidence_strength = 0.0
         evidence_strength = float(np.clip(evidence_strength, 0.0, 1.0))
 
-        # These component calculations are unchanged.
-        coverage_uncertainty = 1.0 - (available_count / 3.0)
+        # Count only agents whose status is exactly DETECTED.
+        detected_count = sum(
+            status == "DETECTED"
+            for status in (
+                spatial_status,
+                spectral_status,
+                feature_status,
+            )
+        )
+        coverage_uncertainty = 1.0 - (detected_count / 3.0)
         coverage_uncertainty = float(
             np.clip(coverage_uncertainty, 0.0, 1.0)
         )
@@ -283,7 +280,7 @@ class UncertaintyAgent:
 
         line("UNCERTAINTY COMPONENTS", 370, 0.52, True)
         line(
-            f"Coverage: {self._mean_field(results, 'coverage_uncertainty'):.3f}",
+            f"Detection coverage uncertainty: {self._mean_field(results, 'coverage_uncertainty'):.3f}",
             405,
             0.42,
         )
@@ -337,18 +334,18 @@ if __name__ == "__main__":
             "class": "test",
             "spatial_status": "DETECTED",
             "spectral_status": "DETECTED",
-            "feature_status": "DETECTED",
+            "feature_status": "NO_DETECTION",
             "spatial_evidence": 0.90,
             "spectral_evidence": 0.85,
             "feature_evidence": 0.80,
             "available_agents": ["spatial", "spectral", "feature"],
             "available_count": 3,
-            "supporting_agents": ["spatial", "spectral", "feature"],
-            "support_count": 3,
-            "agreement": 1.0,
+            "supporting_agents": ["spatial", "spectral"],
+            "support_count": 2,
+            "agreement": 2.0 / 3.0,
             "conflict": 0.10,
             "conflict_state": "LOW",
-            "evidence_pattern": "THREE-AGENT AGREEMENT",
+            "evidence_pattern": "TWO AGENTS DETECTED",
         }
     ]
 
