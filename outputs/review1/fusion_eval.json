@@ -52,16 +52,16 @@
     "missed_in_clear_band": 44
   },
   "learned": {
-    "roc_auc": 0.9561,
-    "avg_precision": 0.778,
-    "precision": 0.7873,
-    "recall": 0.725,
-    "f1": 0.7549,
-    "review_rate": 0.0733,
-    "tp": 174,
-    "fp": 47,
-    "fn": 66,
-    "tn": 7569,
-    "missed_in_clear_band": 25
+    "roc_auc": 0.9606,
+    "avg_precision": 0.8047,
+    "precision": 0.8268,
+    "recall": 0.7958,
+    "f1": 0.811,
+    "review_rate": 0.2427,
+    "tp": 191,
+    "fp": 40,
+    "fn": 49,
+    "tn": 7576,
+    "missed_in_clear_band": 17
   }
 }

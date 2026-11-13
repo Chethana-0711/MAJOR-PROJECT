@@ -24,13 +24,8 @@ from agents.cognitive import (
     analyze_candidates,
     to_legacy_candidate,
 )
-from agents.fusion import FusionAgent, SimpleFusionAgent
-
-# Learned fusion (Method 1) is optional: used only when a trained model file exists.
-try:
-    from agents.learned_fusion.learned_fusion_agent import LearnedFusionAgent
-except ImportError:
-    LearnedFusionAgent = None
+# Learned fusion is the primary and required final-decision layer.
+from agents.learned_fusion.learned_fusion_agent import LearnedFusionAgent
 
 
 # ============================================================
@@ -51,11 +46,8 @@ MODEL_PATH = (
 # Trained by: python -m agents.learned_fusion.train --data data/fusion/val.csv
 LEARNED_FUSION_MODEL = PROJECT_DIR / "models" / "learned_fusion.joblib"
 
-# Which fusion layer decides the final output:
-#   "simple"   - detectors carry the weight, cognitive layer smallest (recommended to start)
-#   "weighted" - reliability-weighted fusion of all layers
-#   "learned"  - trained meta-classifier (needs models/learned_fusion.joblib)
-FUSION_METHOD = "simple"
+# The trained learned-fusion meta-classifier is the sole final-decision layer.
+FUSION_METHOD = "learned"
 
 
 # ============================================================
@@ -737,9 +729,10 @@ def create_summary(
 
     fusion_results = fusion_results or []
 
+    # LearnedFusionAgent emits DETECTED, CLEAR, and REVIEW.
     final_counts = {
-        "CAMOUFLAGE DETECTED": 0,
-        "NOT DETECTED": 0,
+        "DETECTED": 0,
+        "CLEAR": 0,
         "REVIEW": 0
     }
 
@@ -753,9 +746,9 @@ def create_summary(
     cv2.putText(
         summary,
         (
-            f"FINAL (FUSION)  Detected: "
-            f"{final_counts['CAMOUFLAGE DETECTED']}   "
-            f"Not detected: {final_counts['NOT DETECTED']}   "
+            f"FINAL (LEARNED FUSION)  Detected: "
+            f"{final_counts['DETECTED']}   "
+            f"Clear: {final_counts['CLEAR']}   "
             f"Review: {final_counts['REVIEW']}"
         ),
         (35, 770),
@@ -781,6 +774,64 @@ def create_summary(
     )
 
     return output_path
+
+
+def save_learned_visualization(rgb_path, results, output_path):
+    """Draw all learned-fusion candidate decisions without agents.fusion."""
+    image = cv2.imread(str(rgb_path))
+    if image is None:
+        raise FileNotFoundError(f"Could not read RGB image: {rgb_path}")
+
+    colors = {"DETECTED": (0, 220, 0), "REVIEW": (0, 165, 255), "CLEAR": (150, 150, 150)}
+    for i, item in enumerate(results, start=1):
+        bbox = item.get("final_bbox") or item.get("bbox")
+        if not bbox or len(bbox) != 4:
+            continue
+        try:
+            x, y, w, h = [int(float(v)) for v in bbox]
+        except (TypeError, ValueError):
+            continue
+        # Conflict-agent candidates use xywh bounding boxes.
+        x1, y1 = max(0, x), max(0, y)
+        x2, y2 = min(image.shape[1] - 1, x + w), min(image.shape[0] - 1, y + h)
+        status = str(item.get("final_status", "REVIEW")).upper()
+        color = colors.get(status, colors["REVIEW"])
+        if x2 > x1 and y2 > y1:
+            cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)
+            label = f"C{i}: {status} P={float(item.get('final_suspicion', 0.5)):.2f}"
+            cv2.putText(image, label, (x1, max(18, y1 - 7)), cv2.FONT_HERSHEY_SIMPLEX, 0.48, color, 2, cv2.LINE_AA)
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if not cv2.imwrite(str(output_path), image):
+        raise IOError(f"Could not save visualization: {output_path}")
+    return output_path
+
+
+def save_learned_certified_output(rgb_path, results, output_path, report_path):
+    """Save only DETECTED candidates as the final camouflage output and JSON report."""
+    image = cv2.imread(str(rgb_path))
+    if image is None:
+        raise FileNotFoundError(f"Could not read RGB image: {rgb_path}")
+
+    detected = [r for r in results if r.get("final_status") == "DETECTED" and r.get("final_bbox")]
+    for item in detected:
+        x, y, w, h = [int(float(v)) for v in item["final_bbox"]]
+        x1, y1 = max(0, x), max(0, y)
+        x2, y2 = min(image.shape[1] - 1, x + w), min(image.shape[0] - 1, y + h)
+        if x2 > x1 and y2 > y1:
+            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 220, 0), 2)
+            label = f"CAMOUFLAGE P={float(item.get('final_suspicion', 0.0)):.2f}"
+            cv2.putText(image, label, (x1, max(18, y1 - 7)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 220, 0), 2, cv2.LINE_AA)
+
+    output_path, report_path = Path(output_path), Path(report_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    if not cv2.imwrite(str(output_path), image):
+        raise IOError(f"Could not save final output image: {output_path}")
+    with open(report_path, "w", encoding="utf-8") as file:
+        json.dump(detected, file, indent=2, default=str)
+    return output_path, report_path
 
 
 # ============================================================
@@ -1225,35 +1276,19 @@ def main():
     # ========================================================
 
     print("\n")
-    print("7/7  FUSION AGENT")
+    print("7/7  LEARNED FUSION AGENT")
     print("-" * 70)
 
-    if (
-        FUSION_METHOD == "learned"
-        and LearnedFusionAgent is not None
-        and LEARNED_FUSION_MODEL.exists()
-    ):
-
-        fusion_agent = LearnedFusionAgent(
-            str(LEARNED_FUSION_MODEL)
+    if not LEARNED_FUSION_MODEL.exists():
+        raise FileNotFoundError(
+            f"Learned-fusion model not found: {LEARNED_FUSION_MODEL}\n"
+            "Train it first with: python -m agents.learned_fusion.train --data data/fusion/val.csv"
         )
 
-        print("  Method: LEARNED fusion (trained meta-classifier)")
-
-    elif FUSION_METHOD == "weighted":
-
-        fusion_agent = FusionAgent()
-
-        print("  Method: WEIGHTED fusion (all layers)")
-
-    else:
-
-        fusion_agent = SimpleFusionAgent()
-
-        print(
-            "  Method: SIMPLE fusion "
-            "(spatial/spectral/feature weighted most, cognitive least)"
-        )
+    fusion_agent = LearnedFusionAgent(str(LEARNED_FUSION_MODEL))
+    print(f"  Method: LEARNED fusion (algorithm={fusion_agent.algo})")
+    print(f"  Detection threshold: {fusion_agent.detect_t:.4f}")
+    print(f"  Clear threshold: {fusion_agent.clear_t:.4f}")
 
     fusion_results = fusion_agent.analyze(
         cognitive_results
@@ -1266,7 +1301,7 @@ def main():
         start=1
     ):
 
-        if candidate["final_status"] == "NOT DETECTED":
+        if candidate["final_status"] == "CLEAR":
             cleared += 1
             continue
 
@@ -1284,7 +1319,7 @@ def main():
         for reason in candidate["fusion_reasons"]:
             print(f"        - {reason}")
 
-    print(f"  ({cleared} candidates cleared as NOT DETECTED)")
+    print(f"  ({cleared} candidates classified as CLEAR)")
 
     fusion_path = OUTPUT_DIR / "09_fusion_results.json"
 
@@ -1302,31 +1337,22 @@ def main():
         )
 
     # all candidates (debug view)
-    fusion_agent.save_visualization(
+    save_learned_visualization(
         rgb_path,
         fusion_results,
-        output_path=(
-            OUTPUT_DIR /
-            "10b_all_candidates.png"
-        )
+        output_path=OUTPUT_DIR / "10b_all_candidates.png",
     )
 
-    # FINAL OUTPUT: only camouflaged objects, with the evidence behind each one
-    fusion_agent.save_certified_output(
+    # Final output: only candidates classified as DETECTED by learned fusion.
+    save_learned_certified_output(
         rgb_path,
         fusion_results,
-        output_path=(
-            OUTPUT_DIR /
-            "10_final_output.png"
-        ),
-        report_path=(
-            OUTPUT_DIR /
-            "11_camouflaged_objects.json"
-        )
+        output_path=OUTPUT_DIR / "10_final_output.png",
+        report_path=OUTPUT_DIR / "11_camouflaged_objects.json",
     )
 
     print(
-        f"Fusion results saved to: "
+        f"Learned-fusion results saved to: "
         f"{fusion_path}"
     )
 

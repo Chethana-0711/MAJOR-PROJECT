@@ -1,3 +1,4 @@
+
 """learned_fusion_agent.py
 Learned fusion driven by the trained meta-classifier.
 Independent of the rule-based FusionAgent.
@@ -147,7 +148,7 @@ class LearnedFusionAgent:
     # --------------------------------------------------
     # Candidate validation
     # --------------------------------------------------
-
+  
     @staticmethod
     def _reject_if_implausible(candidate):
         """

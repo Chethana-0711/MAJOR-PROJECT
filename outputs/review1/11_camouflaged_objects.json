@@ -1,121 +1,242 @@
-{
-  "image": "MUDCAD-X\\dataset\\03_Autumn\\2022-11-09\\rk1\\b\\7\\v2\\2\\vis.png",
-  "camouflaged_objects": [
-    {
-      "id": 1,
-      "bbox_xywh": [
-        381,
-        480,
-        35,
-        32
-      ],
-      "detector_class": "tarpgreen",
-      "decision": "CAMOUFLAGE DETECTED",
-      "confidence": 0.8773,
-      "parameters": {
-        "spatial_evidence": 0.924,
-        "spectral_evidence": 0.749,
-        "feature_evidence": 0.937,
-        "agents_supporting": "3/3",
-        "conflict": 0.188,
-        "uncertainty": 0.109,
-        "cognitive_p_camouflaged": 0.733
-      },
-      "rule": "Score 0.88 >= 0.45.",
-      "fusion_method": "simple"
+[
+  {
+    "bbox": [
+      480,
+      317,
+      32,
+      34
+    ],
+    "class": "net3dgreen",
+    "spatial_status": "DETECTED",
+    "spectral_status": "NO_DETECTION",
+    "feature_status": "DETECTED",
+    "spatial_evidence": 0.9556478261947632,
+    "spectral_evidence": 0.0,
+    "feature_evidence": 0.6468569040298462,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spatial",
+      "feature"
+    ],
+    "support_count": 2,
+    "agreement": 0.6666666666666666,
+    "conflict": 0.9556478261947632,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "PARTIAL AGREEMENT",
+    "evidence_strength": 0.5341682434082031,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.4658317565917969,
+    "conflict_uncertainty": 0.9556478261947632,
+    "uncertainty": 0.4730270504951477,
+    "confidence": 0.5269729495048523,
+    "reliability": "MEDIUM",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4656,
+    "bayes_posterior": {
+      "H0": 0.4656,
+      "H1": 0.2672,
+      "H2": 0.2672
     },
-    {
-      "id": 2,
-      "bbox_xywh": [
-        0,
-        128,
-        83,
-        97
-      ],
-      "detector_class": "hedge",
-      "decision": "CAMOUFLAGE DETECTED",
-      "confidence": 0.8757,
-      "parameters": {
-        "spatial_evidence": 0.981,
-        "spectral_evidence": 0.754,
-        "feature_evidence": 0.851,
-        "agents_supporting": "3/3",
-        "conflict": 0.227,
-        "uncertainty": 0.123,
-        "cognitive_p_camouflaged": 0.65
-      },
-      "rule": "Score 0.88 >= 0.45.",
-      "fusion_method": "simple"
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "SINGLE_AGENT_DOMINATES",
+      "OVERCONFIDENT"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 209.0 (decisive); consistent with ['H1', 'H2'].",
+      "Bayesian posterior: P(H0)=0.995, P(H1)=0.003, P(H2)=0.003.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'SINGLE_AGENT_DOMINATES', 'OVERCONFIDENT'].",
+      "Agents disagree strongly (conflict=0.96).",
+      "Only 2/3 agents reported.",
+      "One agent supplies 88% of the discriminating evidence.",
+      "Belief is extreme despite shaky evidence; tempered."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0,
+    "final_status": "DETECTED",
+    "final_label": "Camouflaged Object",
+    "final_sublabel": "Camouflaged object",
+    "final_suspicion": 0.5051,
+    "final_bbox": [
+      480,
+      317,
+      32,
+      34
+    ],
+    "final_class": "net3dgreen",
+    "fusion_method": "learned-ens",
+    "fusion_signals": {
+      "learned_probability": 0.5051
     },
-    {
-      "id": 3,
-      "bbox_xywh": [
-        288,
-        32,
-        33,
-        32
-      ],
-      "detector_class": "persongreen",
-      "decision": "CAMOUFLAGE DETECTED",
-      "confidence": 0.6235,
-      "parameters": {
-        "spatial_evidence": 0.273,
-        "spectral_evidence": 0.832,
-        "feature_evidence": 0.759,
-        "agents_supporting": "3/3",
-        "conflict": 0.559,
-        "uncertainty": 0.319,
-        "cognitive_p_camouflaged": 0.8
-      },
-      "rule": "Score 0.62 >= 0.45.",
-      "fusion_method": "simple"
+    "fusion_reasons": [
+      "Learned probability 0.51 >= detection threshold 0.26."
+    ]
+  },
+  {
+    "bbox": [
+      386.8514709472656,
+      10.837254524230957,
+      14.41180419921875,
+      17.3375825881958
+    ],
+    "class": "persongreen",
+    "spatial_status": "DETECTED",
+    "spectral_status": "NO_DETECTION",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.8287472724914551,
+    "spectral_evidence": 0.0,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spatial"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.8287472724914551,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "SPATIAL-ONLY EVIDENCE",
+    "evidence_strength": 0.27624909083048504,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7237509091695149,
+    "conflict_uncertainty": 0.8287472724914551,
+    "uncertainty": 0.5381245454152425,
+    "confidence": 0.46187545458475754,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4654,
+    "bayes_posterior": {
+      "H0": 0.4654,
+      "H1": 0.2673,
+      "H2": 0.2673
     },
-    {
-      "id": 4,
-      "bbox_xywh": [
-        192,
-        192,
-        64,
-        64
-      ],
-      "detector_class": "net2dgreen",
-      "decision": "CAMOUFLAGE DETECTED",
-      "confidence": 0.5995,
-      "parameters": {
-        "spatial_evidence": 0.973,
-        "spectral_evidence": null,
-        "feature_evidence": 1.0,
-        "agents_supporting": "1/3",
-        "conflict": 1.0,
-        "uncertainty": 0.637,
-        "cognitive_p_camouflaged": 0.333
-      },
-      "rule": "Score 0.60 >= 0.45.",
-      "fusion_method": "simple"
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "OVERCONFIDENT"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 301.9 (decisive); consistent with ['H0', 'H1', 'H2'].",
+      "Bayesian posterior: P(H0)=0.994, P(H1)=0.003, P(H2)=0.003.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'OVERCONFIDENT'].",
+      "Agents disagree strongly (conflict=0.83).",
+      "Only 1/3 agents reported.",
+      "Belief is extreme despite shaky evidence; tempered."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0,
+    "final_status": "DETECTED",
+    "final_label": "Camouflaged Object",
+    "final_sublabel": "Camouflaged object",
+    "final_suspicion": 0.9165,
+    "final_bbox": [
+      386.8514709472656,
+      10.837254524230957,
+      14.41180419921875,
+      17.3375825881958
+    ],
+    "final_class": "persongreen",
+    "fusion_method": "learned-ens",
+    "fusion_signals": {
+      "learned_probability": 0.9165
     },
-    {
-      "id": 5,
-      "bbox_xywh": [
-        216,
-        129,
-        18,
-        23
-      ],
-      "detector_class": "persongreen",
-      "decision": "CAMOUFLAGE DETECTED",
-      "confidence": 0.5566,
-      "parameters": {
-        "spatial_evidence": 0.69,
-        "spectral_evidence": 0.829,
-        "feature_evidence": null,
-        "agents_supporting": "2/3",
-        "conflict": 0.829,
-        "uncertainty": 0.546,
-        "cognitive_p_camouflaged": 0.516
-      },
-      "rule": "Score 0.56 >= 0.45.",
-      "fusion_method": "simple"
-    }
-  ],
-  "uncertain_candidates_not_shown": 9
-}
+    "fusion_reasons": [
+      "Learned probability 0.92 >= detection threshold 0.26."
+    ]
+  },
+  {
+    "bbox": [
+      423.9484558105469,
+      114.34908294677734,
+      32.80645751953125,
+      47.52935028076172
+    ],
+    "class": "tarpgray",
+    "spatial_status": "DETECTED",
+    "spectral_status": "NO_DETECTION",
+    "feature_status": "NO_DETECTION",
+    "spatial_evidence": 0.8047630786895752,
+    "spectral_evidence": 0.0,
+    "feature_evidence": 0.0,
+    "available_agents": [
+      "spatial",
+      "spectral",
+      "feature"
+    ],
+    "available_count": 3,
+    "supporting_agents": [
+      "spatial"
+    ],
+    "support_count": 1,
+    "agreement": 0.3333333333333333,
+    "conflict": 0.8047630786895752,
+    "conflict_state": "HIGH",
+    "evidence_pattern": "SPATIAL-ONLY EVIDENCE",
+    "evidence_strength": 0.2682543595631917,
+    "coverage_uncertainty": 0.0,
+    "evidence_uncertainty": 0.7317456404368083,
+    "conflict_uncertainty": 0.8047630786895752,
+    "uncertainty": 0.5341271797815959,
+    "confidence": 0.46587282021840415,
+    "reliability": "LOW",
+    "bayes_decision": "UNCERTAIN - REVIEW",
+    "bayes_hypothesis": null,
+    "bayes_camouflage_detected": false,
+    "bayes_suspicion": 0.4654,
+    "bayes_posterior": {
+      "H0": 0.4654,
+      "H1": 0.2673,
+      "H2": 0.2673
+    },
+    "bayes_flags": [
+      "HIGH_CONFLICT",
+      "MODERATE_UNCERTAINTY",
+      "MISSING_EVIDENCE",
+      "OVERCONFIDENT"
+    ],
+    "bayes_explanation": [
+      "Hypothesis test: best=H0, BF over H1 = 307.7 (decisive); consistent with ['H0', 'H1', 'H2'].",
+      "Bayesian posterior: P(H0)=0.994, P(H1)=0.003, P(H2)=0.003.",
+      "Metacognition flags: ['HIGH_CONFLICT', 'MODERATE_UNCERTAINTY', 'MISSING_EVIDENCE', 'OVERCONFIDENT'].",
+      "Agents disagree strongly (conflict=0.80).",
+      "Only 1/3 agents reported.",
+      "Belief is extreme despite shaky evidence; tempered."
+    ],
+    "rule_decision": "N/A",
+    "rule_confidence": 0.0,
+    "final_status": "DETECTED",
+    "final_label": "Camouflaged Object",
+    "final_sublabel": "Camouflaged object",
+    "final_suspicion": 0.7906,
+    "final_bbox": [
+      423.9484558105469,
+      114.34908294677734,
+      32.80645751953125,
+      47.52935028076172
+    ],
+    "final_class": "tarpgray",
+    "fusion_method": "learned-ens",
+    "fusion_signals": {
+      "learned_probability": 0.7906
+    },
+    "fusion_reasons": [
+      "Learned probability 0.79 >= detection threshold 0.26."
+    ]
+  }
+]
